@@ -1,21 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
-import {ApiService} from './api.service';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { FeaturedRecepieComponent } from './featured-recepie/featured-recepie.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { RecepiesComponent } from './recepies/recepies.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToolbarComponent,
+    FeaturedRecepieComponent,
+    SideBarComponent,
+    RecepiesComponent
   ],
   imports: [
-    BrowserModule,
-    HttpClientModule,
+    BrowserModule
   ],
-  providers: [ApiService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

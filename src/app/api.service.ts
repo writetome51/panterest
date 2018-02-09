@@ -7,4 +7,9 @@ export class ApiService {
   constructor(private _http: HttpClient) {
   }
 
+
+  search() {
+    this._http.get('');
+  }
+
 }
