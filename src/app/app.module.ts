@@ -7,6 +7,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FeaturedRecepieComponent } from './featured-recepie/featured-recepie.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { RecepiesComponent } from './recepies/recepies.component';
+import { ApiService } from './api.service';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { RecepiesComponent } from './recepies/recepies.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
