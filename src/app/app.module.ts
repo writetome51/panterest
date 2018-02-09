@@ -8,6 +8,8 @@ import { FeaturedRecepieComponent } from './featured-recepie/featured-recepie.co
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { RecepiesComponent } from './recepies/recepies.component';
 import { ApiService } from './api.service';
+import { ApiServiceTestComponent } from './api-service-test/api-service-test.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -16,10 +18,12 @@ import { ApiService } from './api.service';
     ToolbarComponent,
     FeaturedRecepieComponent,
     SideBarComponent,
-    RecepiesComponent
+    RecepiesComponent,
+    ApiServiceTestComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
