@@ -1,5 +1,8 @@
 .featuredRecipes{
   background-color: #3C8D2F;
   display: flex;
+<<<<<<< HEAD
   justify-content: space-around;
+=======
+>>>>>>> e52e400d1a9dc46374f9e1c08dbb679490504143
 }

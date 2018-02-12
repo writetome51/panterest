@@ -1,16 +1,23 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="container">
+<head>
+  <meta name="viewport" content="width=divice-width, initial-scale=1">
+</head>
+<body>
+<div class="thingthatcontains container-fluid">
   <div class="title">
     <h1>
       Welcome to {{ title }}!
     </h1>
   </div>
-  <div class="buttons">
-    <button><h2>Sign Up</h2></button>
-    <button><h2>Log In</h2></button>
+  <div class="button">
+    <button class="btn btn-default">Sign Up</button>
+    <button class="btn btn-default">Log In</button>
   </div>
 </div>
 <div class="componentsdiv">
-  <side-bar></side-bar>
-  <app-featured-recipes></app-featured-recipes>
-</div>
+
+  <side-bar ></side-bar>
+  <app-featured-recipes ></app-featured-recipes>
+  </div>
+
+</body>
