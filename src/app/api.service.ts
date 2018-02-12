@@ -1,7 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable, Subscribable} from 'rxjs/Observable';
 import {SearchCallbackFunction} from './interfaces/SearchCallbackFunction';
+import {SearchResult} from './interfaces/SearchResult';
+import {SearchResultRecipe} from './interfaces/SearchResultRecipe';
+import {Subscription} from 'rxjs/Subscription';
 
 @Injectable()
 export class ApiService {
@@ -27,18 +30,17 @@ export class ApiService {
 
 
   search(
-    recipeSearch: string, functionThatManipulatesResponse: SearchCallbackFunction
-  ): void {
-    this._searchAndGetObservable(recipeSearch)
-    //  .subscribe(functionThatManipulatesResponse); // may need to keep this.
-      .subscribe((response) => {
-        response =  this._narrowSearchByTitle(response, recipeSearch);
-        functionThatManipulatesResponse(response);
-      });
+    recipeSearch: string,
+    functionThatManipulatesResponse: SearchCallbackFunction
+  ): Subscription {
+    return this._searchAndGetObservable(recipeSearch)
+      .subscribe(functionThatManipulatesResponse);
   }
 
 
-  getSpecificRecipe(recipeId: string, functionThatManipulatesResponse): void {
+  getSpecificRecipe(
+    recipeId: string, functionThatManipulatesResponse: SearchCallbackFunction
+  ): void {
     this._getSpecificRecipeAsObservable(recipeId)
     .subscribe(functionThatManipulatesResponse);
   }
@@ -60,9 +62,6 @@ export class ApiService {
   }
 
 
-  private _narrowSearchByTitle(resultObject, recipeSearch) {
-    // return modified resultObject.
-  }
 
 }
 

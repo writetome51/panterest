@@ -1,4 +1,4 @@
 
 export interface SearchCallbackFunction {
-  (response: any,  propertyToAssignResponseTo ?: any);
+  (response: any);
 }

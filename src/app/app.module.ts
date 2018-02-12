@@ -8,6 +8,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { RecipesComponent} from './recipes/recipes.component';
 import { ApiService } from './api.service';
 import {HttpClientModule} from '@angular/common/http';
+import { ApiServiceTestComponent } from './api-service-test/api-service-test.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {HttpClientModule} from '@angular/common/http';
     FeaturedRecipesComponent,
     SideBarComponent,
     RecipesComponent,
+    ApiServiceTestComponent,
 
   ],
   imports: [
