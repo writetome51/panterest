@@ -13,12 +13,14 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   searchSubscription: Subscription;
   result: any;
+  publisher: string;
 
   constructor(private _api: ApiService) {
   }
 
   ngOnInit() {
-  this.search('cupcake', this.result);
+    this.searchAndGetPropertyFromEach('cupcake', 'title', 'result');
+   // this.search('cupcake', 'publisher'); // 'result' refers to this.result
   }
 
   ngOnDestroy() {
@@ -31,8 +33,23 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       recipeSearch,
       (response: SearchResult) => {
         this[propertyToAssignResultTo] = this._narrowResultByTitle(response, recipeSearch);
-        this[propertyToAssignResultTo] = this[propertyToAssignResultTo][0];
         console.log(this[propertyToAssignResultTo]);
+      }
+    );
+  }
+
+
+  searchAndGetPropertyFromEach(recipeSearch, propertyToReturn, propertyToAssignResultTo) {
+    this.searchSubscription = this._api.search(
+      recipeSearch,
+      (response: SearchResult) => {
+        let results = this._narrowResultByTitle(response, recipeSearch);
+        let properties = [];
+        results.forEach((result) => {
+          properties.push(result[propertyToReturn]);
+        });
+        this[propertyToAssignResultTo] = properties;
+        console.log(properties);
       }
     );
   }
