@@ -1,3 +1,21 @@
 .side-bar{
   background-color: #F3D240;
+  display: flex;
+  flex-direction: column;
+
 }
+
+.size{
+  height: auto;
+  width: 98px;
+}
+.noStyle {
+  background-color: #F3D240;
+  border: none;
+}
+
+.noStyle:active:focus, .noStyle:hover{
+  background-color: #b9992e;
+  border: none;
+}
+
