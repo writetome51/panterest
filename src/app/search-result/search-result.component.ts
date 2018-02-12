@@ -19,8 +19,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.searchAndGetPropertyFromEach('cupcake', 'title', 'result');
-   // this.search('cupcake', 'publisher'); // 'result' refers to this.result
+    // sets this.result to array of recipe titles:
+    this.searchAndGetPropertyFromEach('cupcake', 'publisher_url', 'result');
+   // this.search('cupcake', 'publisher');
   }
 
   ngOnDestroy() {
@@ -33,7 +34,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       recipeSearch,
       (response: SearchResult) => {
         this[propertyToAssignResultTo] = this._narrowResultByTitle(response, recipeSearch);
-        console.log(this[propertyToAssignResultTo]);
       }
     );
   }
@@ -44,14 +44,18 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       recipeSearch,
       (response: SearchResult) => {
         let results = this._narrowResultByTitle(response, recipeSearch);
-        let properties = [];
-        results.forEach((result) => {
-          properties.push(result[propertyToReturn]);
-        });
-        this[propertyToAssignResultTo] = properties;
-        console.log(properties);
+        this[propertyToAssignResultTo] = this.getArrayOf(propertyToReturn, results);
       }
     );
+  }
+
+
+  getArrayOf(thisProperty, results) {
+    let properties = [];
+    results.forEach((result) => {
+      properties.push(result[thisProperty]);
+    });
+    return properties;
   }
 
 
