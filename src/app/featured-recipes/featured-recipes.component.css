@@ -1,4 +1,6 @@
 .featuredRecipes{
   background-color: #F78888;
   display: flex;
+  justify-content: space-between;
+  width: auto;
 }
