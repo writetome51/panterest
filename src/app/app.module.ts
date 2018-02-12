@@ -7,7 +7,6 @@ import { FeaturedRecipesComponent} from './featured-recipes/featured-recipes.com
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { RecipesComponent} from './recipes/recipes.component';
 import { ApiService } from './api.service';
-import { ApiServiceTestComponent } from './api-service-test/api-service-test.component';
 import {HttpClientModule} from '@angular/common/http';
 
 
@@ -18,7 +17,6 @@ import {HttpClientModule} from '@angular/common/http';
     FeaturedRecipesComponent,
     SideBarComponent,
     RecipesComponent,
-    ApiServiceTestComponent,
 
   ],
   imports: [
