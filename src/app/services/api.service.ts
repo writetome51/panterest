@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subscribable} from 'rxjs/Observable';
-import {SearchCallbackFunction} from './interfaces/SearchCallbackFunction';
-import {SearchResult} from './interfaces/SearchResult';
-import {SearchResultRecipe} from './interfaces/SearchResultRecipe';
+import {SearchCallbackFunction} from '../interfaces/SearchCallbackFunction';
+import {SearchResult} from '../interfaces/SearchResult';
+import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
 import {Subscription} from 'rxjs/Subscription';
 
 @Injectable()
@@ -40,8 +40,8 @@ export class ApiService {
 
   getSpecificRecipe(
     recipeId: string, functionThatManipulatesResponse: SearchCallbackFunction
-  ): void {
-    this._getSpecificRecipeAsObservable(recipeId)
+  ): Subscription {
+    return this._getSpecificRecipeAsObservable(recipeId)
     .subscribe(functionThatManipulatesResponse);
   }
 
@@ -64,26 +64,3 @@ export class ApiService {
 
 
 }
-
-
-/********
- getCharacters(): Observable<Character[]> {
-  return this.httpClient
-    .get<Character[]>(this.characterUrl)
-    .pipe(catchError(this.handleError));
-}
-
- getCharacter(characterId: string): Observable<Character> {
-  return this.httpClient
-    .get<Character[]>(this.characterUrl)
-    .pipe(
-      map((characters: Character[]) => characters.find(character => character.id == characterId)),
-      catchError(this.handleError)
-    )
-}
-
- handleError(error) {
-  console.log(error);
-  return Observable.throw(error.json().error || 'Server error');
-}
- ******/

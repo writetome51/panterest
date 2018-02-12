@@ -1,4 +1,3 @@
 
-export interface SearchCallbackFunction {
-  (response: any);
-}
+ export type SearchCallbackFunction = (response: any) => void;
+

@@ -6,9 +6,9 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FeaturedRecipesComponent} from './featured-recipes/featured-recipes.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { RecipesComponent} from './recipes/recipes.component';
-import { ApiService } from './api.service';
+import { ApiService } from './services/api.service';
 import {HttpClientModule} from '@angular/common/http';
-import { ApiServiceTestComponent } from './api-service-test/api-service-test.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 
 @NgModule({
@@ -18,8 +18,7 @@ import { ApiServiceTestComponent } from './api-service-test/api-service-test.com
     FeaturedRecipesComponent,
     SideBarComponent,
     RecipesComponent,
-    ApiServiceTestComponent,
-
+    SearchResultComponent,
   ],
   imports: [
     BrowserModule,
