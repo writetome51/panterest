@@ -49,6 +49,11 @@ export class ApiService {
       return this._http.get(fullUrl, this._httpOptions);
   }
 
+
+  private _narrowSearchByTitle(resultObject, recipeSearch) {
+
+  }
+
 }
 
 

@@ -12,21 +12,22 @@ export class ApiServiceTestComponent implements OnInit {
   constructor(private _api: ApiService) { }
 
   ngOnInit() {
-    /***
+
       this._api.search(
         'cake',
         (response) => {
           console.log(response);
         }
       );
-     ****/
 
-    this._api.getSpecificRecipe('d8a889',
-      (response) => {
-        console.log(typeof response);
-        this.result = JSON.stringify(response);
-      }
-    );
+
+      this._api.getSpecificRecipe(
+        'd8a889',
+        (response) => {
+          console.log(response);
+          this.result = JSON.stringify(response);
+        }
+      );
   }
 
 }
