@@ -16,7 +16,9 @@ interface User {
 @Injectable()
 
 export class AuthService {
+
   user: Observable<User>;
+
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
               private router: Router) {
@@ -30,16 +32,21 @@ export class AuthService {
         }
       });
   }
+
   googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider()
+    const provider = new firebase.auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
   }
+
+
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         this.updateUserData(credential.user);
       });
   }
+
+
   private updateUserData(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
@@ -51,6 +58,8 @@ export class AuthService {
     };
     return userRef.set(data);
   }
+
+
   signOut() {
     this.afAuth.auth.signOut().then(() => {
       this.router.navigate(['/']);
