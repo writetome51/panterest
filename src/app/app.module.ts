@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import {RoutesModule} from "./routes/routes.module";
 import { BrowseWindowComponent } from './browse-window/browse-window.component';
 import { HomeComponent } from './home/home.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     RoutesModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
         { path: 'home', component: HomeComponent },
