@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FeaturedRecipesComponent} from './featured-recipes/featured-recipes.component';
@@ -9,6 +10,10 @@ import { RecipesComponent} from './recipes/recipes.component';
 import { ApiService } from './services/api.service';
 import {HttpClientModule} from '@angular/common/http';
 import { SearchComponent } from './search/search.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import {RouterModule} from "@angular/router";
+import {RoutesModule} from "./routes/routes.module";
 
 
 @NgModule({
@@ -19,10 +24,13 @@ import { SearchComponent } from './search/search.component';
     SideBarComponent,
     RecipesComponent,
     SearchComponent,
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    RoutesModule,
+    RouterModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
