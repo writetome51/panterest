@@ -23,6 +23,7 @@ import {FormsModule} from '@angular/forms';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BrowseWindowComponent } from './browse-window/browse-window.component';
 import { HomeComponent } from './home/home.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { HomeComponent } from './home/home.component';
     SignUpComponent,
     UserProfileComponent,
     BrowseWindowComponent,
-    HomeComponent
+    HomeComponent,
+    FavoritesComponent
   ],
 
   imports: [
