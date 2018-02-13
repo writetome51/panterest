@@ -20,6 +20,7 @@ import { AuthService } from './services/auth.service';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {FormsModule} from '@angular/forms';
     RecipesComponent,
     SearchComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,7 @@ import {FormsModule} from '@angular/forms';
     HttpClientModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp((environment.firebase)),
-    AngularFireAuthModule.auth.GoogleAuthProvider()
+    AngularFireAuthModule
   ],
   providers: [ApiService, AuthService],
   bootstrap: [AppComponent]

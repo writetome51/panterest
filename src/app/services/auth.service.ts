@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
 interface User {
-  uid: string;
+  username: string;
   email: string;
   displayName: string;
   photoURL: string;
@@ -26,7 +26,7 @@ export class AuthService {
     this.user = this.afAuth.authState
       .switchMap(user => {
         if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+          return this.afs.doc<User>(`users/${user.username}`).valueChanges();
         } else {
           return Observable.of(null);
         }
@@ -49,9 +49,9 @@ export class AuthService {
 
   private updateUserData(user) {
     // Sets user data to firestore on login
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.username}`);
     const data: User = {
-      uid: user.uid,
+      username: user.username,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL
