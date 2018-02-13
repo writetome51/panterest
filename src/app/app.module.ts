@@ -8,7 +8,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { RecipesComponent} from './recipes/recipes.component';
 import { ApiService } from './services/api.service';
 import {HttpClientModule} from '@angular/common/http';
-import { SearchResultComponent } from './search-result/search-result.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
     FeaturedRecipesComponent,
     SideBarComponent,
     RecipesComponent,
-    SearchResultComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
