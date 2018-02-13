@@ -12,7 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { SearchComponent } from './search/search.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import {RouterModule} from "@angular/router";
+import { RouterModule } from '@angular/router';
 import {RoutesModule} from "./routes/routes.module";
 import { BrowseWindowComponent } from './browse-window/browse-window.component';
 import { HomeComponent } from './home/home.component';
@@ -34,7 +34,12 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     RoutesModule,
-    RouterModule
+    HttpClientModule,
+    RouterModule.forRoot([
+        { path: 'home', component: HomeComponent },
+        { path: '', pathMatch: 'full', redirectTo: 'home' },
+        { path: '**', redirectTo: 'home' }
+        ]),
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

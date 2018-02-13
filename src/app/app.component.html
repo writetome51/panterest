@@ -5,25 +5,15 @@
 <body>
 <div class="thingthatcontains container-fluid">
   <div class="title">
-    <h1>
+    <h1 [routerLink]="['/home']">
       Welcome to {{ title }}!
     </h1>
   </div>
   <div class="button">
     <a [routerLink]="['/signup']">Sign Up</a>
-
     <button class="btn btn-default" [routerLink]="['/login']" >Log In</button>
+  </div>
+</div>
 
-  </div>
-</div>
-<div class="componentsdiv">
-  <side-bar ></side-bar>
-  <div class="box2">
-    <app-featured-recipes ></app-featured-recipes>
-    <div class="panel panel-default box">
-      <div class="panel-body">hello</div>
-    </div>
-  </div>
-</div>
 
 <router-outlet></router-outlet>
