@@ -14,6 +14,8 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {RouterModule} from "@angular/router";
 import {RoutesModule} from "./routes/routes.module";
+import { BrowseWindowComponent } from './browse-window/browse-window.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {RoutesModule} from "./routes/routes.module";
     RecipesComponent,
     SearchComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    BrowseWindowComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
