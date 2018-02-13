@@ -21,7 +21,8 @@ import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-
+import { BrowseWindowComponent } from './browse-window/browse-window.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -33,17 +34,24 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     SearchComponent,
     LoginComponent,
     SignUpComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    BrowseWindowComponent,
+    HomeComponent
   ],
+
   imports: [
     BrowserModule,
     RoutesModule,
-    RouterModule,
     FormsModule,
     HttpClientModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp((environment.firebase)),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    RouterModule.forRoot([
+        { path: 'home', component: HomeComponent },
+        { path: '', pathMatch: 'full', redirectTo: 'home' },
+        { path: '**', redirectTo: 'home' }
+        ]),
   ],
   providers: [ApiService, AuthService],
   bootstrap: [AppComponent]
