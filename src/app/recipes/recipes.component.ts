@@ -9,12 +9,16 @@ import {ApiService} from '../services/api.service';
 })
 export class RecipesComponent extends SearchComponent  implements OnInit {
 
+  JSON = JSON;
+
   constructor(_api: ApiService) {
     super(_api);
   }
 
   ngOnInit() {
-    this.search('cupcake', 'result');
+    // just a test:
+    // this.search('cupcake', 'result');
+    this.getSpecificRecipe('8f47af', 'result');
   }
 
 }

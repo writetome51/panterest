@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {ApiService} from '../services/api.service';
 import {SearchResult} from '../interfaces/SearchResult';
 import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
+import {SpecificRecipe} from '../interfaces/SpecificRecipe';
 
 // This decorator only here because it's required:
 @Component({
@@ -34,6 +35,16 @@ export class SearchComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+
+  getSpecificRecipe(recipeID, propertyToAssignResultTo) {
+    this.searchSubscription = this._api.getSpecificRecipe(recipeID,
+      (response: SpecificRecipe) => {
+        this[propertyToAssignResultTo] = response;
+      }
+    );
+  }
+
 
   // Example:  sets this.result to array of cupcake recipe titles:
   // this.searchAndGetPropertyFromEach('cupcake', 'title', 'result');
