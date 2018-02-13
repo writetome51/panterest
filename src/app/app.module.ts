@@ -7,6 +7,10 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FeaturedRecipesComponent} from './featured-recipes/featured-recipes.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { RecipesComponent} from './recipes/recipes.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import {RouterModule} from "@angular/router";
+import {RoutesModule} from "./routes/routes.module";
 
 @NgModule({
   declarations: [
@@ -14,10 +18,14 @@ import { RecipesComponent} from './recipes/recipes.component';
     ToolbarComponent,
     FeaturedRecipesComponent,
     SideBarComponent,
-    RecipesComponent
+    RecipesComponent,
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RoutesModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
