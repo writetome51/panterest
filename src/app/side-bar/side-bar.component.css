@@ -1,8 +1,11 @@
 .side-bar{
   background-color: #F3D240;
+<<<<<<< HEAD
+=======
   display: flex;
   flex-direction: column;
 
+>>>>>>> 3de488971b7393d53593ca82545b6f6a333724d9
 }
 
 .size{
