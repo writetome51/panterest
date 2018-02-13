@@ -17,6 +17,7 @@ import {RoutesModule} from "./routes/routes.module";
 import { BrowseWindowComponent } from './browse-window/browse-window.component';
 import { HomeComponent } from './home/home.component';
 import {FormsModule} from "@angular/forms";
+import { FavoritesComponent } from './favorites/favorites.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {FormsModule} from "@angular/forms";
     LoginComponent,
     SignUpComponent,
     BrowseWindowComponent,
-    HomeComponent
+    HomeComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,
