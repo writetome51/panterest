@@ -1,13 +1,13 @@
-<div class="browse-window container-fluid">
+<div class="browse-window container-fluid" *ngFor="let recipe of recipes">
   <div class="recipe-card">
-    <div class="recipe-card-header"><h4>Albondigas</h4></div>
+    <div class="recipe-card-header"><h4>{{recipeName}}</h4></div>
     <div class="recipe-card-body">
-      <img src="../../assets/test.jpg" alt="A steaming bowl of Albondigas with a red soup base with mildly spicy meatballs">
+      <img [src]="recipeImage" [alt]="imageDescription">
       <div class="time">
         <p class="time-font glyphicon glyphicon-time"></p>
-        <p>Cook Time: 45 min.</p>
+        <p>Cook Time: {{cookTime}} min. | </p>
       </div>
-      <p>Description: Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.</p>
+      <p>Description: {{recipeDescription}}</p>
     </div>
   </div>
 </div>
