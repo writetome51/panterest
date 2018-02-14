@@ -7,7 +7,7 @@ import {ApiService} from '../services/api.service';
   templateUrl: './browse-window.component.html',
   styleUrls: ['./browse-window.component.css']
 })
-export class BrowseWindowComponent extends SearchComponent  implements OnInit {
+export class BrowseWindowComponent implements OnInit {
 
   recipeName: string;
   recipeImage: string;
@@ -15,9 +15,7 @@ export class BrowseWindowComponent extends SearchComponent  implements OnInit {
   cookTime: number;
   recipeDescription: string;
 
-  constructor(_api:ApiService) {
-    super(_api);
-  }
+  constructor() { }
 
   ngOnInit() {
   }
