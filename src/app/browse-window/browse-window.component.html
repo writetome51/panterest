@@ -1,14 +1,16 @@
-<div class="browse-window container-fluid" *ngFor="let recipe of recipes">
-  <div class="recipe-card">
+<div class="browse-window container-fluid">
+
+  <div class="recipe-card" *ngFor="let recipe of recipes">
     <div class="recipe-card-header"><h4>{{recipeName}}</h4></div>
     <div class="recipe-card-body">
       <img [src]="recipeImage" [alt]="imageDescription">
       <div class="time">
         <p class="time-font glyphicon glyphicon-time"></p>
-        <p>Cook Time: {{cookTime}} min. | </p>
+        <p>Cook Time: {{cookTime}} min. | filter</p>
       </div>
       <p>Description: {{recipeDescription}}</p>
     </div>
   </div>
+
 </div>
 

@@ -1,8 +1,21 @@
-.thingthatcontains{
+.thing-that-contains{
   background-color: #ECECEC;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-
 }
 
+.nav-section {
+  width: 33.33%;
+}
+
+.separate-me {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fav-font {
+  color: #f06db6;
+  font-size: 20px;
+  margin: 0;
+}

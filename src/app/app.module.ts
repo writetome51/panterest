@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FeaturedRecipesComponent} from './featured-recipes/featured-recipes.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { RecipesComponent} from './recipes/recipes.component';
@@ -24,11 +23,11 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BrowseWindowComponent } from './browse-window/browse-window.component';
 import { HomeComponent } from './home/home.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent,
     FeaturedRecipesComponent,
     SideBarComponent,
     RecipesComponent,
@@ -38,7 +37,8 @@ import { FavoritesComponent } from './favorites/favorites.component';
     UserProfileComponent,
     BrowseWindowComponent,
     HomeComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    SearchBarComponent
   ],
 
   imports: [
