@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {SearchComponent} from '../search/search.component';
-import {ApiService} from '../services/api.service';
 
 @Component({
   selector: 'app-browse-window',
@@ -15,9 +14,7 @@ export class BrowseWindowComponent extends SearchComponent  implements OnInit {
   cookTime: number;
   recipeDescription: string;
 
-  constructor(_api:ApiService) {
-    super(_api);
-  }
+  constructor() {}
 
   ngOnInit() {
   }
