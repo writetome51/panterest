@@ -27,6 +27,11 @@ export class SearchService {
   }
 
 
+  getRecipeID(recipe: SearchResultRecipe){
+    return recipe.recipe_id;
+  }
+
+
   getSpecificRecipe(
     recipeID, functionThatManipulatesResponse: SearchCallbackFunction) {
     this.subscription = this._api.getSpecificRecipe(recipeID,
