@@ -1,0 +1,9 @@
+.emailPasswordBox{
+  display: flex;
+  justify-content: center;
+}
+
+.form-control{
+  width: 235px;
+  height: auto;
+}
