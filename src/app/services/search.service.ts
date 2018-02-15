@@ -14,7 +14,15 @@ export class SearchService {
   constructor(private _api: ApiService) {
   }
 
-
+  /**  Example of use:
+   * Inject this service into a component, and call its property 'searchService'.
+   * Now, to call the search() method:
+   this.searchService.search('whatever recipe',
+      (response) => {
+        this.componentPropertyName = response;
+      }
+   );
+   */
   search(
     recipeSearch, functionThatManipulatesResponse: SearchCallbackFunction) {
     this.subscription = this._api.search(
@@ -33,7 +41,7 @@ export class SearchService {
 
 
   getSpecificRecipe(
-    recipeID, functionThatManipulatesResponse: SearchCallbackFunction) {
+    recipeID: string, functionThatManipulatesResponse: SearchCallbackFunction) {
     this.subscription = this._api.getSpecificRecipe(recipeID,
       (response: SpecificRecipe) => {
         functionThatManipulatesResponse(response);
