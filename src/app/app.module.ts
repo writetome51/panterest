@@ -9,7 +9,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { RecipesComponent} from './recipes/recipes.component';
 import { ApiService } from './services/api.service';
 import {HttpClientModule} from '@angular/common/http';
-import { SearchComponent } from './search/search.component';
+import { SearchComponent } from './services/search.service';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {RouterModule} from '@angular/router';
