@@ -1,5 +1,7 @@
 .browse-window {
   display: flex;
+  width: 100%;
+  height: auto;
 }
 
 .time {
@@ -14,7 +16,7 @@
 
 .recipe-card {
   width: 325px;
-  height: auto;
+  height: 400px;
   box-shadow: 0 3px 6px gray;
   border-radius: 3px;
   margin: 10px;
