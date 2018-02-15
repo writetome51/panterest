@@ -9,3 +9,14 @@
   border-radius: 3px;
   padding: 8px 10px;
 }
+
+.fav-font {
+  font-size: 18px;
+  font-family: Futura, sans-serif;
+}
+
+.glyphicon-search {
+  color: #604029;
+  margin: 0;
+  font-size: 18px;
+}

@@ -15,7 +15,19 @@
 }
 
 .fav-font {
+  font-size: 18px;
+  font-family: Futura, sans-serif;
+}
+
+.glyphicon-heart {
   color: #f06db6;
-  font-size: 20px;
   margin: 0;
+  font-size: 18px;
+}
+
+.title {
+  font-family: Futura, sans-serif;
+  font-size: 45px;
+  outline: none;
+  cursor: pointer;
 }

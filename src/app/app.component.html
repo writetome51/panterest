@@ -8,18 +8,18 @@
   <div class="nav-section">
     <app-search-bar></app-search-bar>
   </div>
-  <div class="title nav-section">
-    <h1 [routerLink]="['/home']">
-      {{ title }}
+  <div class="nav-section">
+    <h1 class="title" [routerLink]="['/home']">
+      {{ title | uppercase}}
     </h1>
   </div>
   <div class="button nav-section separate-me">
     <div>
-      <button class="btn btn-default" [routerLink]="['/favorites']"><p class="glyphicon glyphicon-heart-empty fav-font"></p> My Favorites</button>
+      <button class="btn btn-default fav-font" [routerLink]="['/favorites']"><p class="glyphicon glyphicon-heart"></p> My Favorites</button>
     </div>
     <div>
-      <a [routerLink]="['/signup']">Sign Up</a>
-      <button class="btn btn-default" [routerLink]="['/login']" >Log In</button>
+      <a class="fav-font" [routerLink]="['/signup']">Sign Up</a>
+      <button class="btn btn-default fav-font" [routerLink]="['/login']" >Log In</button>
     </div>
   </div>
 </div>
