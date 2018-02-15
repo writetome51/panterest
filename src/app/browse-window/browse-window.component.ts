@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SearchComponent} from '../search/search.component';
 import {ApiService} from '../services/api.service';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -8,7 +7,9 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './browse-window.component.html',
   styleUrls: ['./browse-window.component.css']
 })
-export class BrowseWindowComponent implements OnInit {
+
+
+export class BrowseWindowComponent implements OnInit, OnDestroy {
 
   recipeName: string;
   recipeImage: string;
@@ -18,9 +19,17 @@ export class BrowseWindowComponent implements OnInit {
   searchSubscription: Subscription;
   result: any;
 
+
   constructor() { }
+
 
   ngOnInit() {
   }
+
+
+  ngOnDestroy() {
+
+  }
+
 
 }
