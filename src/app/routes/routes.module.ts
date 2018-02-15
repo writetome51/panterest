@@ -5,6 +5,7 @@ import {LoginComponent} from '../login/login.component';
 import {SignUpComponent} from '../sign-up/sign-up.component';
 import {AuthGuard} from '../auth.guard';
 import {FavoritesComponent} from '../favorites/favorites.component';
+import {RecipesComponent} from '../recipes/recipes.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import {FavoritesComponent} from '../favorites/favorites.component';
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignUpComponent },
       { path: 'favorites', component: FavoritesComponent },
+      { path: 'recipes', component: RecipesComponent }
 
 
       // Uncomment this when ready to use:

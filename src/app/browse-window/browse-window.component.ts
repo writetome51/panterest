@@ -8,7 +8,7 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './browse-window.component.html',
   styleUrls: ['./browse-window.component.css']
 })
-export class BrowseWindowComponent extends SearchComponent implements OnInit, OnDestroy {
+export class BrowseWindowComponent implements OnInit {
 
   recipeName: string;
   recipeImage: string;
@@ -18,15 +18,9 @@ export class BrowseWindowComponent extends SearchComponent implements OnInit, On
   searchSubscription: Subscription;
   result: any;
 
-  constructor(_api: ApiService) {
-    super(_api);
-  }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  ngOnDestroy() {
-    this.searchSubscription.unsubscribe();
   }
 
 }
