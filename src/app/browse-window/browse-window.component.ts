@@ -6,7 +6,7 @@ import {SearchComponent} from '../search/search.component';
   templateUrl: './browse-window.component.html',
   styleUrls: ['./browse-window.component.css']
 })
-export class BrowseWindowComponent extends SearchComponent  implements OnInit {
+export class BrowseWindowComponent   implements OnInit {
 
   recipeName: string;
   recipeImage: string;
