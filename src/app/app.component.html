@@ -13,10 +13,21 @@
     <div>
       <button class="btn btn-default fav-font" [routerLink]="['/favorites']"><p class="glyphicon glyphicon-heart"></p> My Favorites</button>
     </div>
+
+
     <div>
       <a class="fav-font" [routerLink]="['/signup']">Sign Up</a>
-      <button class="btn btn-default fav-font" [routerLink]="['/login']" >Log In</button>
+
+     <!--      <button class="btn btn-default fav-font" [routerLink]="['/login']" >Log In</button>           -->
     </div>
+
+
+
+    <!-- Trying this instead: (Google login template)   -->
+   <app-user-profile></app-user-profile>
+    <!--  End of Google login template   -->
+
+
   </div>
 </div>
 

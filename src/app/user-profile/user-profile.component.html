@@ -4,20 +4,16 @@
 
 <!--If User NOT logged in, show this: -->
 <ng-template #guest>
-  <h3>Howdy, GUEST</h3>
-  <p>Login to get started...</p>
-
   <button (click)="auth.googleLogin()">
-    <i class="fa fa-google"></i> Connect Google
+    <i class="fa fa-google"></i> Google Login
   </button>
 </ng-template>
 
 <!--If User logged in, show this: -->
 <ng-template #authenticated>
   <div *ngIf="auth.user | async as user">
-    <h3>Howdy, {{ user.displayName }}</h3>
-    <img  [src]="user.photoURL">
-    <p>Username: {{ user.uid }}</p>
+    <p>Hi, {{ user.displayName }}</p>
+    <img class="google-photo-thumbnail"  [src]="user.photoURL"  alt="Photo ID">
     <button (click)="auth.signOut()">Logout</button>
   </div>
 </ng-template>
