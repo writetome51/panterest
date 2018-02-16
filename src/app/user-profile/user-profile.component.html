@@ -1,6 +1,6 @@
-<div *ngIf="gAuth.user | async; then authenticated else guest">
+<li *ngIf="gAuth.user | async; then authenticated else guest">
   <!-- template will replace this div -->
-</div>
+</li>
 
 <!--If User NOT logged in, show this: -->
 <ng-template #guest>
