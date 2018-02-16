@@ -8,7 +8,7 @@
 
     <div *ngFor="let recipe of recipes; let i = index;" [class]="'recipes' + (i+1)">
       <div class="recipe-card">
-        <a>
+        <a class="featured-recipe-link"  [href]="">
           <div class="recipe-card-header"><h4>{{recipe.title}}</h4></div>
           <div class="recipe-card-body">
             <img [src]="recipe.image_url">
