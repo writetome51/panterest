@@ -4,9 +4,11 @@
 
 <!--If User NOT logged in, show this: -->
 <ng-template #guest>
-  <button (click)="gAuth.googleLogin()">
-    <i class="fa fa-google"></i> Google Login
-  </button>
+  <li>
+    <a class="fa fa-google" (click)="gAuth.googleLogin()">
+      Google Login
+    </a>
+  </li>
 </ng-template>
 
 <!--If User logged in, show this: -->
