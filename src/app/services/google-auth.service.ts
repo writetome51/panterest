@@ -5,19 +5,15 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+import {GoogleUser} from '../interfaces/GoogleUser';
 
-interface User {
-  uid: string;
-  email: string;
-  displayName: string;
-  photoURL: string;
-}
+
 
 @Injectable()
 
 export class GoogleAuthService {
 
-  user: Observable<User>;
+  user: Observable<GoogleUser>;
 
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
@@ -26,7 +22,7 @@ export class GoogleAuthService {
     this.user = this.afAuth.authState
       .switchMap(user => {
         if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+          return this.afs.doc<GoogleUser>(`users/${user.uid}`).valueChanges();
         } else {
           return Observable.of(null);
         }
@@ -50,7 +46,7 @@ export class GoogleAuthService {
   private updateUserData(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    const data: User = {
+    const data: GoogleUser = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
