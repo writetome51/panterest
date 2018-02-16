@@ -14,7 +14,7 @@ import {RouterModule} from '@angular/router';
 import {RoutesModule} from './routes/routes.module';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AuthService } from './services/auth.service';
+import { GoogleAuthService } from './services/google-auth.service';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
@@ -53,7 +53,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
         { path: '**', redirectTo: 'home' }
         ]),
   ],
-  providers: [ApiService, AuthService],
+  providers: [ApiService, GoogleAuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

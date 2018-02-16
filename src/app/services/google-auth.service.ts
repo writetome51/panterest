@@ -15,7 +15,7 @@ interface User {
 
 @Injectable()
 
-export class AuthService {
+export class GoogleAuthService {
 
   user: Observable<User>;
 

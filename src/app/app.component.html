@@ -18,15 +18,15 @@
     <div>
       <a class="fav-font" [routerLink]="['/signup']">Sign Up</a>
 
-     <!--      <button class="btn btn-default fav-font" [routerLink]="['/login']" >Log In</button>           -->
+     <!--  Probably don't want this any more:
+     <button class="btn btn-default fav-font" [routerLink]="['/login']" >Log In</button>
+     -->
+
+      <!-- Trying this instead: (Google login template)   -->
+      <app-user-profile></app-user-profile>
+      <!--  End of Google login template   -->
+
     </div>
-
-
-
-    <!-- Trying this instead: (Google login template)   -->
-   <app-user-profile></app-user-profile>
-    <!--  End of Google login template   -->
-
 
   </div>
 </div>
