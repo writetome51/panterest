@@ -1,9 +1,32 @@
 .emailPasswordBox{
   display: flex;
   justify-content: center;
+  flex-direction: column;
+
 }
 
 .form-control{
-  width: 235px;
+  width: 330px;
   height: auto;
 }
+.panel-body{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #F78888;
+
+  border: none;
+
+}
+
+.panel-heading{
+  background-color: #F3D240;
+
+
+}
+.panel-default{
+  border-radius: 15px;
+  border: none;
+}
+
+
