@@ -1,6 +1,5 @@
 
 export interface SpecificRecipe {
-  recipe: {
     f2f_url: string;
     image_url: string;
     publisher: string;
@@ -10,5 +9,4 @@ export interface SpecificRecipe {
     source_url: string;
     title: string;
     ingredients: string[];
-  };
 }
