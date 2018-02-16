@@ -12,7 +12,7 @@
 <!--If User logged in, show this: -->
 <ng-template #authenticated>
   <div *ngIf="gAuth.user | async as user">
-    <p>Hi, {{ user.displayName }}</p>
+    <span>Hi, {{ user.displayName }}</span>
     <img class="google-photo-thumbnail"  [src]="user.photoURL"  alt="Photo ID">
     <button (click)="gAuth.signOut()">Logout</button>
   </div>
