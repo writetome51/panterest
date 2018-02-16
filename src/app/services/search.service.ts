@@ -24,9 +24,10 @@ export class SearchService {
    );
    */
   search(
-    recipeSearch, functionThatManipulatesResponse: SearchCallbackFunction) {
+    recipeSearch, resultPage: number,
+    functionThatManipulatesResponse: SearchCallbackFunction) {
     this.subscription = this._api.search(
-      recipeSearch,
+      recipeSearch, resultPage,
       (response: SearchResult) => {
         let narrowedResult = this._narrowResultByTitle(response, recipeSearch);
         functionThatManipulatesResponse(narrowedResult);
@@ -56,7 +57,7 @@ export class SearchService {
     functionThatManipulatesResponse: SearchCallbackFunction
   ) {
     this.subscription = this._api.search(
-      recipeSearch,
+      recipeSearch, 1,
       (response: SearchResult) => {
         let results = this._narrowResultByTitle(response, recipeSearch);
         results = this._getArrayOf(propertyToReturn, results);

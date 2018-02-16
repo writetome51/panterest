@@ -17,6 +17,8 @@ export class ApiService {
   private _keyParam = 'key';
   private _queryParam = 'q';
   private _recipeIDParam = 'rId';
+  private _pageParam = 'page';
+  private _currentPage = 1;
   private _httpOptions = {
     headers: new HttpHeaders({
       'Authorization': this._apiKey,
@@ -31,6 +33,7 @@ export class ApiService {
 
   search(
     recipeSearch: string,
+    resultPage: number,
     functionThatManipulatesResponse: SearchCallbackFunction
   ): Subscription {
     return this._searchAndGetObservable(recipeSearch)
@@ -49,7 +52,8 @@ export class ApiService {
   private _searchAndGetObservable(recipeSearch): Observable<any> {
     // spaces in searchString probably be automatically converted
     // to %20 for us.
-    let getParameters = `?${this._keyParam}=${this._apiKey}&${this._queryParam}=${recipeSearch}`;
+    let getParameters =
+      `?${this._keyParam}=${this._apiKey}&${this._queryParam}=${recipeSearch}&${this._pageParam}=${this._currentPage}`;
     let fullUrl = `${this._baseSearchUrl}${getParameters}`;
     return this._http.get(fullUrl, this._httpOptions);
   }
