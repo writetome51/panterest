@@ -14,10 +14,10 @@
 <!--If User logged in, show this: -->
 
 <ng-template #authenticated>
+  <li>
+  <div *ngIf="gAuth.user | async as user">
+    <div class="fontSize">Hi, {{ user.displayName }} <p class="glyphicon glyphicon-user"></p><a (click)="gAuth.signOut()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</a></div>
 
-  <div *ngIf="gAuth.user | async as user" >
-    <div class="fontSize">Hi, {{ user.displayName }}</div>
-    <a  (click)="gAuth.signOut()">Logout</a>
   </div>
-
+  </li>
 </ng-template>
