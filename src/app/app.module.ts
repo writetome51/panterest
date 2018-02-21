@@ -22,6 +22,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import {SearchService} from './services/search.service';
 import {UserDataService} from './services/user-data.service';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {UserDataService} from './services/user-data.service';
     BrowseWindowComponent,
     HomeComponent,
     FavoritesComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    SearchResultsComponent
   ],
 
   imports: [
