@@ -19,7 +19,6 @@ export class ApiService {
   private _queryParam = 'q';
   private _recipeIDParam = 'rId';
   private _pageParam = 'page';
-  private _currentPage = 1;
   private _httpOptions = {
     headers: new HttpHeaders({
       'Authorization': this._apiKey,
@@ -32,12 +31,18 @@ export class ApiService {
   }
 
 
+  getTopRated(resultPage, functionThatManipulatesResponse): Subscription{
+    return this._getTopRatedAndGetObservable(resultPage)
+      .subscribe(functionThatManipulatesResponse);
+  }
+
+
   search(
     recipeSearch: string,
     resultPage: number,
     functionThatManipulatesResponse: SearchCallbackFunction
   ): Subscription {
-    return this._searchAndGetObservable(recipeSearch)
+    return this._searchAndGetObservable(recipeSearch, resultPage)
       .subscribe(functionThatManipulatesResponse);
   }
 
@@ -50,11 +55,21 @@ export class ApiService {
   }
 
 
-  private _searchAndGetObservable(recipeSearch): Observable<any> {
+  private _getTopRatedAndGetObservable(resultPage){
     // spaces in searchString probably be automatically converted
     // to %20 for us.
     let getParameters =
-      `?${this._keyParamValuePair}&${this._queryParam}=${recipeSearch}&${this._pageParam}=${this._currentPage}`;
+      `?${this._keyParamValuePair}&${this._pageParam}=${resultPage}`;
+    let fullUrl = `${this._baseSearchUrl}${getParameters}`;
+    return this._http.get(fullUrl, this._httpOptions);
+  }
+
+
+  private _searchAndGetObservable(recipeSearch, resultPage): Observable<any> {
+    // spaces in searchString probably be automatically converted
+    // to %20 for us.
+    let getParameters =
+      `?${this._keyParamValuePair}&${this._queryParam}=${recipeSearch}&${this._pageParam}=${resultPage}`;
     let fullUrl = `${this._baseSearchUrl}${getParameters}`;
     return this._http.get(fullUrl, this._httpOptions);
   }

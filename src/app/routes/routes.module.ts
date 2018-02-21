@@ -8,12 +8,9 @@ import {RecipesComponent} from '../recipes/recipes.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'favorites', component: FavoritesComponent },
+      { path: 'favorites', component: FavoritesComponent, canActivate: [AuthGuard] },
       { path: 'recipes', component: RecipesComponent }
 
-
-      // Uncomment this when ready to use:
-      // { path: 'favorites', component: FavoritesComponent, canActivate: [AuthGuard] }
     ]),
     CommonModule
   ],
