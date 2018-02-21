@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
-import {SearchService} from '../services/search.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SearchResultRecipe } from '../interfaces/SearchResultRecipe';
+import { SearchService } from '../services/search.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-featured-recipes',

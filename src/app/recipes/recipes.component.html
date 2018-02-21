@@ -1,2 +1,19 @@
 <p>{{JSON.stringify(result)}}</p>
+
+<div class="recipe-container">
+  <div class="recipe-header">
+    <h2>{{result.recipe.title}}</h2>
+  </div>
+  <div class="recipe-body">
+    <img [src]="result.recipe.image_url">
+
+    <h4>Ingredients:</h4>
+    <div *ngFor="let ingredient of result.recipe.ingredients">
+      <input type="checkbox"/>
+      <span>{{ingredient}}</span>
+    </div>
+    <h4>For full description & instructions visit <a [href]="result.recipe.source_url">{{result.recipe.publisher}}</a></h4>
+  </div>
+</div>
+
 <button class="btn btn-default" (click)="onBack()">Go Back</button>

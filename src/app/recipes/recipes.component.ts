@@ -10,8 +10,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class RecipesComponent   implements OnInit {
 
   JSON = JSON;
-  result;
+  result: any;
   recipeId: string;
+  ingredients: string[];
 
 
   constructor(private search: SearchService,
@@ -24,7 +25,7 @@ export class RecipesComponent   implements OnInit {
   ngOnInit() {
     // just a test:
     // this.search('cupcake', 'result');
-    this.search.getSpecificRecipe('recipe_id', (response) => {
+    this.search.getSpecificRecipe(this.recipeId, (response) => {
       this.result = response;
     });
   }
