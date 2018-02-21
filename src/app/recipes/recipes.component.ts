@@ -24,7 +24,7 @@ export class RecipesComponent   implements OnInit {
   ngOnInit() {
     // just a test:
     // this.search('cupcake', 'result');
-    this.search.getSpecificRecipe('recipe_id', (response) => {
+    this.search.getSpecificRecipe(this.recipeId, (response) => {
       this.result = response;
     });
   }
