@@ -25,7 +25,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
   getFeatured() {
     this._searcher.getTopRated(1, (response) => {
-      this.recipes = Object.values(response.recipes);
+      this.recipes = response.recipes;
       console.log(this.recipes);
     });
   }
