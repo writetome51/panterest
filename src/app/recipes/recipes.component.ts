@@ -7,11 +7,12 @@ import {ActivatedRoute, Router} from '@angular/router';
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
-export class RecipesComponent   implements OnInit, OnDestroy {
+export class RecipesComponent implements OnInit, OnDestroy {
 
   JSON = JSON;
-  result;
+  result: any;
   recipeId: string;
+  ingredients: string[];
 
 
   constructor(private search: SearchService,
@@ -27,7 +28,7 @@ export class RecipesComponent   implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.search.subscription.unsubscribe();
   }
 
