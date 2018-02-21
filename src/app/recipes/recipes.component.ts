@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchService} from "../services/search.service";
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
-export class RecipesComponent   implements OnInit {
+export class RecipesComponent   implements OnInit, OnDestroy {
 
   JSON = JSON;
   result;
@@ -27,6 +27,10 @@ export class RecipesComponent   implements OnInit {
     this.search.getSpecificRecipe(this.recipeId, (response) => {
       this.result = response;
     });
+  }
+
+  ngOnDestroy(){
+    this.search.subscription.unsubscribe();
   }
 
   onBack() {
