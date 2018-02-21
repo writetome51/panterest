@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {SpecificRecipe} from '../interfaces/SpecificRecipe';
+import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
+import {SearchService} from '../services/search.service';
 
 @Component({
   selector: 'app-featured-recipes',
@@ -8,11 +9,19 @@ import {SpecificRecipe} from '../interfaces/SpecificRecipe';
 })
 export class FeaturedRecipesComponent implements OnInit {
 
-  recipes: SpecificRecipe[];
+  recipes: SearchResultRecipe[];
 
-  constructor() { }
+  constructor(private _searcher: SearchService) {
+    this.recipes = this.getFeatured();
+  }
 
   ngOnInit() {
+  }
+
+
+  getFeatured(){
+    let result: SearchResultRecipe[];
+    return result;
   }
 
 }

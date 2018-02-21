@@ -18,14 +18,13 @@ export class SearchService {
    * Inject this service into a component, and call its property 'searchService'.
    * Now, to call the search() method:
    this.searchService.search('whatever recipe',
-      (response) => {
+   (response) => {
         this.componentPropertyName = response;
       }
    );
    */
-  search(
-    recipeSearch, resultPage: number,
-    functionThatManipulatesResponse: SearchCallbackFunction) {
+  search(recipeSearch, resultPage: number,
+         functionThatManipulatesResponse: SearchCallbackFunction) {
     this.subscription = this._api.search(
       recipeSearch, resultPage,
       (response: SearchResult) => {
@@ -36,13 +35,12 @@ export class SearchService {
   }
 
 
-  getRecipeID(recipe: SearchResultRecipe){
+  getRecipeID(recipe: SearchResultRecipe) {
     return recipe.recipe_id;
   }
 
 
-  getSpecificRecipe(
-    recipeID: string, functionThatManipulatesResponse: SearchCallbackFunction) {
+  getSpecificRecipe(recipeID: string, functionThatManipulatesResponse: SearchCallbackFunction) {
     this.subscription = this._api.getSpecificRecipe(recipeID,
       (response: SpecificRecipe) => {
         functionThatManipulatesResponse(response);
@@ -51,11 +49,9 @@ export class SearchService {
   }
 
 
-  searchAndGetPropertyFromEach(
-    recipeSearch,
-    propertyToReturn,
-    functionThatManipulatesResponse: SearchCallbackFunction
-  ) {
+  searchAndGetPropertyFromEach(recipeSearch,
+                               propertyToReturn,
+                               functionThatManipulatesResponse: SearchCallbackFunction) {
     this.subscription = this._api.search(
       recipeSearch, 1,
       (response: SearchResult) => {
