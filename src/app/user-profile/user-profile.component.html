@@ -12,10 +12,12 @@
 </ng-template>
 
 <!--If User logged in, show this: -->
+
 <ng-template #authenticated>
+  <li>
   <div *ngIf="gAuth.user | async as user">
-    <span>Hi, {{ user.displayName }}</span>
-    <img class="google-photo-thumbnail"  [src]="user.photoURL"  alt="Photo ID">
-    <button (click)="gAuth.signOut()">Logout</button>
+    <div class="fontSize">Hi, {{ user.displayName }} <p class="glyphicon glyphicon-user"></p><a  class="noUnderline" (click)="gAuth.signOut()">&nbsp;&nbsp;&nbsp;Logout</a></div>
+
   </div>
+  </li>
 </ng-template>

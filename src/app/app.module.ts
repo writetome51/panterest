@@ -8,8 +8,6 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { RecipesComponent} from './recipes/recipes.component';
 import { ApiService } from './services/api.service';
 import {HttpClientModule} from '@angular/common/http';
-import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
 import {RouterModule} from '@angular/router';
 import {RoutesModule} from './routes/routes.module';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -30,8 +28,6 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     FeaturedRecipesComponent,
     SideBarComponent,
     RecipesComponent,
-    LoginComponent,
-    SignUpComponent,
     UserProfileComponent,
     BrowseWindowComponent,
     HomeComponent,
