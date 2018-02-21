@@ -29,4 +29,8 @@ export class RecipesComponent   implements OnInit {
     });
   }
 
+  onBack() {
+    this.router.navigate(['/home']);
+  }
+
 }

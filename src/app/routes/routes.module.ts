@@ -9,7 +9,7 @@ import {RecipesComponent} from '../recipes/recipes.component';
   imports: [
     RouterModule.forChild([
       { path: 'favorites', component: FavoritesComponent, canActivate: [AuthGuard] },
-      { path: 'recipes', component: RecipesComponent }
+      { path: 'recipes/:recipe_id', component: RecipesComponent }
 
     ]),
     CommonModule
