@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SearchService} from "../services/search.service";
+import {SearchService} from '../services/search.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -22,8 +22,6 @@ export class RecipesComponent   implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // just a test:
-    // this.search('cupcake', 'result');
     this.search.getSpecificRecipe(this.recipeId, (response) => {
       this.result = response;
     });
