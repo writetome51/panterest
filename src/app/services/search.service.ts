@@ -14,6 +14,12 @@ export class SearchService {
   constructor(private _api: ApiService) {
   }
 
+
+  getTopRated(resultPage: number,
+              functionThatManipulatesResponse: SearchCallbackFunction) {
+      this.subscription = this._api.getTopRated(resultPage, functionThatManipulatesResponse);
+  }
+
   /**  Example of use:
    * Inject this service into a component, and call its property 'searchService'.
    * Now, to call the search() method:

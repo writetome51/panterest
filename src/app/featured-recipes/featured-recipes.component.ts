@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
 import {SearchService} from '../services/search.service';
 
@@ -7,21 +7,27 @@ import {SearchService} from '../services/search.service';
   templateUrl: './featured-recipes.component.html',
   styleUrls: ['./featured-recipes.component.css']
 })
-export class FeaturedRecipesComponent implements OnInit {
+export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
   recipes: SearchResultRecipe[];
 
   constructor(private _searcher: SearchService) {
-    this.recipes = this.getFeatured();
   }
 
   ngOnInit() {
+    this.getFeatured();
+  }
+
+  ngOnDestroy(){
+    this._searcher.subscription.unsubscribe();
   }
 
 
-  getFeatured(){
-    let result: SearchResultRecipe[];
-    return result;
+  getFeatured() {
+    this._searcher.getTopRated(1, (response) => {
+      this.recipes = Object.values(response.recipes);
+      console.log(this.recipes);
+    });
   }
 
 }
