@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
 import {SearchService} from '../services/search.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-featured-recipes',
@@ -10,8 +11,14 @@ import {SearchService} from '../services/search.service';
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
   recipes: SearchResultRecipe[];
+  recipeId: string;
 
-  constructor(private _searcher: SearchService) {
+  constructor(
+    private _searcher: SearchService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+              ) {
+    this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
   }
 
   ngOnInit() {

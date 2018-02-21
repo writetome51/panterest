@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SearchService} from "../services/search.service";
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -10,17 +11,26 @@ export class RecipesComponent   implements OnInit {
 
   JSON = JSON;
   result;
+  recipeId: string;
 
-  constructor(private search: SearchService) {
 
+  constructor(private search: SearchService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
+
+    this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
   }
 
   ngOnInit() {
     // just a test:
     // this.search('cupcake', 'result');
-    this.search.getSpecificRecipe('8f47af', (response) => {
+    this.search.getSpecificRecipe('recipe_id', (response) => {
       this.result = response;
     });
+  }
+
+  onBack() {
+    this.router.navigate(['/home']);
   }
 
 }
