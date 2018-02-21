@@ -51,7 +51,9 @@ export class ApiService {
     recipeId: string, functionThatManipulatesResponse: SearchCallbackFunction
   ): Subscription {
     return this._getSpecificRecipeAsObservable(recipeId)
-    .subscribe(functionThatManipulatesResponse);
+    .subscribe((response) => {
+      functionThatManipulatesResponse(response.recipe);
+    });
   }
 
 
