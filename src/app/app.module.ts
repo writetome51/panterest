@@ -21,6 +21,7 @@ import { BrowseWindowComponent } from './browse-window/browse-window.component';
 import { HomeComponent } from './home/home.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import {SearchService} from './services/search.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
         { path: '**', redirectTo: 'home' }
         ]),
   ],
-  providers: [ApiService, GoogleAuthService],
+  providers: [ApiService, GoogleAuthService, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
