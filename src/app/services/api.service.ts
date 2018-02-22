@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subscribable} from 'rxjs/Observable';
-import {SearchCallbackFunction} from '../interfaces/SearchCallbackFunction';
+import {Observer} from '../interfaces/Observer';
 import {SearchResult} from '../interfaces/SearchResult';
 import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
 import {Subscription} from 'rxjs/Subscription';
@@ -40,7 +40,7 @@ export class ApiService {
   search(
     recipeSearch: string,
     resultPage: number,
-    functionThatManipulatesResponse: SearchCallbackFunction
+    functionThatManipulatesResponse: Observer
   ): Subscription {
     return this._searchAndGetObservable(recipeSearch, resultPage)
       .subscribe(functionThatManipulatesResponse);
@@ -48,7 +48,7 @@ export class ApiService {
 
 
   getSpecificRecipe(
-    recipeId: string, functionThatManipulatesResponse: SearchCallbackFunction
+    recipeId: string, functionThatManipulatesResponse: Observer
   ): Subscription {
     return this._getSpecificRecipeAsObservable(recipeId)
     .subscribe((response) => {

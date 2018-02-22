@@ -4,7 +4,7 @@ import {ApiService} from './api.service';
 import {SearchResult} from '../interfaces/SearchResult';
 import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
 import {SpecificRecipe} from '../interfaces/SpecificRecipe';
-import {SearchCallbackFunction} from '../interfaces/SearchCallbackFunction';
+import {Observer} from '../interfaces/Observer';
 
 @Injectable()
 export class SearchService {
@@ -16,7 +16,7 @@ export class SearchService {
 
 
   getTopRated(resultPage: number,
-              functionThatManipulatesResponse: SearchCallbackFunction) {
+              functionThatManipulatesResponse: Observer) {
     this.subscription = this._api.getTopRated(resultPage, functionThatManipulatesResponse);
   }
 
@@ -30,7 +30,7 @@ export class SearchService {
    );
    */
   search(recipeSearch, resultPage: number,
-         functionThatManipulatesResponse: SearchCallbackFunction) {
+         functionThatManipulatesResponse: Observer) {
     this.subscription = this._api.search(
       recipeSearch, resultPage,
       (response: SearchResult) => {
@@ -42,7 +42,7 @@ export class SearchService {
 
 
   getSpecificRecipe(recipeID: string,
-                    functionThatManipulatesResponse: SearchCallbackFunction) {
+                    functionThatManipulatesResponse: Observer) {
     this.subscription = this._api.getSpecificRecipe(recipeID, functionThatManipulatesResponse);
   }
 
@@ -54,7 +54,7 @@ export class SearchService {
 
   searchAndGetPropertyFromEach(recipeSearch,
                                propertyToReturn,
-                               functionThatManipulatesResponse: SearchCallbackFunction) {
+                               functionThatManipulatesResponse: Observer) {
     this.subscription = this._api.search(
       recipeSearch, 1,
       (response: SearchResult) => {
