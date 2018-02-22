@@ -27,6 +27,7 @@ export class RecipesComponent   implements OnInit, OnDestroy {
     // this.search('cupcake', 'result');
     this.search.getSpecificRecipe(this.recipeId, (response) => {
       this.result = response;
+      console.log(this.result);
     });
   }
 
