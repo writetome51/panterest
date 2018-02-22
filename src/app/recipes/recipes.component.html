@@ -1,19 +1,26 @@
-<p>{{JSON.stringify(result)}}</p>
-
-<div class="recipe-container">
-  <div class="recipe-header">
-    <h2>{{result.recipe.title}}</h2>
-  </div>
-  <div class="recipe-body">
-    <img [src]="result.recipe.image_url">
-
-    <h4>Ingredients:</h4>
-    <div *ngFor="let ingredient of result.recipe.ingredients">
-      <input type="checkbox"/>
-      <span>{{ingredient}}</span>
+<div class="recipe-container container-fluid row" *ngIf="result">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="recipe">
+      <div class="recipe-header">
+        <h2>{{result.title}}</h2>
+      </div>
+      <div class="recipe-body">
+        <div class="image-container">
+          <img [src]="result.image_url">
+        </div>
+        <div class="content-container">
+          <h4>Ingredients:</h4>
+          <div *ngFor="let ingredient of result.ingredients">
+            <input type="checkbox"/>
+            <span>{{ingredient}}</span>
+          </div>
+          <h4>For full description & instructions visit <a class="publisher-link" [href]="result.source_url" target="_blank">{{result.publisher}}</a></h4>
+        </div>
+        </div>
+      <button class="btn btn-default back-button" (click)="onBack()">Go Back</button>
     </div>
-    <h4>For full description & instructions visit <a [href]="result.recipe.source_url">{{result.recipe.publisher}}</a></h4>
   </div>
+  <div class="col-md-2"></div>
 </div>
 
-<button class="btn btn-default" (click)="onBack()">Go Back</button>

@@ -25,6 +25,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.search.getSpecificRecipe(this.recipeId, (response) => {
       this.result = response;
+      console.log(this.result);
     });
   }
 

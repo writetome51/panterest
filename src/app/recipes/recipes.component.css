@@ -1,0 +1,44 @@
+.recipe {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeeeee;
+}
+
+.recipe-body {
+  background-color: whitesmoke;
+}
+
+.content-container {
+  padding: 10px 0 10px 10px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.recipe-body img {
+  width: 1000px;
+}
+
+.back-button {
+  width: 200px;
+}
+
+.publisher-link {
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 500px) {
+  recipe-body img {
+    width: 600px;
+  }
+}
