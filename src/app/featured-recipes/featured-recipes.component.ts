@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SearchResultRecipe } from '../interfaces/SearchResultRecipe';
-import { SearchService } from '../services/search.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
+import {SearchService} from '../services/search.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-featured-recipes',
@@ -13,11 +13,9 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
   recipes: SearchResultRecipe[];
   recipeId: string;
 
-  constructor(
-    private _searcher: SearchService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-              ) {
+  constructor(private _searcher: SearchService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
     this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
   }
 
@@ -25,7 +23,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     this.getFeatured();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this._searcher.subscription.unsubscribe();
   }
 
@@ -33,7 +31,6 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
   getFeatured() {
     this._searcher.getTopRated(1, (response) => {
       this.recipes = response.recipes;
-      console.log(this.recipes);
     });
   }
 

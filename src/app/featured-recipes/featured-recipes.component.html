@@ -9,13 +9,13 @@
     <div *ngFor="let recipe of recipes; let i = index;" [class]="'recipes' + (i+1)"
          [routerLink]="['/recipes', recipe.recipe_id]">
       <div class="recipe-card">
-        <a class="featured-recipe-link" [href]="">
+
           <div class="recipe-card-header"><h4>{{recipe.title}}</h4></div>
           <div class="recipe-card-body">
-            <img [src]="recipe.image_url">
-            <p>Rank: {{recipe.social_rank}}</p>
+            <div class="WhatEverTheHellYouWant">
+              <img [src]="recipe.image_url">
+            </div>
           </div>
-        </a>
       </div>
     </div>
   </div>

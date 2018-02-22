@@ -17,7 +17,7 @@ export class SearchService {
 
   getTopRated(resultPage: number,
               functionThatManipulatesResponse: SearchCallbackFunction) {
-      this.subscription = this._api.getTopRated(resultPage, functionThatManipulatesResponse);
+    this.subscription = this._api.getTopRated(resultPage, functionThatManipulatesResponse);
   }
 
   /**  Example of use:
@@ -41,7 +41,8 @@ export class SearchService {
   }
 
 
-  getSpecificRecipe(recipeID: string, functionThatManipulatesResponse: SearchCallbackFunction) {
+  getSpecificRecipe(recipeID: string,
+                    functionThatManipulatesResponse: SearchCallbackFunction) {
     this.subscription = this._api.getSpecificRecipe(recipeID, functionThatManipulatesResponse);
   }
 
