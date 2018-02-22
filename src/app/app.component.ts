@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {UserDataService} from './services/user-data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Panterest';
+
+  constructor(private _userData: UserDataService){
+
+  }
 }
