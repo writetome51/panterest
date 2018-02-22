@@ -30,10 +30,11 @@
 }
 
 .recipe-card {
+  cursor: pointer;
   width: 325px;
   height: 250px;
   box-shadow: 0 3px 6px #884949;
-  border-radius: 3px;
+  border-radius: 15px;
   margin: 25px;
   display: flex;
   flex-direction: column;
@@ -41,13 +42,13 @@
 }
 
 .recipe-card-header {
-  height: 40px;
+  padding: 0 5px;
   border-bottom: solid 1px darkgray;
   background-color: #eeeeee;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 3px 3px 0 0;
+  border-radius: 15px 15px 0 0;
 }
 
 .recipe-card-body {
@@ -56,12 +57,15 @@
   justify-content: center;
   overflow: hidden;
   height: 216px;
+  border-radius:0 0 15px 15px;
 }
 
 .recipe-card-body img {
   width: 325px;
   z-index: 0;
   margin: 0 auto 5px auto;
+
+
 }
 
 .recipe-card-body p {
