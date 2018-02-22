@@ -1,6 +1,9 @@
 .recipe {
   display: flex;
   flex-direction: column;
+  box-shadow: 0 3px 6px #4c728c;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .recipe-header {
@@ -8,10 +11,13 @@
   justify-content: center;
   align-items: center;
   background-color: #eeeeee;
+  padding: 0 5px;
+  border-bottom: solid 1px darkgray;
 }
 
 .recipe-body {
   background-color: whitesmoke;
+  padding: 0 0 10px 0;
 }
 
 .content-container {
@@ -30,15 +36,15 @@
 }
 
 .back-button {
-  width: 200px;
+  width: 100px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .publisher-link {
   text-decoration: none;
-}
-
-@media only screen and (max-width: 500px) {
-  recipe-body img {
-    width: 600px;
-  }
 }
