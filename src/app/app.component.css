@@ -22,6 +22,7 @@
 .fav-font {
   font-size: 18px;
   font-family: Futura, sans-serif;
+  cursor: pointer;
 }
 
 .glyphicon-heart {
