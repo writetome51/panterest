@@ -8,5 +8,4 @@ export interface SearchResultRecipe {
   social_rank: number;
   source_url: string;
   title: string;
-  ingredients: string[];
 }

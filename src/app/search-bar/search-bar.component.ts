@@ -11,9 +11,7 @@ export class SearchBarComponent implements OnInit {
 
     searchText = '';
 
-    constructor(private _searcher: SearchService,
-                private _activatedRoute: ActivatedRoute) {
-
+    constructor(private _activatedRoute: ActivatedRoute) {
         this.searchText = this._activatedRoute.snapshot.params['search_text'];
     }
 

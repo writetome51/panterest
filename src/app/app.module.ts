@@ -24,6 +24,7 @@ import {SearchService} from './services/search.service';
 import {UserDataService} from './services/user-data.service';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import {AuthGuard} from './guards/auth.guard';
+import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {AuthGuard} from './guards/auth.guard';
     HomeComponent,
     FavoritesComponent,
     SearchBarComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    ProfileDetailComponent
   ],
 
   imports: [
