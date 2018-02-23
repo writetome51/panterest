@@ -16,6 +16,7 @@ export class UserDataService {
     db: AngularFirestoreCollection<object>;
     subscription: Subscription;
     store: AngularFirestoreDocument<object>;
+    private _storeIsEmpty: object | null;
 
 
     constructor(private firestore: AngularFirestore,
@@ -24,12 +25,22 @@ export class UserDataService {
 
         this.subscription = this._afAuth.authState.subscribe((response) => {
             if (response){ // if true, you're logged in.
-                this._set_db();
-                this._gAuth.user.subscribe((newResponse) => {
-                    this.user = newResponse;
-                    this._set_store();
-                });
+               this._setupUserData();
             }
+        });
+    }
+
+
+    update(newData: object){
+        this.store.update(newData);
+    }
+
+
+    private _setupUserData(){
+        this._set_db();
+        this._gAuth.user.subscribe((newResponse) => {
+            this.user = newResponse;
+            this._set_store();
         });
     }
 
@@ -42,7 +53,21 @@ export class UserDataService {
     private _set_store(){
         // The document object is named after user's email:
         this.store = this.db.doc(this.user.email);
+        this.store.valueChanges().subscribe((response) => {
+            if ( ! response){ // Then store doesn't exist...
+                this._createDefaultUserStore();
+            }
+        });
     }
+
+
+    private _createDefaultUserStore(){
+        let content = {};
+        content['displayName'] = this.user.displayName;
+        content['favorites'] = {};
+        this.db.doc(this.user.email).set(content);
+    }
+
 
 
 }

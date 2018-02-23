@@ -12,9 +12,9 @@ export class UserService {
 
     addNewFavorite(favorite: Favorite){
         this._userData.store.valueChanges().subscribe((response: UserStore) => {
-            let obj = response;
-            obj.favorites[favorite.name] = favorite.content;
-            this._userData.store.update(obj);
+            let userStore = response;
+            userStore.favorites[favorite.name] = favorite.content;
+            this._userData.update(userStore);
         });
     }
 
