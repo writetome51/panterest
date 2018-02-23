@@ -23,6 +23,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import {SearchService} from './services/search.service';
 import {UserDataService} from './services/user-data.service';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import {AuthGuard} from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { SearchResultsComponent } from './search-results/search-results.componen
         { path: '**', redirectTo: 'home' }
         ]),
   ],
-  providers: [ApiService, GoogleAuthService, SearchService, UserDataService],
+  providers: [ApiService, GoogleAuthService, SearchService, UserDataService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
