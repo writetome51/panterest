@@ -38,8 +38,8 @@ export class UserDataService {
 
     private _setupUserData(){
         this._set_db();
-        this._gAuth.user.subscribe((newResponse) => {
-            this.user = newResponse;
+        this._gAuth.user.subscribe((response) => {
+            this.user = response;
             this._set_store();
         });
     }
@@ -53,6 +53,7 @@ export class UserDataService {
     private _set_store(){
         // The document object is named after user's email:
         this.store = this.db.doc(this.user.email);
+
         this.store.valueChanges().subscribe((response) => {
             if ( ! response){ // Then store doesn't exist...
                 this._createDefaultUserStore();
