@@ -1,19 +1,19 @@
 <div class="main-container ">
   <div class="contains-title">
-    <h1 class="featured-title">Today's Featured Recipes</h1>
+    <h1 class="featured-title">{{header}}</h1>
   </div>
 
 
   <div class="featuredRecipes">
 
-    <div *ngFor="let recipe of recipes; let i = index;" [class]="'recipes' + (i+1)"
-         [routerLink]="['/recipes', recipe.recipe_id]">
+    <div *ngFor="let result of searcher.results; let i = index;" [class]="'recipes' + (i+1)"
+         [routerLink]="['/recipes', result.recipe_id]">
       <div class="recipe-card">
 
-          <div class="recipe-card-header"><h4>{{recipe.title}}</h4></div>
+          <div class="recipe-card-header"><h4>{{result.title}}</h4></div>
           <div class="recipe-card-body">
             <div class="WhatEverTheHellYouWant">
-              <img [src]="recipe.image_url">
+              <img [src]="result.image_url">
             </div>
           </div>
       </div>
@@ -21,67 +21,3 @@
   </div>
 
 </div>
-
-<!--  Examples   -->
-
-<!--<div class="featuredRecipes">-->
-<!--<div class="recipes1">-->
-<!--<div class="recipe-card">-->
-<!--<div class="recipe-card-header"><h4>Albondigas</h4></div>-->
-<!--<div class="recipe-card-body">-->
-<!--<img src="../../assets/test.jpg">-->
-<!--<div class="time">-->
-<!--<p class="time-font glyphicon glyphicon-time"></p>-->
-<!--<p>-->
-<!--Cook Time: 45 min.-->
-<!--</p>-->
-<!--</div>-->
-<!--<p>-->
-<!--Description: Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts-->
-<!--fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.-->
-<!--</p>-->
-<!--</div>-->
-
-<!--</div>-->
-<!--</div>-->
-<!--<div class="recipes2">-->
-<!--<div class="recipe-card">-->
-<!--<div class="recipe-card-header"><h4>Albondigas</h4></div>-->
-<!--<div class="recipe-card-body">-->
-<!--<img src="../../assets/test.jpg">-->
-<!--<div class="time">-->
-<!--<p class="time-font glyphicon glyphicon-time"></p>-->
-<!--<p>-->
-<!--Cook Time: 45 min.-->
-<!--</p>-->
-<!--</div>-->
-<!--<p>-->
-<!--Description: Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts-->
-<!--fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.-->
-<!--</p>-->
-<!--</div>-->
-
-<!--</div>-->
-<!--</div>-->
-<!--<div class="recipes3">-->
-<!--<div class="recipe-card">-->
-<!--<div class="recipe-card-header"><h4>Albondigas</h4></div>-->
-<!--<div class="recipe-card-body">-->
-<!--<img src="../../assets/test.jpg">-->
-<!--<div class="time">-->
-<!--<p class="time-font glyphicon glyphicon-time"></p>-->
-<!--<p>-->
-<!--Cook Time: 45 min.-->
-<!--</p>-->
-<!--</div>-->
-<!--<p>-->
-<!--Description: Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts-->
-<!--fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.-->
-<!--</p>-->
-<!--</div>-->
-
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-

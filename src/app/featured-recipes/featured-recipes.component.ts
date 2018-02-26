@@ -10,27 +10,42 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
+    header: string;
     recipes: SearchResultRecipe[];
     recipeId: string;
 
-    constructor(private _searcher: SearchService,
+    constructor(public searcher: SearchService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
     }
 
     ngOnInit(){
-        this.getFeatured();
+        if (this.searcher.searchText === ''){
+            this.header = 'Today\'s Featured Recipes';
+            this.getFeatured();
+        }
+        else{
+            this.header = 'Search Results';
+            this.getSearchResults();
+        }
     }
 
     ngOnDestroy(){
-        this._searcher.subscription.unsubscribe();
+        this.searcher.subscription.unsubscribe();
+    }
+
+
+    getSearchResults(){
+        this.searcher.search(this.searcher.searchText, 1, (response) => {
+            this.searcher.results = response;
+        });
     }
 
 
     getFeatured(){
-        this._searcher.getTopRated(1, (response) => {
-            this.recipes = response.recipes;
+        this.searcher.getTopRated(1, (response) => {
+            this.searcher.results = response.recipes;
         });
     }
 

@@ -10,6 +10,9 @@ import {Observer} from '../interfaces/Observer';
 export class SearchService {
 
   subscription: Subscription;
+  searchText = '';
+  results;
+  resultsHeader: string;
 
   constructor(private _api: ApiService) {
   }
