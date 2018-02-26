@@ -31,34 +31,34 @@ export class ApiService {
   }
 
 
-  getTopRated(resultPage, functionThatManipulatesResponse): Subscription{
+  getTopRated(resultPage, observer): Subscription{
     return this._getTopRatedAndGetObservable(resultPage)
-      .subscribe(functionThatManipulatesResponse);
+      .subscribe(observer);
   }
 
 
   search(
     recipeSearch: string,
     resultPage: number,
-    functionThatManipulatesResponse: Observer
+    observer: Observer
   ): Subscription {
     return this._searchAndGetObservable(recipeSearch, resultPage)
-      .subscribe(functionThatManipulatesResponse);
+      .subscribe(observer);
   }
 
 
   getSpecificRecipe(
-    recipeId: string, functionThatManipulatesResponse: Observer
+    recipeId: string, observer: Observer
   ): Subscription {
     return this._getSpecificRecipeAsObservable(recipeId)
     .subscribe((response) => {
-      functionThatManipulatesResponse(response.recipe);
+      observer(response.recipe);
     });
   }
 
 
   private _getTopRatedAndGetObservable(resultPage){
-    // spaces in searchString probably be automatically converted
+    // spaces in searchString are automatically converted
     // to %20 for us.
     let getParameters =
       `?${this._keyParamValuePair}&${this._pageParam}=${resultPage}`;

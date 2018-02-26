@@ -21,11 +21,9 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     ngOnInit(){
         if (this.searcher.searchText === ''){
-            this.searcher.resultsHeader = 'Today\'s Featured Recipes';
             this.getFeatured();
         }
         else{
-            this.searcher.resultsHeader = 'Search Results';
             this.getSearchResults();
         }
     }
@@ -36,18 +34,12 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
 
     getSearchResults(){
-        this.searcher.search(this.searcher.searchText, 1, (response) => {
-            this.searcher.resultsHeader = 'Search Results';
-            this.searcher.results = response;
-        });
+        this.searcher.search(1);
     }
 
 
     getFeatured(){
-        this.searcher.getTopRated(1, (response) => {
-            this.searcher.resultsHeader = 'Today\'s Featured Recipes';
-            this.searcher.results = response.recipes;
-        });
+        this.searcher.getTopRated(1);
     }
 
 }
