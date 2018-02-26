@@ -19,6 +19,7 @@ export class SearchService {
 
 
     getTopRated(resultPage: number) {
+        this._clearResults();
         this.subscription = this._api.getTopRated(resultPage, (response) => {
             this.resultsHeader = 'Today\'s Featured Recipes';
             this.results = response.recipes;
@@ -34,7 +35,9 @@ export class SearchService {
       }
      );
      */
+
     search(resultPage: number) {
+        this._clearResults();
         this.subscription = this._api.search(
             this.searchText, resultPage,
             (response: SearchResult) => {
@@ -67,6 +70,12 @@ export class SearchService {
                 observer(results);
             }
         );
+    }
+
+
+    private _clearResults(){
+        this.resultsHeader = '';
+        this.results = null;
     }
 
 

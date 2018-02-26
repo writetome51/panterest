@@ -4,7 +4,6 @@ import {RouterModule} from '@angular/router';
 import {AuthGuard} from '../guards/auth.guard';
 import {FavoritesComponent} from '../favorites/favorites.component';
 import {RecipesComponent} from '../recipes/recipes.component';
-import {SearchResultsComponent} from '../search-results/search-results.component';
 
 @NgModule({
     imports: [
