@@ -9,17 +9,19 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class SearchBarComponent implements OnInit {
 
-    searchText = '';
 
-    constructor(private _activatedRoute: ActivatedRoute) {
-        this.searchText = this._activatedRoute.snapshot.params['search_text'];
+    constructor(private _activatedRoute: ActivatedRoute,
+                public searcher: SearchService) {
     }
-
 
     ngOnInit() {
     }
 
-    search() {
+
+    changeResults(){
+        this.searcher.search(this.searcher.searchText, 1, (response) => {
+            this.searcher.results = response;
+        });
     }
 
 }
