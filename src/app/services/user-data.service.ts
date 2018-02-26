@@ -16,7 +16,6 @@ export class UserDataService {
     db: AngularFirestoreCollection<object>;
     subscription: Subscription;
     store: AngularFirestoreDocument<object>;
-    private _storeIsEmpty: object | null;
 
 
     constructor(private firestore: AngularFirestore,
