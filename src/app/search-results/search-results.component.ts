@@ -7,7 +7,7 @@ import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
 @Component({
     selector: 'app-search-results',
     templateUrl: './search-results.component.html',
-    styleUrls: ['./search-results.component.css']
+    styleUrls: ['./search-results.component.css'],
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
 
@@ -16,7 +16,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     JSON = JSON;
 
     constructor(private _searcher: SearchService,
-                private _activatedRoute: ActivatedRoute) {
+                private _activatedRoute: ActivatedRoute)
+    {
         this.searchText = this._activatedRoute.snapshot.params['search_text'];
     }
 

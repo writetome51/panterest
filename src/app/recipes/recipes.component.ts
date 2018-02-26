@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchService} from '../services/search.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common'
 
 @Component({
   selector: 'app-recipes',
@@ -17,7 +18,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
   constructor(private search: SearchService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private _location: Location) {
 
     this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
   }
@@ -33,8 +35,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
     this.search.subscription.unsubscribe();
   }
 
-  onBack() {
-    this.router.navigate(['/home']);
+  goBack() {
+    this._location.back();
   }
 
 }
