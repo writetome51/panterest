@@ -21,6 +21,10 @@ export class SearchBarComponent implements OnInit {
     changeResults(){
         this.searcher.search(this.searcher.searchText, 1, (response) => {
             this.searcher.results = response;
+            if (this.searcher.searchText === ''){
+                this.searcher.resultsHeader = 'Today\'s Featured Recipes';
+            }
+            else this.searcher.resultsHeader = 'Search Results';
         });
     }
 

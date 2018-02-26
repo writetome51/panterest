@@ -10,7 +10,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
-    header: string;
     recipes: SearchResultRecipe[];
     recipeId: string;
 
@@ -22,11 +21,11 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     ngOnInit(){
         if (this.searcher.searchText === ''){
-            this.header = 'Today\'s Featured Recipes';
+            this.searcher.resultsHeader = 'Today\'s Featured Recipes';
             this.getFeatured();
         }
         else{
-            this.header = 'Search Results';
+            this.searcher.resultsHeader = 'Search Results';
             this.getSearchResults();
         }
     }
@@ -38,6 +37,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     getSearchResults(){
         this.searcher.search(this.searcher.searchText, 1, (response) => {
+            this.searcher.resultsHeader = 'Search Results';
             this.searcher.results = response;
         });
     }
@@ -45,6 +45,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     getFeatured(){
         this.searcher.getTopRated(1, (response) => {
+            this.searcher.resultsHeader = 'Today\'s Featured Recipes';
             this.searcher.results = response.recipes;
         });
     }

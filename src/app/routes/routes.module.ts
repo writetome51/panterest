@@ -11,7 +11,6 @@ import {SearchResultsComponent} from '../search-results/search-results.component
         RouterModule.forChild([
             {path: 'favorites', component: FavoritesComponent, canActivate: [AuthGuard]},
             {path: 'recipes/:recipe_id', component: RecipesComponent},
-            {path: 'search-results/:search_text', component: SearchResultsComponent},
         ]),
         CommonModule
     ],
