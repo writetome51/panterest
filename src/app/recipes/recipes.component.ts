@@ -14,6 +14,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
   result: any;
   recipeId: string;
   ingredients: string[];
+  pattern: RegExp = new RegExp('([a-zA-Z 0-9])');
+
 
 
   constructor(private search: SearchService,

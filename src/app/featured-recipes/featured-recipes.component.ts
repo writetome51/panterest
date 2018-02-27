@@ -10,9 +10,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
-    header: string;
     recipes: SearchResultRecipe[];
     recipeId: string;
+    loadingSpinner = '../../../assets/loading_spinner.gif';
 
     constructor(public searcher: SearchService,
                 private router: Router,
@@ -22,11 +22,9 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     ngOnInit(){
         if (this.searcher.searchText === ''){
-            this.header = 'Today\'s Featured Recipes';
             this.getFeatured();
         }
         else{
-            this.header = 'Search Results';
             this.getSearchResults();
         }
     }
@@ -37,16 +35,12 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
 
     getSearchResults(){
-        this.searcher.search(this.searcher.searchText, 1, (response) => {
-            this.searcher.results = response;
-        });
+        this.searcher.search(1);
     }
 
 
     getFeatured(){
-        this.searcher.getTopRated(1, (response) => {
-            this.searcher.results = response.recipes;
-        });
+        this.searcher.getTopRated(1);
     }
 
 }

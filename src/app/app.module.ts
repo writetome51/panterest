@@ -22,7 +22,6 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import {SearchService} from './services/search.service';
 import {UserDataService} from './services/user-data.service';
-import { SearchResultsComponent } from './search-results/search-results.component';
 import {AuthGuard} from './guards/auth.guard';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 
@@ -37,7 +36,6 @@ import { ProfileDetailComponent } from './profile-detail/profile-detail.componen
     HomeComponent,
     FavoritesComponent,
     SearchBarComponent,
-    SearchResultsComponent,
     ProfileDetailComponent
   ],
 
