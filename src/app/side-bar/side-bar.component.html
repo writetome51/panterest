@@ -1,41 +1,15 @@
 <div class="side-bar">
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle size noStyle"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Breakfast <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><a [routerLink]="['/search-results', 'french toast']">French Toast</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a [routerLink]="['/search-results', 'pancakes']">Pancakes</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a [routerLink]="['/search-results', 'meat']">Breakfast Meats</a></li>
-    </ul>
-  </div>
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle size noStyle"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Lunch <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><a href="#">Soup</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a href="#">Salad</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a href="#">Sandwiches</a></li>
-    </ul>
-  </div>
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle size noStyle"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dinner <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><a href="#">Chicken</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a href="#">Roast</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a href="#">Entrees</a></li>
-    </ul>
-  </div>
+
+    <div *ngFor="let title of dropdownCategoryTitles"   class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle size noStyle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{title}} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li *ngFor="let subcategory of dropdownCategories[title]">
+                <a (click)="search(subcategory)">{{subcategory}}</a>
+                <span role="separator" class="divider"></span>
+            </li>
+        </ul>
+    </div>
 </div>

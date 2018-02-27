@@ -15,12 +15,21 @@
             <input type="checkbox" *ngIf="pattern.test(ingredient)"/>
             <span [innerHtml]="ingredient"></span>
           </div>
-          <h4>For full description & instructions visit <a class="publisher-link" [href]="result.source_url" target="_blank">{{result.publisher}}</a></h4>
+          <h4>For full description & instructions visit
+              <a class="publisher-link"
+                 [href]="result.source_url" target="_blank">{{result.publisher}}
+              </a>
+          </h4>
         </div>
           <br>
         <div class="button-container">
-          <button class="btn btn-default back-button" (click)="goBack()"><p class="glyphicon glyphicon-chevron-left"></p> Go Back</button>
-            <p *ngIf="notFavorited" class="glyphicon glyphicon-heart-empty"></p><p *ngIf="favorited" class="glyphicon glyphicon-heart"></p>
+          <button class="btn btn-default back-button" (click)="goBack()">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              Go Back
+          </button>
+            <p *ngIf="! favorite" class="glyphicon glyphicon-heart-empty"
+               (click)="userService.addNewFavorite(result)"></p>
+            <p *ngIf="favorite" class="glyphicon glyphicon-heart"></p>
         </div>
         </div>
     </div>
