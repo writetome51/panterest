@@ -11,12 +11,13 @@ import {UserService} from '../services/user.service';
 })
 export class RecipesComponent implements OnInit, OnDestroy {
 
-    JSON = JSON;
-    result: any;
-    recipeId: string;
-    ingredients: string[];
-    pattern: RegExp = new RegExp('([a-zA-Z 0-9])');
-    favorite: boolean;
+  JSON = JSON;
+  result: any;
+  recipeId: string;
+  ingredients: string[];
+  specialCharPattern: RegExp = new RegExp('([a-z])');
+  favorite: boolean;
+
 
 
     constructor(private search: SearchService,

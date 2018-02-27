@@ -14,6 +14,7 @@ import {GoogleUser} from '../interfaces/GoogleUser';
 export class GoogleAuthService {
 
   user: Observable<GoogleUser>;
+  loggedIn: boolean = false;
 
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
@@ -31,7 +32,8 @@ export class GoogleAuthService {
 
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    return this.oAuthLogin(provider);
+      this.loggedIn = true;
+      return this.oAuthLogin(provider);
   }
 
 
@@ -60,5 +62,6 @@ export class GoogleAuthService {
     this.afAuth.auth.signOut().then(() => {
       this.router.navigate(['/']);
     });
+    this.loggedIn = false;
   }
 }
