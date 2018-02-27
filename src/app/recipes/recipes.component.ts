@@ -30,6 +30,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
     }
 
+
     ngOnInit() {
         this.search.getSpecificRecipe(this.recipeId, (response) => {
             this.result = response;
@@ -43,5 +44,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
     goBack() {
         this._location.back();
     }
+
 
 }
