@@ -1,3 +1,26 @@
-<p>
-  favorites works!
-</p>
+<div class="main-container ">
+    <div class="contains-title">
+        <h1 class="featured-title">Favorites</h1>
+    </div>
+
+
+    <div class="featuredRecipes">
+        <div *ngIf="!searcher.results" class="recipe-card contains-title time">
+            <img [src]="loadingSpinner" style="height: 168px; width: 168px;">
+            LOADING ...
+        </div>
+        <div *ngFor="let result of searcher.results; let i = index;" [class]="'recipes' + (i+1)"
+             [routerLink]="['/recipes', result.recipe_id]">
+            <div class="recipe-card">
+
+                <div class="recipe-card-header"><h4>{{result.title}}</h4></div>
+                <div class="recipe-card-body">
+                    <div class="WhatEverTheHellYouWant">
+                        <img [src]="result.image_url">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
