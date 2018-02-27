@@ -8,29 +8,28 @@ import {Subscription} from 'rxjs/Subscription';
 @Injectable()
 export class UserService {
 
-    loggedIn: boolean;
+    // magic variable:  loggedIn: boolean;
     subscription: Subscription;
-    user;
 
-    constructor(private _userData: UserDataService) {
-        //  this._userData.setLoggedIn(this.loggedIn);
-        this.set_user();
-        console.log(this.user);
+    constructor(private data: UserDataService) {
+        this.subscription = this.data.subscription;
     }
 
-    set_user() {
-        if (this._userData) {
-            this.user = this._userData.user;
-        }
+
+    login(){
+
+    }
+
+    logout(){
+        this.data.unsetLoggedInLocalState();
     }
 
 
     addNewFavorite(recipe: SpecificRecipe) {
         let favorite: Favorite = this._createFavorite(recipe);
-        this._userData.store.valueChanges().subscribe((response: UserStore) => {
-            let userStore = response;
+        this.data.store.valueChanges().subscribe((userStore: UserStore) => {
             userStore.favorites[favorite.name] = favorite.content;
-            this._userData.update(userStore);
+            this.data.update(userStore);
         });
     }
 
@@ -40,6 +39,11 @@ export class UserService {
         favorite.name = recipe.recipe_id;
         favorite.content = recipe;
         return favorite;
+    }
+
+
+    get loggedIn(){
+        return Boolean(this.data.isLoggedInLocalState());
     }
 
 }

@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserDataService} from './services/user-data.service';
-import {GoogleAuthService} from './services/google-auth.service';
 import {UserService} from './services/user.service';
 
 @Component({
