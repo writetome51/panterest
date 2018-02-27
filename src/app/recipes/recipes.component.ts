@@ -24,7 +24,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private _location: Location,
-                public userService: UserService,
+                public user: UserService,
                 public gAuth: GoogleAuthService) {
 
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
