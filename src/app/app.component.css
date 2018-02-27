@@ -1,7 +1,11 @@
 .main-container {
   background-color: #90ccf4;
+    overflow-y: auto;
+    overflow-x: hidden;
 
 }
+
+
 
 .thing-that-contains{
   background-color: #ECECEC;
