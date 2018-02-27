@@ -1,13 +1,13 @@
 <div class="side-bar">
 
-    <div *ngFor="let dropdownCategoryTitle of dropdownCategoryTitles"   class="btn-group">
+    <div *ngFor="let title of dropdownCategoryTitles"   class="btn-group">
         <button type="button" class="btn btn-default dropdown-toggle size noStyle"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{dropdownCategoryTitle}} <span class="caret"></span>
+            {{title}} <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-            <li *ngFor="let subcategory of dropdownCategories[dropdownCategoryTitle]">
-                <a>{{subcategory}}</a>
+            <li *ngFor="let subcategory of dropdownCategories[title]">
+                <a (click)="search(subcategory)">{{subcategory}}</a>
                 <span role="separator" class="divider"></span>
             </li>
         </ul>

@@ -9,7 +9,7 @@ import {SearchService} from '../services/search.service';
 export class SideBarComponent implements OnInit {
 
     dropdownCategories = {
-        Breakfast: ['French Toast', 'Pancakes', 'Breakfast Meats'],
+        Breakfast: ['French Toast', 'Pancakes', 'Breakfast Burrito'],
         Lunch: ['Soup', 'Salad', 'Sandwiches'],
         Dinner: ['Chicken', 'Roast', 'Entrees']
     };
@@ -20,6 +20,12 @@ export class SideBarComponent implements OnInit {
   constructor(public searcher: SearchService) { }
 
   ngOnInit() {
+  }
+
+
+  search(recipe){
+      this.searcher.searchText = recipe;
+      this.searcher.search(1);
   }
 
 }
