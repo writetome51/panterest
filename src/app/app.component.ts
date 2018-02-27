@@ -13,6 +13,8 @@ export class AppComponent implements OnDestroy{
   constructor(private _userData: UserDataService, public gAuth: GoogleAuthService){
   }
 
+
+
   ngOnDestroy(){
       this._userData.subscription.unsubscribe();
   }

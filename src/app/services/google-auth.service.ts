@@ -14,7 +14,7 @@ import {GoogleUser} from '../interfaces/GoogleUser';
 export class GoogleAuthService {
 
   user: Observable<GoogleUser>;
-  loggedIn: boolean;
+  loggedIn: boolean = false;
 
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
