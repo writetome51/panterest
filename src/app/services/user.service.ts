@@ -17,11 +17,11 @@ export class UserService {
 
 
     login(){
-
+        this.data.login();
     }
 
     logout(){
-        this.data.unsetLoggedInLocalState();
+        this.data.logout();
     }
 
 
