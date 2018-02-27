@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserDataService} from './services/user-data.service';
 import {GoogleAuthService} from './services/google-auth.service';
+import {UserService} from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import {GoogleAuthService} from './services/google-auth.service';
 export class AppComponent implements OnDestroy{
   title = 'Panterest';
 
-  constructor(private _userData: UserDataService, public gAuth: GoogleAuthService){
+  constructor(private _userData: UserDataService, public user: UserService){
   }
 
   ngOnDestroy(){

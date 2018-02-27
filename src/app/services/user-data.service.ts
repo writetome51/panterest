@@ -5,9 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {GoogleUser} from '../interfaces/GoogleUser';
 import {Subscription} from 'rxjs/Subscription';
 import {AngularFireAuth} from 'angularfire2/auth';
-import {Observer} from '../interfaces/Observer';
-import {UserStore} from '../interfaces/UserStore';
-import {Favorite} from '../interfaces/Favorite';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class UserDataService {
@@ -16,6 +14,8 @@ export class UserDataService {
     db: AngularFirestoreCollection<object>;
     subscription: Subscription;
     store: AngularFirestoreDocument<object>;
+    localStorageKeyPrefix = 'panterest_' + environment.firebase.apiKey;
+    localLoggedInKey = this.localStorageKeyPrefix + '_loggedIn';
 
 
     constructor(private firestore: AngularFirestore,
@@ -23,19 +23,20 @@ export class UserDataService {
                 private _gAuth: GoogleAuthService) {
 
         this.subscription = this._afAuth.authState.subscribe((response) => {
-            if (response){ // if true, you're logged in.
-               this._setupUserData();
+            if (response) { // if true, you're logged in.
+                this._setupUserData();
             }
         });
     }
 
 
-    update(newData: object){
+    update(newData: object) {
         this.store.update(newData);
     }
 
 
-    private _setupUserData(){
+    private _setupUserData() {
+        localStorage.setItem(this.localLoggedInKey, 'true');
         this._set_db();
         this._gAuth.user.subscribe((response) => {
             this.user = response;
@@ -44,24 +45,24 @@ export class UserDataService {
     }
 
 
-    private _set_db(){
+    private _set_db() {
         this.db = this.firestore.collection('users');
     }
 
 
-    private _set_store(){
+    private _set_store() {
         // The document object is named after user's email:
         this.store = this.db.doc(this.user.email);
 
         this.store.valueChanges().subscribe((response) => {
-            if ( ! response){ // Then store doesn't exist...
+            if (!response) { // Then store doesn't exist...
                 this._createDefaultUserStore();
             }
         });
     }
 
 
-    private _createDefaultUserStore(){
+    private _createDefaultUserStore() {
         let content = {};
         content['displayName'] = this.user.displayName;
         content['favorites'] = {};

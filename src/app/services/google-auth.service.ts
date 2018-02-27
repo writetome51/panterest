@@ -32,7 +32,6 @@ export class GoogleAuthService {
 
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider();
-      this.loggedIn = true;
       return this.oAuthLogin(provider);
   }
 
@@ -62,6 +61,5 @@ export class GoogleAuthService {
     this.afAuth.auth.signOut().then(() => {
       this.router.navigate(['/']);
     });
-    this.loggedIn = false;
   }
 }
