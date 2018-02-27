@@ -60,4 +60,5 @@ export class GoogleAuthService {
             this.router.navigate(['/']);
         });
     }
+
 }
