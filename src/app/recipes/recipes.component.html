@@ -19,7 +19,8 @@
         </div>
           <br>
         <div class="button-container">
-          <button class="btn btn-default back-button" (click)="goBack()"><p class="glyphicon glyphicon-chevron-left"></p> Go Back</button><p class="glyphicon glyphicon-heart-empty"></p>
+          <button class="btn btn-default back-button" (click)="goBack()"><p class="glyphicon glyphicon-chevron-left"></p> Go Back</button>
+            <p *ngIf="notFavorited" class="glyphicon glyphicon-heart-empty"></p><p *ngIf="favorited" class="glyphicon glyphicon-heart"></p>
         </div>
         </div>
     </div>
