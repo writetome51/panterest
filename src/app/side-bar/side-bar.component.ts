@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SearchService} from '../services/search.service';
 
 @Component({
   selector: 'side-bar',
@@ -7,7 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
 
-  constructor() { }
+    dropdownCategories = {
+        Breakfast: ['French Toast', 'Pancakes', 'Breakfast Meats'],
+        Lunch: ['Soup', 'Salad', 'Sandwiches'],
+        Dinner: ['Chicken', 'Roast', 'Entrees']
+    };
+
+    dropdownCategoryTitles = Object.keys(this.dropdownCategories);
+
+
+  constructor(public searcher: SearchService) { }
 
   ngOnInit() {
   }
