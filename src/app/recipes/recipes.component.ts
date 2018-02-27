@@ -3,6 +3,7 @@ import {SearchService} from '../services/search.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {UserService} from '../services/user.service';
+import {GoogleAuthService} from '../services/google-auth.service';
 
 @Component({
     selector: 'app-recipes',
@@ -23,7 +24,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private _location: Location,
-                public userService: UserService) {
+                public userService: UserService,
+                public gAuth: GoogleAuthService) {
 
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
     }

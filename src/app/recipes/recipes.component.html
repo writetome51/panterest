@@ -1,39 +1,41 @@
 <div class="recipe-container container-fluid row" *ngIf="result">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <div class="recipe">
-      <div class="recipe-header">
-        <h2 [innerHtml]="result.title"></h2>
-      </div>
-      <div class="recipe-body">
-        <div class="image-container">
-          <img [src]="result.image_url">
-        </div>
-        <div class="content-container">
-          <h4>Ingredients:</h4>
-          <div *ngFor="let ingredient of result.ingredients">
-            <input type="checkbox" *ngIf="pattern.test(ingredient)"/>
-            <span [innerHtml]="ingredient"></span>
-          </div>
-          <h4>For full description & instructions visit
-              <a class="publisher-link"
-                 [href]="result.source_url" target="_blank">{{result.publisher}}
-              </a>
-          </h4>
-        </div>
-          <br>
-        <div class="button-container">
-          <button class="btn btn-default back-button" (click)="goBack()">
-              <span class="glyphicon glyphicon-chevron-left"></span>
-              Go Back
-          </button>
-            <p *ngIf="! favorite" class="glyphicon glyphicon-heart-empty"
-               (click)="userService.addNewFavorite(result)"></p>
-            <p *ngIf="favorite" class="glyphicon glyphicon-heart"></p>
-        </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="recipe">
+            <div class="recipe-header">
+                <h2 [innerHtml]="result.title"></h2>
+            </div>
+            <div class="recipe-body">
+                <div class="image-container">
+                    <img [src]="result.image_url">
+                </div>
+                <div class="content-container">
+                    <h4>Ingredients:</h4>
+                    <div *ngFor="let ingredient of result.ingredients">
+                        <input type="checkbox" *ngIf="pattern.test(ingredient)"/>
+                        <span [innerHtml]="ingredient"></span>
+                    </div>
+                    <h4>For full description & instructions visit
+                        <a class="publisher-link"
+                           [href]="result.source_url" target="_blank">{{result.publisher}}
+                        </a>
+                    </h4>
+                </div>
+                <br>
+                <div class="button-container">
+                    <button class="btn btn-default back-button" (click)="goBack()">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        Go Back
+                    </button>
+                    <div *ngIf="gAuth.loggedIn">
+                        <p *ngIf="! favorite" class="glyphicon glyphicon-heart-empty"
+                           (click)="userService.addNewFavorite(result)"></p>
+                        <p *ngIf="favorite" class="glyphicon glyphicon-heart"></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-  </div>
-  <div class="col-md-2"></div>
+    <div class="col-md-2"></div>
 </div>
 
