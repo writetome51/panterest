@@ -11,7 +11,7 @@ export class UserService {
     // magic variable:  loggedIn: boolean;
     subscription: Subscription;
 
-    constructor(private data: UserDataService) {
+    constructor(public data: UserDataService) {
         this.subscription = this.data.subscription;
     }
 
