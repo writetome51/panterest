@@ -12,7 +12,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     recipes: SearchResultRecipe[];
     recipeId: string;
-    loadingSpinner = '../../../assets/loading_spinner.gif';
+    loadingSpinner = '../../../assets/giphy.gif';
 
     constructor(public searcher: SearchService,
                 private router: Router,
