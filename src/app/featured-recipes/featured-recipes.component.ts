@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
 import {SearchService} from '../services/search.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 @Component({
     selector: 'app-featured-recipes',
@@ -10,9 +11,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
-    recipes: SearchResultRecipe[];
     recipeId: string;
-    loadingSpinner = '../../../assets/loading_spinner.gif';
+
+    loadingSpinner = environment.loadingSpinner;
+
 
     constructor(public searcher: SearchService,
                 private router: Router,

@@ -3,6 +3,7 @@ import {SearchService} from '../services/search.service';
 import {UserService} from '../services/user.service';
 import {SpecificRecipe} from '../interfaces/SpecificRecipe';
 import {Subscription} from 'rxjs/Subscription';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-favorites',
@@ -11,7 +12,7 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class FavoritesComponent implements OnInit, OnDestroy {
 
-    loadingSpinner = '../../../assets/loading_spinner.gif';
+    loadingSpinner = environment.loadingSpinner;
     favorites: SpecificRecipe[];
     favoritesSubscription: Subscription;
 
