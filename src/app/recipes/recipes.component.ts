@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {UserService} from '../services/user.service';
 import {GoogleAuthService} from '../services/google-auth.service';
+import {UserStore} from '../interfaces/UserStore';
 
 @Component({
     selector: 'app-recipes',
@@ -35,13 +36,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.search.getSpecificRecipe(this.recipeId, (response) => {
             this.result = response;
-
-            this.user.data.getFavorites((favorites) => {
-                this.favorites = favorites;
-                if (this.favorites[this.recipeId]){
-                    this.favorite = true;
-                }
-            });
+            this.set_favorite();
         });
 
     }
@@ -50,14 +45,39 @@ export class RecipesComponent implements OnInit, OnDestroy {
         this.search.subscription.unsubscribe();
     }
 
+
+    set_favorite(){
+        this.user.data.getFavorites((favorites) => {
+            this.favorites = favorites;
+            if (this.favorites[this.recipeId]){
+                this.favorite = true;
+            }
+        });
+    }
+
+
     goBack() {
         this._location.back();
     }
 
 
-    addToFavorites(recipe){
-        this.favorite = true;
-        this.user.addNewFavorite(recipe);
+    toggleFavorite(recipe){
+        this.favorite = ( ! this.favorite);
+        if (this.favorites[this.recipeId]){
+            this.removeFavorite(this.recipeId);
+        }
+        else{
+            this.user.addNewFavorite(recipe);
+        }
+    }
+
+
+    removeFavorite(recipeId){
+        this.user.data.store.valueChanges().subscribe((userStore: UserStore) => {
+            delete userStore.favorites[recipeId];
+            console.log(userStore);
+            this.user.data.update(userStore);
+        });
     }
 
 
