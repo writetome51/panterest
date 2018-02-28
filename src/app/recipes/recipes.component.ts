@@ -3,6 +3,7 @@ import {SearchService} from '../services/search.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {UserService} from '../services/user.service';
+import {GoogleAuthService} from '../services/google-auth.service';
 
 @Component({
     selector: 'app-recipes',
@@ -11,23 +12,25 @@ import {UserService} from '../services/user.service';
 })
 export class RecipesComponent implements OnInit, OnDestroy {
 
-  JSON = JSON;
-  result: any;
-  recipeId: string;
-  ingredients: string[];
-  specialCharPattern: RegExp = new RegExp('([a-z])');
-  favorite: boolean;
 
+    JSON = JSON;
+    result: any;
+    recipeId: string;
+    ingredients: string[];
+    pattern: RegExp = new RegExp('([a-zA-Z 0-9])');
+    favorite: boolean;
 
 
     constructor(private search: SearchService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private _location: Location,
-                public userService: UserService) {
+                public userService: UserService,
+                public gAuth: GoogleAuthService) {
 
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
     }
+
 
     ngOnInit() {
         this.search.getSpecificRecipe(this.recipeId, (response) => {
@@ -42,5 +45,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
     goBack() {
         this._location.back();
     }
+
 
 }
