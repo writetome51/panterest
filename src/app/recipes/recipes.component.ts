@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {UserService} from '../services/user.service';
 import {GoogleAuthService} from '../services/google-auth.service';
+import {environment} from '../../environments/environment';
 
 @Component({
     selector: 'app-recipes',
@@ -13,12 +14,13 @@ import {GoogleAuthService} from '../services/google-auth.service';
 export class RecipesComponent implements OnInit, OnDestroy {
 
     JSON = JSON;
-    result: any;
+    result: any = false;
     recipeId: string;
     ingredients: string[];
     pattern: RegExp = new RegExp('([a-zA-Z 0-9])');
     favorite = false;
     favorites: object;
+    loadingSpinner = environment.loadingSpinner;
 
 
     constructor(private search: SearchService,
