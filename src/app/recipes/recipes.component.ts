@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {UserService} from '../services/user.service';
 import {GoogleAuthService} from '../services/google-auth.service';
-import {UserStore} from '../interfaces/UserStore';
 
 @Component({
     selector: 'app-recipes',
@@ -43,6 +42,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.search.subscription.unsubscribe();
+        this.user.subscription.unsubscribe();
     }
 
 
@@ -64,20 +64,11 @@ export class RecipesComponent implements OnInit, OnDestroy {
     toggleFavorite(recipe){
         this.favorite = ( ! this.favorite);
         if (this.favorites[this.recipeId]){
-            this.removeFavorite(this.recipeId);
+            this.user.removeFavorite(this.recipeId);
         }
         else{
             this.user.addNewFavorite(recipe);
         }
-    }
-
-
-    removeFavorite(recipeId){
-        this.user.data.store.valueChanges().subscribe((userStore: UserStore) => {
-            delete userStore.favorites[recipeId];
-            console.log(userStore);
-            this.user.data.update(userStore);
-        });
     }
 
 
