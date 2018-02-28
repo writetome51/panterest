@@ -26,9 +26,14 @@ export class UserDataService {
 
         this.subscription = this._afAuth.authState.subscribe((response) => {
             if (response) { // if true, you're logged in.
-                this._setupUserData();
+
+                // this._setupUserData() requires a callback passed to it in case
+                // you need to run more code inside it that requires access to the properties
+                // that have just been assigned values.
+                this._setupUserData(() => {
+                });
             }
-            else{
+            else {
                 this.unsetLoggedInLocalState();
             }
         });
@@ -40,18 +45,23 @@ export class UserDataService {
     }
 
 
-    login(){
+    login() {
         this.googleAuth.googleLogin();
     }
 
-    logout(){
+    logout() {
         this.googleAuth.signOut();
     }
 
 
-    getFavorites(observer: Observer){
-        return this.store.valueChanges().subscribe((userStore: UserStore) => {
-            observer(userStore.favorites);
+    getFavorites(observer: Observer) {
+
+        // this._setupUserData() needs to be called again because, due to its setting of variables
+        // asynchronously, when this class' methods are run later, those variables are suddenly undefined.
+        this._setupUserData(() => {
+            this.store.valueChanges().subscribe((userStore: UserStore) => {
+                observer(userStore.favorites);
+            });
         });
     }
 
@@ -60,22 +70,23 @@ export class UserDataService {
         localStorage.setItem(this._localLoggedInKey, 'true');
     }
 
-    unsetLoggedInLocalState(){
+    unsetLoggedInLocalState() {
         localStorage.removeItem(this._localLoggedInKey);
     }
 
 
-    isLoggedInLocalState(){
+    isLoggedInLocalState() {
         return (localStorage.getItem(this._localLoggedInKey));
     }
 
 
-    private _setupUserData() {
+    private _setupUserData(observer) {
         this.setLoggedInLocalState();
         this._set_db();
         this.googleAuth.user.subscribe((response) => {
             this.user = response;
             this._set_store();
+            observer();
         });
     }
 

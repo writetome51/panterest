@@ -19,13 +19,13 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   constructor(public user: UserService) { }
 
   ngOnInit() {
-      this.favoritesSubscription = this.user.data.getFavorites((favorites) => {
+      this.user.data.getFavorites((favorites) => {
           this.favorites = Object.values(favorites);
       });
   }
 
   ngOnDestroy(){
-      this.favoritesSubscription.unsubscribe();
+    this.user.subscription.unsubscribe();
   }
 
 }
