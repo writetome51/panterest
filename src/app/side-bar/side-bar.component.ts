@@ -11,7 +11,7 @@ export class SideBarComponent implements OnInit {
     dropdownCategories = {
         Breakfast: ['French Toast', 'Pancakes', 'Breakfast Burrito'],
         Lunch: ['Soup', 'Salad', 'Sandwiches'],
-        Dinner: ['Chicken', 'Roast', 'Entrees']
+        Dinner: ['Chicken', 'Roast', 'Pasta']
     };
 
     dropdownCategoryTitles = Object.keys(this.dropdownCategories);
