@@ -30,7 +30,7 @@
                     </button>
                     <div *ngIf="user.loggedIn">
                         <p *ngIf="! favorite" class="glyphicon glyphicon-heart-empty"
-                           (click)="user.addNewFavorite(result)"></p>
+                           (click)="addToFavorites(result)"></p>
                         <p *ngIf="favorite" class="glyphicon glyphicon-heart"></p>
                     </div>
                 </div>

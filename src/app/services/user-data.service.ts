@@ -6,6 +6,8 @@ import {GoogleUser} from '../interfaces/GoogleUser';
 import {Subscription} from 'rxjs/Subscription';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {environment} from '../../environments/environment';
+import {UserStore} from '../interfaces/UserStore';
+import {Observer} from '../interfaces/Observer';
 
 @Injectable()
 export class UserDataService {
@@ -44,6 +46,13 @@ export class UserDataService {
 
     logout(){
         this.googleAuth.signOut();
+    }
+
+
+    getFavorites(observer: Observer){
+        this.store.valueChanges().subscribe((userStore: UserStore) => {
+            observer(userStore.favorites);
+        });
     }
 
 

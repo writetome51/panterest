@@ -17,7 +17,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
     recipeId: string;
     ingredients: string[];
     pattern: RegExp = new RegExp('([a-zA-Z 0-9])');
-    favorite: boolean;
+    favorite = false;
+    favorites: object;
 
 
     constructor(private search: SearchService,
@@ -34,7 +35,15 @@ export class RecipesComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.search.getSpecificRecipe(this.recipeId, (response) => {
             this.result = response;
+
+            this.user.data.getFavorites((favorites) => {
+                this.favorites = favorites;
+                if (this.favorites[this.recipeId]){
+                    this.favorite = true;
+                }
+            });
         });
+
     }
 
     ngOnDestroy() {
@@ -43,6 +52,12 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
     goBack() {
         this._location.back();
+    }
+
+
+    addToFavorites(recipe){
+        this.favorite = true;
+        this.user.addNewFavorite(recipe);
     }
 
 
