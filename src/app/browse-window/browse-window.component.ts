@@ -18,6 +18,7 @@ export class BrowseWindowComponent implements OnInit, OnDestroy {
   recipeDescription: string;
   searchSubscription: Subscription;
   result: any;
+  pages: any;
 
 
   constructor() { }
