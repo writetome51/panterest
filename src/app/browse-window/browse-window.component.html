@@ -4,28 +4,27 @@
     <div class="recipe-card-header"><h4>{{recipeName}}</h4></div>
     <div class="recipe-card-body">
       <img [src]="recipeImage" [alt]="imageDescription">
-      <div class="time">
-        <p class="time-font glyphicon glyphicon-time"></p>
-        <p>Cook Time: {{cookTime}} min. | filter</p>
-      </div>
-      <p>Description: {{recipeDescription}}</p>
     </div>
   </div>
 
-<!--</div>-->
-  <!--<div class="recipe-card" [routerLink]="['/recipes']">-->
-    <!--<div class="recipe-card-header"><h4>Albondigas</h4></div>-->
-    <!--<div class="recipe-card-body">-->
-      <!--<img src="../../assets/test.jpg">-->
-      <!--<div class="time">-->
-        <!--<p class="time-font glyphicon glyphicon-time"></p>-->
-        <!--<p>-->
-          <!--Cook Time: 45 min.-->
-        <!--</p>-->
-      <!--</div>-->
-      <!--<p>-->
-        <!--Description: Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.-->
-      <!--</p>-->
-    <!--</div>-->
-  <!--</div>-->
+    <div class="nav-container">
+      <nav aria-label="Page navigation">
+          <ul class="pagination pagination-lg">
+              <li>
+                  <a aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                  </a>
+              </li>
+              <li *ngFor="let page of pages">{{page}}</li>
+              <li>
+                  <a aria-label="Next" (click)="search()">
+                      <span aria-hidden="true">&raquo;</span>
+                  </a>
+              </li>
+          </ul>
+      </nav>
+    </div>
+
+</div>
+
 

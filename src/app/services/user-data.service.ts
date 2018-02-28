@@ -50,7 +50,7 @@ export class UserDataService {
 
 
     getFavorites(observer: Observer){
-        this.store.valueChanges().subscribe((userStore: UserStore) => {
+        return this.store.valueChanges().subscribe((userStore: UserStore) => {
             observer(userStore.favorites);
         });
     }

@@ -34,6 +34,15 @@ export class UserService {
     }
 
 
+    removeFavorite(recipeId){
+        this.data.store.valueChanges().subscribe((userStore: UserStore) => {
+            delete userStore.favorites[recipeId];
+            this.data.update(userStore);
+        });
+    }
+
+
+
     private _createFavorite(recipe: SpecificRecipe) {
         let favorite = {name: '', content: {}};
         favorite.name = recipe.recipe_id;

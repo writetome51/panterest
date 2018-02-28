@@ -35,29 +35,40 @@ export class RecipesComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.search.getSpecificRecipe(this.recipeId, (response) => {
             this.result = response;
-
-            this.user.data.getFavorites((favorites) => {
-                this.favorites = favorites;
-                if (this.favorites[this.recipeId]){
-                    this.favorite = true;
-                }
-            });
+            this.set_favorite();
         });
 
     }
 
     ngOnDestroy() {
         this.search.subscription.unsubscribe();
+        this.user.subscription.unsubscribe();
     }
+
+
+    set_favorite(){
+        this.user.data.getFavorites((favorites) => {
+            this.favorites = favorites;
+            if (this.favorites[this.recipeId]){
+                this.favorite = true;
+            }
+        });
+    }
+
 
     goBack() {
         this._location.back();
     }
 
 
-    addToFavorites(recipe){
-        this.favorite = true;
-        this.user.addNewFavorite(recipe);
+    toggleFavorite(recipe){
+        this.favorite = ( ! this.favorite);
+        if (this.favorites[this.recipeId]){
+            this.user.removeFavorite(this.recipeId);
+        }
+        else{
+            this.user.addNewFavorite(recipe);
+        }
     }
 
 
