@@ -12,6 +12,7 @@ import {environment} from '../../environments/environment';
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     recipeId: string;
+
     loadingSpinner = environment.loadingSpinner;
 
 
