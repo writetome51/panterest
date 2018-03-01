@@ -5,6 +5,7 @@ import {Location} from '@angular/common';
 import {UserService} from '../services/user.service';
 import {GoogleAuthService} from '../services/google-auth.service';
 import {environment} from '../../environments/environment';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-recipes',
@@ -18,8 +19,9 @@ export class RecipesComponent implements OnInit, OnDestroy {
     recipeId: string;
     ingredients: string[];
     pattern: RegExp = new RegExp('([a-zA-Z 0-9])');
-    favorite = false;
+    favorite: boolean;
     favorites: object;
+    favoritesSubscription: Subscription;
     loadingSpinner = environment.loadingSpinner;
 
 
@@ -31,7 +33,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
                 public gAuth: GoogleAuthService) {
 
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
-        console.log(this.userService.loggedIn);
     }
 
 
@@ -44,17 +45,22 @@ export class RecipesComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.search.subscription.unsubscribe();
-        this.userService.subscription.unsubscribe();
+        try {
+            this.search.subscription.unsubscribe();
+            this.userService.subscription.unsubscribe();
+            this.favoritesSubscription.unsubscribe();
+        }
+        catch (error){}
     }
 
 
     set_favorite(){
-        this.userService.data.getFavorites((favorites) => {
+        this.favoritesSubscription = this.userService.data.getFavorites((favorites) => {
             this.favorites = favorites;
             if (this.favorites[this.recipeId]){
                 this.favorite = true;
             }
+            else { this.favorite = false; }
         });
     }
 
@@ -65,12 +71,15 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
 
     toggleFavorite(recipe){
-        this.favorite = ( ! this.favorite);
-        if (this.favorites[this.recipeId]){
-            this.userService.removeFavorite(this.recipeId);
+        this.favoritesSubscription.unsubscribe();
+        this.favorite = !(this.favorite);
+        if ( ! this.favorite){
+            delete this.favorites[this.recipeId];
+            this.favoritesSubscription =  this.userService.removeFavorite(this.recipeId);
         }
         else{
-            this.userService.addNewFavorite(recipe);
+            this.favoritesSubscription = this.userService.addNewFavorite(recipe);
+            this.favorites[this.recipeId] = recipe;
         }
     }
 
