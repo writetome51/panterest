@@ -75,17 +75,11 @@ export class RecipesComponent implements OnInit, OnDestroy {
         this.favorite = !(this.favorite);
         if ( ! this.favorite){
             delete this.favorites[this.recipeId];
-            console.log(this.favorites);
             this.favoritesSubscription =  this.userService.removeFavorite(this.recipeId);
-            console.log(this.favorite);
-            console.log('removed.');
         }
         else{
             this.favoritesSubscription = this.userService.addNewFavorite(recipe);
             this.favorites[this.recipeId] = recipe;
-            console.log(this.favorite);
-            console.log(this.favorites);
-            console.log('added.');
         }
     }
 
