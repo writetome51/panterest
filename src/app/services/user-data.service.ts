@@ -66,11 +66,9 @@ export class UserDataService {
 
         // this._setupUserDataProperties() needs to be called again because, due to its setting of variables
         // asynchronously, when this class' methods are run later, those variables are suddenly undefined.
-<<<<<<< HEAD
-        this._setupUserDataProperties(() => {
-=======
-        return this._setupUserData(() => {
->>>>>>> steve
+
+        return this._setupUserDataProperties(() => {
+
             this.store.valueChanges().subscribe((userStore: UserStore) => {
                 observer(userStore.favorites);
             });
