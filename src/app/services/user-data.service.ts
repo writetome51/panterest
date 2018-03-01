@@ -26,18 +26,23 @@ export class UserDataService {
 
         this.subscription = this._afAuth.authState.subscribe((response) => {
             if (response) { // if true, you're logged in.
-
-                // this._setupUserData() requires a callback passed to it in case
-                // you need to run more code inside it that requires access to the properties
-                // that have just been assigned values.
-                this._setupUserData(() => {
-                });
-                this.setLoggedInLocalState();
+                this._setupAllLoggedInSettings();
             }
             else {
                 this.unsetLoggedInLocalState();
             }
         });
+    }
+
+
+    private _setupAllLoggedInSettings(){
+
+        // this._setupUserDataProperties() requires a callback passed to it in case
+        // you need to run more code inside it that requires access to the properties
+        // that have just been assigned values.
+        this._setupUserDataProperties(() => {
+        });
+        this.setLoggedInLocalState();
     }
 
 
@@ -48,18 +53,20 @@ export class UserDataService {
 
     login() {
         this.googleAuth.googleLogin();
+        this._setupAllLoggedInSettings();
     }
 
     logout() {
         this.googleAuth.signOut();
+        this.unsetLoggedInLocalState();
     }
 
 
     getFavorites(observer: Observer) {
 
-        // this._setupUserData() needs to be called again because, due to its setting of variables
+        // this._setupUserDataProperties() needs to be called again because, due to its setting of variables
         // asynchronously, when this class' methods are run later, those variables are suddenly undefined.
-        this._setupUserData(() => {
+        this._setupUserDataProperties(() => {
             this.store.valueChanges().subscribe((userStore: UserStore) => {
                 observer(userStore.favorites);
             });
@@ -81,7 +88,7 @@ export class UserDataService {
     }
 
 
-    private _setupUserData(observer) {
+    private _setupUserDataProperties(observer) {
         this._set_db();
         this.googleAuth.user.subscribe((response) => {
             this.user = response;
