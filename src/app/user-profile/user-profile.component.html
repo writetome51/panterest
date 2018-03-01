@@ -5,7 +5,7 @@
 <!--If User NOT logged in, show this: -->
 <ng-template #guest>
   <li>
-    <a class="fa fa-google" (click)="gAuth.googleLogin()">
+    <a class="fa fa-google" (click)="userService.login()">
       Google Login
     </a>
   </li>
@@ -17,7 +17,7 @@
   <li>
   <div *ngIf="gAuth.user | async as user"  [routerLink]="['/profile-detail', user]">
     <div class="fontSize">Hi, {{ user.displayName }} <p class="glyphicon glyphicon-user"></p>
-        <a  class="noUnderline" (click)="gAuth.signOut()">&nbsp;&nbsp;&nbsp;Logout
+        <a  class="noUnderline" (click)="userService.logout()">&nbsp;&nbsp;&nbsp;Logout
         </a>
     </div>
   </div>

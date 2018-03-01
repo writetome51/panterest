@@ -32,6 +32,7 @@ export class UserDataService {
                 // that have just been assigned values.
                 this._setupUserData(() => {
                 });
+                this.setLoggedInLocalState();
             }
             else {
                 this.unsetLoggedInLocalState();
@@ -81,7 +82,6 @@ export class UserDataService {
 
 
     private _setupUserData(observer) {
-        this.setLoggedInLocalState();
         this._set_db();
         this.googleAuth.user.subscribe((response) => {
             this.user = response;

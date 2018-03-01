@@ -27,10 +27,11 @@ export class RecipesComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private _location: Location,
-                public user: UserService,
+                public userService: UserService,
                 public gAuth: GoogleAuthService) {
 
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
+        console.log(this.userService.loggedIn);
     }
 
 
@@ -44,12 +45,12 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.search.subscription.unsubscribe();
-        this.user.subscription.unsubscribe();
+        this.userService.subscription.unsubscribe();
     }
 
 
     set_favorite(){
-        this.user.data.getFavorites((favorites) => {
+        this.userService.data.getFavorites((favorites) => {
             this.favorites = favorites;
             if (this.favorites[this.recipeId]){
                 this.favorite = true;
@@ -66,10 +67,10 @@ export class RecipesComponent implements OnInit, OnDestroy {
     toggleFavorite(recipe){
         this.favorite = ( ! this.favorite);
         if (this.favorites[this.recipeId]){
-            this.user.removeFavorite(this.recipeId);
+            this.userService.removeFavorite(this.recipeId);
         }
         else{
-            this.user.addNewFavorite(recipe);
+            this.userService.addNewFavorite(recipe);
         }
     }
 

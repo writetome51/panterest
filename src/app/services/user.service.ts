@@ -51,8 +51,13 @@ export class UserService {
     }
 
 
-    get loggedIn(){
-        return Boolean(this.data.isLoggedInLocalState());
-    }
+    get loggedIn() {
+        try {
+            return Boolean(this.data.isLoggedInLocalState());
+        }
+        catch(error){
+            return false;
+        }
 
+    }
 }
