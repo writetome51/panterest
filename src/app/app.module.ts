@@ -47,8 +47,8 @@ import {UserService} from './services/user.service';
         AngularFireModule.initializeApp((environment.firebase)),
         AngularFireAuthModule,
         RouterModule.forRoot([
-            {path: 'home', component: HomeComponent},
-            {path: '', pathMatch: 'full', redirectTo: 'home'},
+            {path: 'home/:page_number', component: HomeComponent},
+            {path: '', pathMatch: 'full', redirectTo: 'home/1'},
             {path: '**', redirectTo: 'home'}
         ]),
     ],
