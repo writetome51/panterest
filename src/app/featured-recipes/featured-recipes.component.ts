@@ -29,7 +29,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(){
-        this.page = this.activatedRoute.snapshot.params['page_number'];
+        this.searcher.pageNumber = this.activatedRoute.snapshot.params['page_number'];
         if (this.searcher.searchText === ''){
             this.getFeatured();
         }
@@ -44,7 +44,8 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
 
     getSearchResults(){
-        this.searcher.search(++this.page);
+        ++this.searcher.pageNumber
+        this.searcher.search();
     }
 
 
@@ -52,12 +53,6 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
         this.searcher.getTopRated(this.page);
     }
 
-    toggleState() {
-    }
 
-
-    decrementPage(){
-        --this.page;
-    }
 
 }
