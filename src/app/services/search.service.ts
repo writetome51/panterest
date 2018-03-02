@@ -13,7 +13,7 @@ export class SearchService {
     searchText = '';
     results;
     resultsHeader: string;
-    pageNumber: number;
+    pageNumber = 1;
 
     constructor(private _api: ApiService) {
     }
