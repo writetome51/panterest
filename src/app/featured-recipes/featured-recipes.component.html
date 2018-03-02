@@ -23,4 +23,22 @@
     </div>
   </div>
 
+    <div class="nav-container" *ngIf="searcher.results">
+
+        <div class="nav-container-left">
+            <button class="btn btn-primary nav-button" [disabled]="currentState">
+                <p class="glyphicon glyphicon-triangle-left glyphicon-font-size"></p>
+                Previous
+            </button>
+        </div>
+        <div class="page-number">{{page}}</div>
+        <div class="nav-container-right">
+            <button class="btn btn-primary nav-button">
+                Next
+                <p class="glyphicon glyphicon-triangle-right glyphicon-font-size"></p>
+            </button>
+        </div>
+
+    </div>
+
 </div>

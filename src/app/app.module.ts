@@ -16,7 +16,6 @@ import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
 import {UserProfileComponent} from './user-profile/user-profile.component';
-import {BrowseWindowComponent} from './browse-window/browse-window.component';
 import {HomeComponent} from './home/home.component';
 import {FavoritesComponent} from './favorites/favorites.component';
 import {SearchBarComponent} from './search-bar/search-bar.component';
@@ -33,7 +32,6 @@ import {UserService} from './services/user.service';
         SideBarComponent,
         RecipesComponent,
         UserProfileComponent,
-        BrowseWindowComponent,
         HomeComponent,
         FavoritesComponent,
         SearchBarComponent,

@@ -3,6 +3,7 @@ import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
 import {SearchService} from '../services/search.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {current} from 'codelyzer/util/syntaxKind';
 
 @Component({
     selector: 'app-featured-recipes',
@@ -11,7 +12,10 @@ import {environment} from '../../environments/environment';
 })
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
+    currentState: boolean = false;
+
     recipeId: string;
+    page: number;
 
     loadingSpinner = environment.loadingSpinner;
 
@@ -19,7 +23,8 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     constructor(public searcher: SearchService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
-        this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
+        this.recipeId = this.activatedRoute.snapshot.params['recipe_id']
+        // this.page = ;
     }
 
     ngOnInit(){
@@ -43,6 +48,9 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     getFeatured(){
         this.searcher.getTopRated(1);
+    }
+
+    toggleState() {
     }
 
 }
