@@ -29,6 +29,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(){
+        this.searcher.pageNumber = this.activatedRoute.snapshot.params['page_number'];
         if (this.searcher.searchText === ''){
             this.getFeatured();
         }
@@ -44,7 +45,8 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
 
     getSearchResults(){
-        this.searcher.search(this.page);
+        ++this.searcher.pageNumber;
+        this.searcher.search();
     }
 
 
