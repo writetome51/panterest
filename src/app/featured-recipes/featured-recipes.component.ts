@@ -25,7 +25,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
-        this.page = this.activatedRoute.snapshot.params[''];
+        this.page = this.activatedRoute.snapshot.params['page_number'];
     }
 
     ngOnInit(){
