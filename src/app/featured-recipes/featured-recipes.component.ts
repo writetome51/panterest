@@ -44,8 +44,18 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
 
+    getResults(){
+       ++this.searcher.pageNumber;
+        if (this.searcher.searchText === ''){
+            this.getFeatured();
+        }
+        else{
+            this.getSearchResults();
+        }
+    }
+
+
     getSearchResults(){
-        ++this.searcher.pageNumber;
         this.searcher.search();
     }
 
