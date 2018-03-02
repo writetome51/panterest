@@ -12,7 +12,7 @@ import {current} from 'codelyzer/util/syntaxKind';
 })
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
-    currentState: boolean = false;
+    currentState: boolean = true;
 
     recipeId: string;
     page: number;
@@ -23,8 +23,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     constructor(public searcher: SearchService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
-        this.recipeId = this.activatedRoute.snapshot.params['recipe_id']
-        // this.page = ;
+        this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
     }
 
     ngOnInit(){
@@ -50,7 +49,8 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
         this.searcher.getTopRated(1);
     }
 
-    toggleState() {
+    getNextPage(pageNumber) {
+        this.searcher.search(pageNumber);
     }
 
 }
