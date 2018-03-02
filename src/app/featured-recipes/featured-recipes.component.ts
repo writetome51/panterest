@@ -12,11 +12,11 @@ import {current} from 'codelyzer/util/syntaxKind';
 })
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
-    currentState: boolean = false;
+    currentStatePrev: boolean = true;
+    currentStateNext: boolean = false;
 
     recipeId: string;
     page: number;
-
 
     loadingSpinner = environment.loadingSpinner;
 
@@ -25,7 +25,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
-
+        this.page = this.activatedRoute.snapshot.params['page_number'];
     }
 
     ngOnInit(){
@@ -37,6 +37,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
         else{
             this.getSearchResults();
         }
+        this.toggleButtonState();
     }
 
     ngOnDestroy(){
@@ -44,8 +45,18 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
 
-    getResults(){
+    forwardOne(){
        ++this.searcher.pageNumber;
+        if (this.searcher.searchText === ''){
+            this.getFeatured();
+        }
+        else{
+            this.getSearchResults();
+        }
+    }
+
+    backOne(){
+        --this.searcher.pageNumber;
         if (this.searcher.searchText === ''){
             this.getFeatured();
         }
@@ -65,5 +76,16 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
 
+    toggleButtonState() {
+        if (this.searcher.pageNumber < 2) {
+            this.currentStatePrev = true;
+            this.currentStateNext = false;
+        }
+
+        else {
+            this.currentStatePrev = false;
+            this.currentStateNext = false;
+        }
+    }
 
 }
