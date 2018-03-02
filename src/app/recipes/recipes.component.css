@@ -63,3 +63,20 @@
     font-size: 18px;
     cursor: pointer;
 }
+
+.recipe-card {
+    width: 325px;
+    height: 250px;
+    box-shadow: 0 3px 6px #4c728c;
+    border-radius: 15px;
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.loading-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
