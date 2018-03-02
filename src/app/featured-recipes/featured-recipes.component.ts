@@ -35,6 +35,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
         else{
             this.getSearchResults();
         }
+        this.toggleButtonState();
     }
 
     ngOnDestroy(){
@@ -49,6 +50,21 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     getFeatured(){
         this.searcher.getTopRated(this.page);
+    }
+
+    toggleButtonState() {
+        if(this.page < 2) {
+            this.currentStatePrev = true;
+            this.currentStateNext = false;
+        }
+        else if(this.page >= ) {
+            this.currentStatePrev = false;
+            this.currentStateNext = false;
+        }
+        else {
+            this.currentStateNext = false;
+            this.currentStateNext = false;
+        }
     }
 
 }
