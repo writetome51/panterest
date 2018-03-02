@@ -26,15 +26,19 @@
     <div class="nav-container" *ngIf="searcher.results">
 
         <div class="nav-container-left">
-            <button class="btn btn-primary nav-button" [style.display]="currentStatePrev ? 'none' : 'inherit'" [routerLink]="['/home', (page * 1) - 1]">
+            <button class="btn btn-primary nav-button"
+                    [style.display]="currentStatePrev ? 'none' : 'inherit'"
+                    [routerLink]="['/home', (searcher.pageNumber * 1) - 1]"
+                    (click)="backOne()">
                 <p class="glyphicon glyphicon-triangle-left glyphicon-font-size"></p>
                 Previous
             </button>
         </div>
         <div class="page-number">{{searcher.pageNumber}}</div>
         <div class="nav-container-right">
-            <button class="btn btn-primary nav-button" [style.display]="currentStateNext ? 'none' : 'inherit'"
-                    [routerLink]="['/home', (searcher.pageNumber * 1 + 1)]"  (click)="getSearchResults()" >
+
+            <button class="btn btn-primary nav-button"  [style.display]="currentStateNext ? 'none' : 'inherit'"
+                    [routerLink]="['/home', (searcher.pageNumber * 1 + 1)]"  (click)="forwardOne()" >
                 Next
                 <p class="glyphicon glyphicon-triangle-right glyphicon-font-size"></p>
             </button>

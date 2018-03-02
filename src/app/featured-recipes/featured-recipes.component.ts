@@ -45,8 +45,28 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
 
+    forwardOne(){
+       ++this.searcher.pageNumber;
+        if (this.searcher.searchText === ''){
+            this.getFeatured();
+        }
+        else{
+            this.getSearchResults();
+        }
+    }
+
+    backOne(){
+        --this.searcher.pageNumber;
+        if (this.searcher.searchText === ''){
+            this.getFeatured();
+        }
+        else{
+            this.getSearchResults();
+        }
+    }
+
+
     getSearchResults(){
-        ++this.searcher.pageNumber;
         this.searcher.search();
     }
 
@@ -55,11 +75,13 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
         this.searcher.getTopRated();
     }
 
+
     toggleButtonState() {
-        if(this.page < 2) {
+        if (this.searcher.pageNumber < 2) {
             this.currentStatePrev = true;
             this.currentStateNext = false;
         }
+
         else {
             this.currentStatePrev = false;
             this.currentStateNext = false;
