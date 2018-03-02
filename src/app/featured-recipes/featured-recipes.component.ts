@@ -12,7 +12,8 @@ import {current} from 'codelyzer/util/syntaxKind';
 })
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
-    currentState: boolean = true;
+    currentStatePrev: boolean = true;
+    currentStateNext: boolean = false;
 
     recipeId: string;
     page: number;
@@ -24,6 +25,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
+        this.page = this.activatedRoute.snapshot.params[''];
     }
 
     ngOnInit(){
@@ -47,10 +49,6 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     getFeatured(){
         this.searcher.getTopRated(1);
-    }
-
-    getNextPage(pageNumber) {
-        this.searcher.search(pageNumber);
     }
 
 }
