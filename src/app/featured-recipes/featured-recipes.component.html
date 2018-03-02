@@ -31,9 +31,10 @@
                 Previous
             </button>
         </div>
-        <div class="page-number">{{page}}</div>
+        <div class="page-number">{{searcher.pageNumber}}</div>
         <div class="nav-container-right">
-            <button class="btn btn-primary nav-button" [style.display]="currentStateNext ? 'none' : 'inherit'" [routerLink]="['/home', (page * 1 + 1)]"  (click)="getSearchResults()">
+            <button class="btn btn-primary nav-button" [style.display]="currentStateNext ? 'none' : 'inherit'"
+                    [routerLink]="['/home', (searcher.pageNumber * 1 + 1)]"  (click)="getSearchResults()" >
                 Next
                 <p class="glyphicon glyphicon-triangle-right glyphicon-font-size"></p>
             </button>
