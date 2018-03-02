@@ -30,13 +30,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     ngOnInit(){
         this.searcher.pageNumber = this.activatedRoute.snapshot.params['page_number'];
-        console.log(this.searcher.pageNumber);
-        if (this.searcher.searchText === ''){
-            this.getFeatured();
-        }
-        else{
-            this.getSearchResults();
-        }
+        this.decideWhatSearchToPerform();
         this.toggleButtonState();
     }
 
@@ -45,8 +39,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
 
-    forwardOne(){
-       ++this.searcher.pageNumber;
+    decideWhatSearchToPerform(){
         if (this.searcher.searchText === ''){
             this.getFeatured();
         }
@@ -55,14 +48,15 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
         }
     }
 
+
+    forwardOne(){
+       ++this.searcher.pageNumber;
+       this.decideWhatSearchToPerform();
+    }
+
     backOne(){
         --this.searcher.pageNumber;
-        if (this.searcher.searchText === ''){
-            this.getFeatured();
-        }
-        else{
-            this.getSearchResults();
-        }
+        this.decideWhatSearchToPerform();
     }
 
 
