@@ -14,7 +14,6 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class RecipesComponent implements OnInit, OnDestroy {
 
-    JSON = JSON;
     result: any = false;
     recipeId: string;
     ingredients: string[];

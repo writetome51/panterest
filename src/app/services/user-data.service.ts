@@ -68,7 +68,6 @@ export class UserDataService {
         // asynchronously, when this class' methods are run later, those variables are suddenly undefined.
 
         return this._setupUserDataProperties(() => {
-
             this.store.valueChanges().subscribe((userStore: UserStore) => {
                 observer(userStore.favorites);
             });

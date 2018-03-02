@@ -55,7 +55,7 @@ export class UserService {
         try {
             return Boolean(this.data.isLoggedInLocalState());
         }
-        catch(error){
+        catch (error){
             return false;
         }
 
