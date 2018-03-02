@@ -9,6 +9,8 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class SearchBarComponent implements OnInit {
 
+    page = 1;
+
 
     constructor(private _activatedRoute: ActivatedRoute,
                 public searcher: SearchService) {
@@ -19,11 +21,12 @@ export class SearchBarComponent implements OnInit {
 
 
     changeResults(){
+     //   this.page = this._activatedRoute.snapshot.params['page_number'];
         if (this.searcher.searchText === ''){
-            this.searcher.getTopRated(1);
+            this.searcher.getTopRated(this.page);
         }
         else {
-            this.searcher.search(1);
+            this.searcher.search(this.page);
         }
     }
 

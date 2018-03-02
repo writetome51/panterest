@@ -49,7 +49,7 @@ import {UserService} from './services/user.service';
         RouterModule.forRoot([
             {path: 'home/:page_number', component: HomeComponent},
             {path: '', pathMatch: 'full', redirectTo: 'home/1'},
-            {path: '**', redirectTo: 'home'}
+            {path: '**', redirectTo: 'home/1'}
         ]),
     ],
     providers: [ApiService, GoogleAuthService, SearchService,

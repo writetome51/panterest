@@ -33,7 +33,8 @@
         </div>
         <div class="page-number">{{page}}</div>
         <div class="nav-container-right">
-            <button class="btn btn-primary nav-button">
+            <button class="btn btn-primary nav-button"
+                    [routerLink]="['/home', (page * 1 + 1)]"  (click)="getSearchResults()" >
                 Next
                 <p class="glyphicon glyphicon-triangle-right glyphicon-font-size"></p>
             </button>
