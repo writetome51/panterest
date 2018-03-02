@@ -59,7 +59,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
         }
         else if(this.page >= ) {
             this.currentStatePrev = false;
-            this.currentStateNext = false;
+            this.currentStateNext = true;
         }
         else {
             this.currentStateNext = false;

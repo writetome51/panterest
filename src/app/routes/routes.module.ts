@@ -12,7 +12,7 @@ import {HomeComponent} from '../home/home.component';
         RouterModule.forChild([
             {path: 'favorites', component: FavoritesComponent, canActivate: [AuthGuard]},
             {path: 'recipes/:recipe_id', component: RecipesComponent},
-          //  {path: 'home/:page_number', component: HomeComponent}
+            {path: 'home/:page_number', component: HomeComponent}
         ]),
         CommonModule
     ],
