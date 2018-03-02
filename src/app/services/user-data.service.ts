@@ -35,7 +35,7 @@ export class UserDataService {
     }
 
 
-    private _setupAllLoggedInSettings(){
+    private _setupAllLoggedInSettings() {
 
         // this._setupUserDataProperties() requires a callback passed to it in case
         // you need to run more code inside it that requires access to the properties
@@ -58,20 +58,23 @@ export class UserDataService {
 
     logout() {
         this.googleAuth.signOut();
+        this.subscription.unsubscribe();
         this.unsetLoggedInLocalState();
     }
 
 
     getFavorites(observer: Observer) {
 
-        // this._setupUserDataProperties() needs to be called again because, due to its setting of variables
-        // asynchronously, when this class' methods are run later, those variables are suddenly undefined.
-
-        return this._setupUserDataProperties(() => {
-            this.store.valueChanges().subscribe((userStore: UserStore) => {
-                observer(userStore.favorites);
+        // this._setupUserDataProperties() needs to be called again because,
+        // due to its setting of variables asynchronously, when this class'
+        // methods are run later, those variables are suddenly undefined.
+        if (this.store) {
+            return this._setupUserDataProperties(() => {
+                this.store.valueChanges().subscribe((userStore: UserStore) => {
+                    observer(userStore.favorites);
+                });
             });
-        });
+        }
     }
 
 
@@ -105,14 +108,16 @@ export class UserDataService {
 
 
     private _set_store() {
-        // The document object is named after user's email:
-        this.store = this.db.doc(this.user.email);
+        if (this.user) {
+            // The document object is named after user's email:
+            this.store = this.db.doc(this.user.email);
 
-        this.store.valueChanges().subscribe((response) => {
-            if (!response) { // Then store doesn't exist...
-                this._createDefaultUserStore();
-            }
-        });
+            this.store.valueChanges().subscribe((response) => {
+                if (!response) { // Then store doesn't exist...
+                    this._createDefaultUserStore();
+                }
+            });
+        }
     }
 
 
