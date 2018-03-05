@@ -7,7 +7,8 @@
         </button>
         <ul class="dropdown-menu">
             <li *ngFor="let subcategory of dropdownCategories[title]">
-                <a (click)="search(subcategory)">{{subcategory}}</a>
+                <a (click)="search(subcategory)"
+                   [routerLink]="['/home/1']">{{subcategory}}</a>
             </li>
         </ul>
     </div>

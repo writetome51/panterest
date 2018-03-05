@@ -23,8 +23,6 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     constructor(public searcher: SearchService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
-
-        this.page = this.activatedRoute.snapshot.params['page_number'];
     }
 
     ngOnInit(){
@@ -76,15 +74,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
 
     toggleButtonState() {
-        if (this.searcher.pageNumber < 2) {
-            this.showPrevious = false;
-            this.showNext = true;
-        }
 
-        else {
-            this.showPrevious = true;
-            this.showNext = true;
-        }
     }
 
 }
