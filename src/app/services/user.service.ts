@@ -27,7 +27,7 @@ export class UserService {
 
     addNewFavorite(recipe: SpecificRecipe) {
         let favorite: Favorite = this._createFavorite(recipe);
-        this.data.store.valueChanges().subscribe((userStore: UserStore) => {
+        return this.data.store.valueChanges().subscribe((userStore: UserStore) => {
             userStore.favorites[favorite.name] = favorite.content;
             this.data.update(userStore);
         });
@@ -35,7 +35,7 @@ export class UserService {
 
 
     removeFavorite(recipeId){
-        this.data.store.valueChanges().subscribe((userStore: UserStore) => {
+        return this.data.store.valueChanges().subscribe((userStore: UserStore) => {
             delete userStore.favorites[recipeId];
             this.data.update(userStore);
         });
@@ -51,8 +51,13 @@ export class UserService {
     }
 
 
-    get loggedIn(){
-        return Boolean(this.data.isLoggedInLocalState());
-    }
+    get loggedIn() {
+        try {
+            return Boolean(this.data.isLoggedInLocalState());
+        }
+        catch (error){
+            return false;
+        }
 
+    }
 }

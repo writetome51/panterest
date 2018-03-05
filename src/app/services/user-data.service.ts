@@ -26,12 +26,23 @@ export class UserDataService {
 
         this.subscription = this._afAuth.authState.subscribe((response) => {
             if (response) { // if true, you're logged in.
-                this._setupUserData();
+                this._setupAllLoggedInSettings();
             }
-            else{
+            else {
                 this.unsetLoggedInLocalState();
             }
         });
+    }
+
+
+    private _setupAllLoggedInSettings() {
+
+        // this._setupUserDataProperties() requires a callback passed to it in case
+        // you need to run more code inside it that requires access to the properties
+        // that have just been assigned values.
+        this._setupUserDataProperties(() => {
+        });
+        this.setLoggedInLocalState();
     }
 
 
@@ -40,18 +51,30 @@ export class UserDataService {
     }
 
 
-    login(){
+    login() {
         this.googleAuth.googleLogin();
+        this._setupAllLoggedInSettings();
     }
 
-    logout(){
+    logout() {
         this.googleAuth.signOut();
+        this.subscription.unsubscribe();
+        this.unsetLoggedInLocalState();
     }
 
 
-    getFavorites(observer: Observer){
-        return this.store.valueChanges().subscribe((userStore: UserStore) => {
-            observer(userStore.favorites);
+    getFavorites(observer: Observer) {
+
+        // this._setupUserDataProperties() needs to be called again because,
+        // due to its setting of variables asynchronously, when this class'
+        // methods are run later, those variables are suddenly undefined.
+
+        return this._setupUserDataProperties(() => {
+            if (this.store) {
+                this.store.valueChanges().subscribe((userStore: UserStore) => {
+                    observer(userStore.favorites);
+                });
+            }
         });
     }
 
@@ -60,22 +83,22 @@ export class UserDataService {
         localStorage.setItem(this._localLoggedInKey, 'true');
     }
 
-    unsetLoggedInLocalState(){
+    unsetLoggedInLocalState() {
         localStorage.removeItem(this._localLoggedInKey);
     }
 
 
-    isLoggedInLocalState(){
+    isLoggedInLocalState() {
         return (localStorage.getItem(this._localLoggedInKey));
     }
 
 
-    private _setupUserData() {
-        this.setLoggedInLocalState();
+    private _setupUserDataProperties(observer) {
         this._set_db();
-        this.googleAuth.user.subscribe((response) => {
+        return this.googleAuth.user.subscribe((response) => {
             this.user = response;
             this._set_store();
+            observer();
         });
     }
 
@@ -86,14 +109,16 @@ export class UserDataService {
 
 
     private _set_store() {
-        // The document object is named after user's email:
-        this.store = this.db.doc(this.user.email);
+        if (this.user) {
+            // The document object is named after user's email:
+            this.store = this.db.doc(this.user.email);
 
-        this.store.valueChanges().subscribe((response) => {
-            if (!response) { // Then store doesn't exist...
-                this._createDefaultUserStore();
-            }
-        });
+            this.store.valueChanges().subscribe((response) => {
+                if (!response) { // Then store doesn't exist...
+                    this._createDefaultUserStore();
+                }
+            });
+        }
     }
 
 

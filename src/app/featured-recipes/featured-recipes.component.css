@@ -71,3 +71,34 @@
 .recipe-card-body p {
   margin: 10px 0 5px 10px;
 }
+
+.nav-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+}
+
+.page-number {
+    background-color: #F3D240;
+    color: #4c728c;
+    font-family: Futura, sans-serif;
+    font-size: 27px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    border: solid 3px #4c728c;
+    cursor: default;
+}
+
+.nav-button {
+    width: 125px;
+    color: white;
+    font-family: Futura, sans-serif;
+    font-size: 18px;
+    border: solid 2px #F3D240;
+    outline: none;
+}

@@ -16,7 +16,6 @@ import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
 import {UserProfileComponent} from './user-profile/user-profile.component';
-import {BrowseWindowComponent} from './browse-window/browse-window.component';
 import {HomeComponent} from './home/home.component';
 import {FavoritesComponent} from './favorites/favorites.component';
 import {SearchBarComponent} from './search-bar/search-bar.component';
@@ -33,7 +32,6 @@ import {UserService} from './services/user.service';
         SideBarComponent,
         RecipesComponent,
         UserProfileComponent,
-        BrowseWindowComponent,
         HomeComponent,
         FavoritesComponent,
         SearchBarComponent,
@@ -49,9 +47,9 @@ import {UserService} from './services/user.service';
         AngularFireModule.initializeApp((environment.firebase)),
         AngularFireAuthModule,
         RouterModule.forRoot([
-            {path: 'home', component: HomeComponent},
-            {path: '', pathMatch: 'full', redirectTo: 'home'},
-            {path: '**', redirectTo: 'home'}
+            {path: 'home/:page_number', component: HomeComponent},
+            {path: '', pathMatch: 'full', redirectTo: 'home/1'},
+            {path: '**', redirectTo: 'home/1'}
         ]),
     ],
     providers: [ApiService, GoogleAuthService, SearchService,

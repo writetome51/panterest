@@ -5,6 +5,7 @@ import {Location} from '@angular/common';
 import {UserService} from '../services/user.service';
 import {GoogleAuthService} from '../services/google-auth.service';
 import {environment} from '../../environments/environment';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-recipes',
@@ -13,13 +14,13 @@ import {environment} from '../../environments/environment';
 })
 export class RecipesComponent implements OnInit, OnDestroy {
 
-    JSON = JSON;
     result: any = false;
     recipeId: string;
     ingredients: string[];
     pattern: RegExp = new RegExp('([a-zA-Z 0-9])');
-    favorite = false;
+    favorite: boolean;
     favorites: object;
+    favoritesSubscription: Subscription;
     loadingSpinner = environment.loadingSpinner;
 
 
@@ -27,7 +28,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private _location: Location,
-                public user: UserService,
+                public userService: UserService,
                 public gAuth: GoogleAuthService) {
 
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
@@ -43,17 +44,22 @@ export class RecipesComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.search.subscription.unsubscribe();
-        this.user.subscription.unsubscribe();
+        try {
+            this.search.subscription.unsubscribe();
+            this.userService.subscription.unsubscribe();
+            this.favoritesSubscription.unsubscribe();
+        }
+        catch (error){}
     }
 
 
     set_favorite(){
-        this.user.data.getFavorites((favorites) => {
+        this.favoritesSubscription = this.userService.data.getFavorites((favorites) => {
             this.favorites = favorites;
             if (this.favorites[this.recipeId]){
                 this.favorite = true;
             }
+            else { this.favorite = false; }
         });
     }
 
@@ -64,14 +70,20 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
 
     toggleFavorite(recipe){
-        this.favorite = ( ! this.favorite);
-        if (this.favorites[this.recipeId]){
-            this.user.removeFavorite(this.recipeId);
+        this.favoritesSubscription.unsubscribe();
+        this.favorite = !(this.favorite);
+        if ( ! this.favorite){
+            delete this.favorites[this.recipeId];
+            this.favoritesSubscription =  this.userService.removeFavorite(this.recipeId);
         }
         else{
-            this.user.addNewFavorite(recipe);
+            this.favoritesSubscription = this.userService.addNewFavorite(recipe);
+            this.favorites[this.recipeId] = recipe;
         }
     }
+
+
+
 
 
 }

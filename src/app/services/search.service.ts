@@ -13,14 +13,15 @@ export class SearchService {
     searchText = '';
     results;
     resultsHeader: string;
+    pageNumber = 1;
 
     constructor(private _api: ApiService) {
     }
 
 
-    getTopRated(resultPage: number) {
+    getTopRated() {
         this._clearResults();
-        this.subscription = this._api.getTopRated(resultPage, (response) => {
+        this.subscription = this._api.getTopRated(this.pageNumber, (response) => {
             this.resultsHeader = 'Today\'s Featured Recipes';
             this.results = response.recipes;
         });
@@ -36,10 +37,10 @@ export class SearchService {
      );
      */
 
-    search(resultPage: number) {
+    search() {
         this._clearResults();
         this.subscription = this._api.search(
-            this.searchText, resultPage,
+            this.searchText, this.pageNumber,
             (response: SearchResult) => {
                 this.resultsHeader = 'Search Results';
                 this.results = this._narrowResultByTitle(response, this.searchText);
@@ -63,7 +64,7 @@ export class SearchService {
                                  propertyToReturn,
                                  observer: Observer) {
         this.subscription = this._api.search(
-            recipeSearch, 1,
+            recipeSearch, this.pageNumber,
             (response: SearchResult) => {
                 let results = this._narrowResultByTitle(response, recipeSearch);
                 results = this._getArrayOf(propertyToReturn, results);

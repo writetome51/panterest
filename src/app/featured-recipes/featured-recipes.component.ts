@@ -3,6 +3,7 @@ import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
 import {SearchService} from '../services/search.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {current} from 'codelyzer/util/syntaxKind';
 
 @Component({
     selector: 'app-featured-recipes',
@@ -11,7 +12,11 @@ import {environment} from '../../environments/environment';
 })
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
+    currentStatePrev: boolean = true;
+    currentStateNext: boolean = false;
+
     recipeId: string;
+    page: number;
 
     loadingSpinner = environment.loadingSpinner;
 
@@ -20,9 +25,21 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
+        this.page = this.activatedRoute.snapshot.params['page_number'];
     }
 
     ngOnInit(){
+        this.searcher.pageNumber = this.activatedRoute.snapshot.params['page_number'];
+        this.decideWhatSearchToPerform();
+        this.toggleButtonState();
+    }
+
+    ngOnDestroy(){
+        this.searcher.subscription.unsubscribe();
+    }
+
+
+    decideWhatSearchToPerform(){
         if (this.searcher.searchText === ''){
             this.getFeatured();
         }
@@ -31,18 +48,38 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
         }
     }
 
-    ngOnDestroy(){
-        this.searcher.subscription.unsubscribe();
+
+    forwardOne(){
+       ++this.searcher.pageNumber;
+       this.decideWhatSearchToPerform();
+    }
+
+    backOne(){
+        --this.searcher.pageNumber;
+        this.decideWhatSearchToPerform();
     }
 
 
     getSearchResults(){
-        this.searcher.search(1);
+        this.searcher.search();
     }
 
 
     getFeatured(){
-        this.searcher.getTopRated(1);
+        this.searcher.getTopRated();
+    }
+
+
+    toggleButtonState() {
+        if (this.searcher.pageNumber < 2) {
+            this.currentStatePrev = true;
+            this.currentStateNext = false;
+        }
+
+        else {
+            this.currentStatePrev = false;
+            this.currentStateNext = false;
+        }
     }
 
 }
