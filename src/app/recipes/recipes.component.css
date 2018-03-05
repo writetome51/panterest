@@ -63,6 +63,7 @@
     font-size: 18px;
     cursor: pointer;
 }
+
 .time {
     display: flex;
     align-items: center;
@@ -71,6 +72,10 @@
 
 .recipe-card {
     cursor: pointer;
+}
+
+.recipe-card {
+
     width: 325px;
     height: 250px;
     box-shadow: 0 3px 6px #4c728c;
@@ -80,8 +85,10 @@
     flex-direction: column;
     background-color: white;
 }
+
 .contains-title {
     display: flex;
     justify-content: center;
 }
+
 
