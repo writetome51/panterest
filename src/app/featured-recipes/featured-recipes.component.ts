@@ -15,7 +15,6 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     currentStatePrev: boolean = true;
     currentStateNext: boolean = false;
 
-    recipeId: string;
     page: number;
 
     loadingSpinner = environment.loadingSpinner;
@@ -24,7 +23,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     constructor(public searcher: SearchService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
-        this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
+
         this.page = this.activatedRoute.snapshot.params['page_number'];
     }
 
