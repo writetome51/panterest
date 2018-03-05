@@ -1,8 +1,15 @@
-<div *ngIf="!result"  class="recipe-card contains-title time">
-    <img [src]="loadingSpinner" style="height: 168px; width: 168px;">
-    LOADING ...
-</div>
+<div class="row">
 
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div *ngIf="!result"  class="recipe-card contains-title time">
+            <img [src]="loadingSpinner" style="height: 168px; width: 168px;">
+            LOADING ...
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+
+</div>
 <div class="recipe-container container-fluid row" *ngIf="result">
     <div class="col-md-2"></div>
     <div class="col-md-8">
