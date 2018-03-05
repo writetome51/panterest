@@ -26,7 +26,7 @@ export class UserService {
 
 
     addNewFavorite(recipe: SpecificRecipe) {
-        let favorite: Favorite = this._createFavorite(recipe);
+        let favorite: Favorite = this.data.createFavorite(recipe);
         return this.data.store.valueChanges().subscribe((userStore: UserStore) => {
             userStore.favorites[favorite.name] = favorite.content;
             this.data.update(userStore);
@@ -39,15 +39,6 @@ export class UserService {
             delete userStore.favorites[recipeId];
             this.data.update(userStore);
         });
-    }
-
-
-
-    private _createFavorite(recipe: SpecificRecipe) {
-        let favorite = {name: '', content: {}};
-        favorite.name = recipe.recipe_id;
-        favorite.content = recipe;
-        return favorite;
     }
 
 

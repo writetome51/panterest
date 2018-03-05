@@ -8,6 +8,8 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {environment} from '../../environments/environment';
 import {UserStore} from '../interfaces/UserStore';
 import {Observer} from '../interfaces/Observer';
+import {SpecificRecipe} from '../interfaces/SpecificRecipe';
+import {ApiService} from './api.service';
 
 @Injectable()
 export class UserDataService {
@@ -22,7 +24,8 @@ export class UserDataService {
 
     constructor(private firestore: AngularFirestore,
                 private _afAuth: AngularFireAuth,
-                private googleAuth: GoogleAuthService) {
+                private googleAuth: GoogleAuthService,
+                private _api: ApiService) {
 
         this.subscription = this._afAuth.authState.subscribe((response) => {
             if (response) { // if true, you're logged in.
@@ -90,6 +93,14 @@ export class UserDataService {
 
     isLoggedInLocalState() {
         return (localStorage.getItem(this._localLoggedInKey));
+    }
+
+
+    createFavorite(recipe: SpecificRecipe) {
+        let favorite = {name: '', content: {}};
+        favorite.name = this._api.getRecipeID(recipe);
+        favorite.content = recipe;
+        return favorite;
     }
 
 
