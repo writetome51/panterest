@@ -22,6 +22,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
     favorites: object;
     favoritesSubscription: Subscription;
     loadingSpinner = environment.loadingSpinner;
+    loadingSpinner2 = environment.loadingSpinner2
 
 
     constructor(private search: SearchService,
