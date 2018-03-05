@@ -41,12 +41,12 @@
 
 .button-container {
   display: flex;
-  justify-content: center;
+    justify-content: center;
   align-items: center;
 }
 
 .publisher-link {
-  text-decoration: none;
+    text-decoration: none;
 }
 .recipe-container{
     padding: 0 0 20px 0;
