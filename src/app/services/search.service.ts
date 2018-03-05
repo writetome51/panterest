@@ -31,15 +31,6 @@ export class SearchService {
         });
     }
 
-    /**  Example of use:
-     * Inject this service into a component, and call its property 'searchService'.
-     * Now, to call the search() method:
-     this.searchService.search('whatever recipe',
-     (response) => {
-        this.componentPropertyName = response;
-      }
-     );
-     */
 
     search() {
         this._clearResults();
