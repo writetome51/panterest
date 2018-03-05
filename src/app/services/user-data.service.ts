@@ -32,7 +32,7 @@ export class UserDataService {
                 this._setupAllLoggedInSettings();
             }
             else {
-                this.unsetLoggedInLocalState();
+                this._unsetLoggedInLocalState();
             }
         });
     }
@@ -45,7 +45,7 @@ export class UserDataService {
         // that have just been assigned values.
         this._setupUserDataProperties(() => {
         });
-        this.setLoggedInLocalState();
+        this._setLoggedInLocalState();
     }
 
 
@@ -62,7 +62,7 @@ export class UserDataService {
     logout() {
         this.googleAuth.signOut();
         this.subscription.unsubscribe();
-        this.unsetLoggedInLocalState();
+        this._unsetLoggedInLocalState();
     }
 
 
@@ -82,11 +82,12 @@ export class UserDataService {
     }
 
 
-    setLoggedInLocalState() {
+    private _setLoggedInLocalState() {
         localStorage.setItem(this._localLoggedInKey, 'true');
     }
 
-    unsetLoggedInLocalState() {
+
+    private _unsetLoggedInLocalState() {
         localStorage.removeItem(this._localLoggedInKey);
     }
 
