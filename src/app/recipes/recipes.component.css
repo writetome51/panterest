@@ -29,6 +29,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  height: 600px;
 }
 
 .recipe-body img {
@@ -70,12 +71,13 @@
     color: gray;
 }
 
-.recipe-card {
-    cursor: pointer;
+.time-font {
+    font-size: 21px;
+    font-family: Futura, sans-serif;
 }
 
 .recipe-card {
-
+    cursor: pointer;
     width: 325px;
     height: 250px;
     box-shadow: 0 3px 6px #4c728c;
@@ -85,10 +87,18 @@
     flex-direction: column;
     background-color: white;
 }
-
 .contains-title {
     display: flex;
     justify-content: center;
 }
 
+.image-container {
+    height: 300px;
+}
 
+@media only screen and (max-width: 500px) {
+
+    .image-container {
+        height: 300px;
+    }
+}
