@@ -12,8 +12,8 @@ import {current} from 'codelyzer/util/syntaxKind';
 })
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
-    currentStatePrev: boolean = true;
-    currentStateNext: boolean = false;
+    showPrevious: boolean;
+    showNext: boolean;
 
     page: number;
 
@@ -38,6 +38,23 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
 
+    forwardOne(){
+       ++this.searcher.pageNumber;
+       this.doSearchAndSetNextPreviousButtons();
+    }
+
+    backOne(){
+        --this.searcher.pageNumber;
+        this.doSearchAndSetNextPreviousButtons();
+    }
+
+
+    doSearchAndSetNextPreviousButtons(){
+        this.decideWhatSearchToPerform();
+        this.toggleButtonState();
+    }
+
+
     decideWhatSearchToPerform(){
         if (this.searcher.searchText === ''){
             this.getFeatured();
@@ -45,17 +62,6 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
         else{
             this.getSearchResults();
         }
-    }
-
-
-    forwardOne(){
-       ++this.searcher.pageNumber;
-       this.decideWhatSearchToPerform();
-    }
-
-    backOne(){
-        --this.searcher.pageNumber;
-        this.decideWhatSearchToPerform();
     }
 
 
@@ -71,13 +77,13 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     toggleButtonState() {
         if (this.searcher.pageNumber < 2) {
-            this.currentStatePrev = true;
-            this.currentStateNext = false;
+            this.showPrevious = false;
+            this.showNext = true;
         }
 
         else {
-            this.currentStatePrev = false;
-            this.currentStateNext = false;
+            this.showPrevious = true;
+            this.showNext = true;
         }
     }
 

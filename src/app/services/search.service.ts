@@ -60,32 +60,9 @@ export class SearchService {
     }
 
 
-    searchAndGetPropertyFromEach(recipeSearch,
-                                 propertyToReturn,
-                                 observer: Observer) {
-        this.subscription = this._api.search(
-            recipeSearch, this.pageNumber,
-            (response: SearchResult) => {
-                let results = this._narrowResultByTitle(response, recipeSearch);
-                results = this._getArrayOf(propertyToReturn, results);
-                observer(results);
-            }
-        );
-    }
-
-
     private _clearResults(){
         this.resultsHeader = '';
         this.results = null;
-    }
-
-
-    private _getArrayOf(thisProperty, results) {
-        let properties = [];
-        results.forEach((result) => {
-            properties.push(result[thisProperty]);
-        });
-        return properties;
     }
 
 

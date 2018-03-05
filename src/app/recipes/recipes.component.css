@@ -64,10 +64,16 @@
     font-size: 18px;
     cursor: pointer;
 }
+
 .time {
     display: flex;
     align-items: center;
     color: gray;
+}
+
+.time-font {
+    font-size: 21px;
+    font-family: Futura, sans-serif;
 }
 
 .recipe-card {
@@ -86,15 +92,13 @@
     justify-content: center;
 }
 
-.loading-screen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@media only screen and (max-width: 500px){
-
 .image-container {
     height: 300px;
 }
+
+@media only screen and (max-width: 500px) {
+
+    .image-container {
+        height: 300px;
+    }
 }
