@@ -27,7 +27,7 @@
 
         <div class="nav-container-left">
             <button class="btn btn-primary nav-button"
-                    [style.display]="currentStatePrev ? 'none' : 'inherit'"
+                    [style.display]="showPrevious ?  'inherit' : 'none'"
                     [routerLink]="['/home', (searcher.pageNumber * 1) - 1]"
                     (click)="backOne()">
                 <p class="glyphicon glyphicon-triangle-left glyphicon-font-size"></p>
@@ -37,7 +37,7 @@
         <div class="page-number">{{searcher.pageNumber}}</div>
         <div class="nav-container-right">
 
-            <button class="btn btn-primary nav-button"  [style.display]="currentStateNext ? 'none' : 'inherit'"
+            <button class="btn btn-primary nav-button"  [style.display]="showNext ? 'inherit' :'none'"
                     [routerLink]="['/home', (searcher.pageNumber * 1 + 1)]"  (click)="forwardOne()" >
                 Next
                 <p class="glyphicon glyphicon-triangle-right glyphicon-font-size"></p>
