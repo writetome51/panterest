@@ -14,6 +14,9 @@ export class SearchService {
     results;
     resultsHeader: string;
     pageNumber = 1;
+    showNext: boolean;
+    showPrevious: boolean;
+
 
     constructor(private _api: ApiService) {
     }
@@ -24,18 +27,10 @@ export class SearchService {
         this.subscription = this._api.getTopRated(this.pageNumber, (response) => {
             this.resultsHeader = 'Today\'s Featured Recipes';
             this.results = response.recipes;
+            this._setNextAndPreviousButtons();
         });
     }
 
-    /**  Example of use:
-     * Inject this service into a component, and call its property 'searchService'.
-     * Now, to call the search() method:
-     this.searchService.search('whatever recipe',
-     (response) => {
-        this.componentPropertyName = response;
-      }
-     );
-     */
 
     search() {
         this._clearResults();
@@ -44,6 +39,7 @@ export class SearchService {
             (response: SearchResult) => {
                 this.resultsHeader = 'Search Results';
                 this.results = this._narrowResultByTitle(response, this.searchText);
+                this._setNextAndPreviousButtons();
             }
         );
     }
@@ -77,6 +73,25 @@ export class SearchService {
             }
         });
         return narrowedResults;
+    }
+
+
+    private _setNextAndPreviousButtons(){
+        if (this.pageNumber < 2) {
+            this.showPrevious = false;
+            this.showNext = true;
+            console.log(this.showPrevious);
+        }
+        else {
+            this.showPrevious = true;
+            this.showNext = true;
+        }
+
+        if (this.results.length === 0){
+            this.showPrevious = false;
+            this.showNext = false;
+        }
+
     }
 
 

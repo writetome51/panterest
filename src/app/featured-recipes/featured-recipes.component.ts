@@ -12,25 +12,18 @@ import {current} from 'codelyzer/util/syntaxKind';
 })
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
-    showPrevious: boolean;
-    showNext: boolean;
-
-    page: number;
-
     loadingSpinner = environment.loadingSpinner;
 
 
     constructor(public searcher: SearchService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
-
-        this.page = this.activatedRoute.snapshot.params['page_number'];
     }
+
 
     ngOnInit(){
         this.searcher.pageNumber = this.activatedRoute.snapshot.params['page_number'];
         this.decideWhatSearchToPerform();
-        this.toggleButtonState();
     }
 
     ngOnDestroy(){
@@ -40,18 +33,12 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     forwardOne(){
        ++this.searcher.pageNumber;
-       this.doSearchAndSetNextPreviousButtons();
+        this.decideWhatSearchToPerform();
     }
 
     backOne(){
         --this.searcher.pageNumber;
-        this.doSearchAndSetNextPreviousButtons();
-    }
-
-
-    doSearchAndSetNextPreviousButtons(){
         this.decideWhatSearchToPerform();
-        this.toggleButtonState();
     }
 
 
@@ -74,17 +61,5 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
         this.searcher.getTopRated();
     }
 
-
-    toggleButtonState() {
-        if (this.searcher.pageNumber < 2) {
-            this.showPrevious = false;
-            this.showNext = true;
-        }
-
-        else {
-            this.showPrevious = true;
-            this.showNext = true;
-        }
-    }
 
 }

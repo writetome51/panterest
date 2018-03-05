@@ -25,6 +25,7 @@ export class SideBarComponent implements OnInit {
 
   search(recipe){
       this.searcher.searchText = recipe;
+      this.searcher.pageNumber = 1;
       this.searcher.search();
   }
 
