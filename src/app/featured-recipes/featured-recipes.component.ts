@@ -15,7 +15,6 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     currentStatePrev: boolean = true;
     currentStateNext: boolean = false;
 
-    recipeId: string;
     page: number;
 
     loadingSpinner = environment.loadingSpinner;
@@ -24,19 +23,13 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     constructor(public searcher: SearchService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
-        this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
+
         this.page = this.activatedRoute.snapshot.params['page_number'];
     }
 
     ngOnInit(){
         this.searcher.pageNumber = this.activatedRoute.snapshot.params['page_number'];
-        console.log(this.searcher.pageNumber);
-        if (this.searcher.searchText === ''){
-            this.getFeatured();
-        }
-        else{
-            this.getSearchResults();
-        }
+        this.decideWhatSearchToPerform();
         this.toggleButtonState();
     }
 
@@ -45,8 +38,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
 
-    forwardOne(){
-       ++this.searcher.pageNumber;
+    decideWhatSearchToPerform(){
         if (this.searcher.searchText === ''){
             this.getFeatured();
         }
@@ -55,14 +47,15 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
         }
     }
 
+
+    forwardOne(){
+       ++this.searcher.pageNumber;
+       this.decideWhatSearchToPerform();
+    }
+
     backOne(){
         --this.searcher.pageNumber;
-        if (this.searcher.searchText === ''){
-            this.getFeatured();
-        }
-        else{
-            this.getSearchResults();
-        }
+        this.decideWhatSearchToPerform();
     }
 
 
