@@ -128,6 +128,8 @@
 }
 
 .well {
+
+    background-color: #fcfcfc;
     margin: 0 30px 10px 0;
     padding: 10px 0 0 10px;
 }
