@@ -22,7 +22,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
     favorites: object;
     favoritesSubscription: Subscription;
     loadingSpinner = environment.loadingSpinner;
-    loadingSpinner2 = environment.loadingSpinner2
+    loadingSpinner2 = environment.loadingSpinner2;
+    commentText = '';
 
 
     constructor(private search: SearchService,
@@ -82,6 +83,9 @@ export class RecipesComponent implements OnInit, OnDestroy {
             this.favorites[this.recipeId] = recipe;
         }
     }
+
+
+    addComment(){}
 
 
 
