@@ -51,11 +51,6 @@ export class SearchService {
     }
 
 
-    getRecipeID(recipe: SearchResultRecipe) {
-        return recipe.recipe_id;
-    }
-
-
     private _clearResults(){
         this.resultsHeader = '';
         this.results = null;
@@ -80,7 +75,6 @@ export class SearchService {
         if (this.pageNumber < 2) {
             this.showPrevious = false;
             this.showNext = true;
-            console.log(this.showPrevious);
         }
         else {
             this.showPrevious = true;

@@ -9,6 +9,7 @@ import {Subscription} from 'rxjs/Subscription';
 export class UserService {
 
     // magic variable:  loggedIn: boolean;
+    // magic variable: displayName: string;
     subscription: Subscription;
 
     constructor(public data: UserDataService) {
@@ -26,7 +27,7 @@ export class UserService {
 
 
     addNewFavorite(recipe: SpecificRecipe) {
-        let favorite: Favorite = this._createFavorite(recipe);
+        let favorite: Favorite = this.data.createFavorite(recipe);
         return this.data.store.valueChanges().subscribe((userStore: UserStore) => {
             userStore.favorites[favorite.name] = favorite.content;
             this.data.update(userStore);
@@ -42,12 +43,8 @@ export class UserService {
     }
 
 
-
-    private _createFavorite(recipe: SpecificRecipe) {
-        let favorite = {name: '', content: {}};
-        favorite.name = recipe.recipe_id;
-        favorite.content = recipe;
-        return favorite;
+    get displayName(){
+        return this.data.getDisplayName();
     }
 
 
