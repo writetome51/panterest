@@ -97,11 +97,9 @@
     height: 300px;
 }
 
-@media only screen and (max-width: 500px) {
-
-    .image-container {
-        height: 300px;
-    }
+.placeholder-image {
+    width: 200px;
+    height: 175px;
 }
 
 
