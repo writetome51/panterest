@@ -36,7 +36,8 @@
                         </a>
                     </h4>
                 </div>
-                <br>
+
+
                 <div class="button-container">
                     <button class="btn btn-default back-button" (click)="goBack()">
                         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -108,7 +109,6 @@
                         <div class="well">
                             <div *ngFor="let comment of recipeData.comments" >
                                 <p >{{comment.user}}: {{comment.body}}</p>
-
                             </div>
                         </div>
                     </div>
