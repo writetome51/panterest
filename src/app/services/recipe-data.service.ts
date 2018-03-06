@@ -27,6 +27,7 @@ export class RecipeDataService {
         this.id = recipeID;
         this._set_db();
         this._set_store();
+        this._set_comments();
     }
 
 
@@ -56,12 +57,20 @@ export class RecipeDataService {
             // The document object is named after recipe's id:
             this.store = this.db.doc(this.id);
 
-            this.store.valueChanges().subscribe((store) => {
+            this.subscription = this.store.valueChanges().subscribe((store) => {
                 if (!store) { // Then store doesn't exist...
                     this._createDefaultRecipeStore();
                 }
             });
         }
+    }
+
+
+    private _set_comments(){
+        this.subscription = this.store.valueChanges().subscribe((recipe) => {
+            this.comments = recipe.comments;
+        });
+
     }
 
 
