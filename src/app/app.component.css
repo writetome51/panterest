@@ -39,3 +39,15 @@
   outline: none;
   cursor: pointer;
 }
+
+.brand-container {
+    display: flex;
+
+}
+
+.brand-logo {
+    width: 40px;
+    height: 35px;
+    padding: 0 5px 0 0;
+    margin: -5px 0 0 0;
+}
