@@ -50,6 +50,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
             this.search.subscription.unsubscribe();
             this.userService.subscription.unsubscribe();
             this.favoritesSubscription.unsubscribe();
+            this.recipeData.subscription.unsubscribe();
         }
         catch (error){}
     }
@@ -87,6 +88,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
     addComment(){
         this.recipeData.addComment(this.userService.displayName);
+        this.recipeData.commentText = '';
     }
 
 

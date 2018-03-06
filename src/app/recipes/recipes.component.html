@@ -71,17 +71,20 @@
                                         <h4 class="modal-title">Add Comment:</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
-                                            <textarea maxlength="400"  cols="50"
+                                        <form name="comment-form">
+                                            <textarea name="comment-input"  maxlength="400"
                                                       [(ngModel)]="recipeData.commentText">
                                             </textarea>
-                                            <input type="submit" (click)="addComment()">
+                                            <button type="button"  class="btn btn-default"
+                                                    data-dismiss="modal"  (click)="addComment()">
+                                                Submit
+                                            </button>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default"
                                                 data-dismiss="modal">
-                                            Close
+                                            Cancel
                                         </button>
                                     </div>
                                 </div>

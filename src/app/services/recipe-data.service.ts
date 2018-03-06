@@ -15,6 +15,7 @@ export class RecipeDataService {
     id: string;
     store: AngularFirestoreDocument<object>;
     commentText = '';
+    comments: object[];
 
 
     constructor(private firestore: AngularFirestore,
@@ -36,7 +37,12 @@ export class RecipeDataService {
 
     addComment(userDisplayName){
         let comment = this._createComment(userDisplayName);
-        this.update(comment);
+        this.subscription = this.store.valueChanges().subscribe((recipe) => {
+            recipe.comments.push(comment);
+            this.update(recipe);
+            // This line is added to keep this block of code from repeating endlessly:
+            this.subscription.unsubscribe();
+        });
     }
 
 
