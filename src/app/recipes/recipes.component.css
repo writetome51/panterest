@@ -21,7 +21,7 @@
 }
 
 .content-container {
-  padding: 10px 0 10px 10px;
+  padding: 10px 0 10px 30px;
 }
 
 .image-container {
@@ -43,7 +43,7 @@
 .button-container {
   display: flex;
     justify-content: center;
-    margin: 0 0 0 10px;
+    margin: 0 0 0 30px;
 
 }
 
@@ -107,3 +107,14 @@
     padding: 10px 30px 0 0 ;
 }
 
+.commentContainer{
+    padding: 0 0 0 30px;
+}
+
+.commentCommand{
+    font-size: 25px;
+}
+.well{
+    margin:0 30px 10px 0;
+    padding: 10px 0 0 10px;
+}
