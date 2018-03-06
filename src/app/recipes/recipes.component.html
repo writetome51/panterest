@@ -42,14 +42,7 @@
                         <span class="glyphicon glyphicon-chevron-left"></span>
                         Go Back
                     </button>
-                    <div *ngIf="userService.loggedIn">
-                        <p class="glyphicon"
-                           [class.glyphicon-heart-empty]="!favorite"
-                           [class.glyphicon-heart]="favorite"
-                           (click)="toggleFavorite(result)">
-                        </p>
 
-                    </div>
 
 
                     <div class="container">
@@ -90,7 +83,14 @@
                         </div>
 
                     </div>
+                    <div *ngIf="userService.loggedIn" class="padding">
+                        <p class="glyphicon"
+                           [class.glyphicon-heart-empty]="!favorite"
+                           [class.glyphicon-heart]="favorite"
+                           (click)="toggleFavorite(result)">
+                        </p>
 
+                    </div>
 
                 </div>
 
