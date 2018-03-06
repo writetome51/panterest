@@ -68,11 +68,11 @@
                                         <button type="button" class="close" data-dismiss="modal">
                                             &times;
                                         </button>
-                                        <h4 class="modal-title">Modal Header</h4>
+                                        <h4 class="modal-title">Add Comment:</h4>
                                     </div>
                                     <div class="modal-body">
                                         <form>
-                                            <textarea maxlength="400"
+                                            <textarea maxlength="400"  cols="50"
                                                       [(ngModel)]="recipeData.commentText">
                                             </textarea>
                                             <input type="submit" (click)="addComment()">
