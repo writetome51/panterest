@@ -17,7 +17,6 @@ export class UserDataService extends FirestoreDataService {
 
     user: GoogleUser;
     userSubscription: Subscription;
-    db: AngularFirestoreCollection<object>;
     store: AngularFirestoreDocument<object>;
     private _localStorageKeyPrefix = 'panterest_' + environment.firebase.apiKey;
     private _localLoggedInKey = this._localStorageKeyPrefix + '_loggedIn';
@@ -40,28 +39,26 @@ export class UserDataService extends FirestoreDataService {
         });
     }
 
-    setup(){
-        super.setup('users', this.user.email, this._createDefaultUser());
-    }
-
 
     private _setupAllLoggedInSettings() {
 
         // this._set_user() requires a callback passed to it in case
         // you need to run more code inside it that requires access to the properties
         // that have just been assigned values.
-        this.userSubscription  = this._set_user(() => {});
+        this.userSubscription  = this._set_user(() => {
+            this.setup();
+        });
         this._setLoggedInLocalState();
+    }
+
+
+    setup(){
+        super.setup('users', this.user.email, this._createDefaultUser());
     }
 
 
     getDisplayName(){
         return this.user.displayName;
-    }
-
-
-    update(newData: object) {
-        this.store.update(newData);
     }
 
 
@@ -78,19 +75,8 @@ export class UserDataService extends FirestoreDataService {
 
 
     getFavorites(observer: Observer) {
-        this.getProperty('favorites', (favorites) => {
+        return this.getProperty('favorites', (favorites) => {
             observer(favorites);
-        });
-        // this._set_user() needs to be called again because,
-        // due to its setting of variables asynchronously, when this class'
-        // methods are run later, those variables are suddenly undefined.
-
-        return this._set_user(() => {
-            if (this.store) {
-                this.store.valueChanges().subscribe((userStore: UserStore) => {
-                    observer(userStore.favorites);
-                });
-            }
         });
     }
 

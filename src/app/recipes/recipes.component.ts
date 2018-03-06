@@ -69,6 +69,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
         if (this.recipeData.comments){
             return (this.recipeData.comments.length > 0);
         }
+        else return false;
     }
 
 
