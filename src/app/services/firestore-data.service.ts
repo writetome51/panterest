@@ -1,20 +1,19 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
-import {GoogleAuthService} from './google-auth.service';
 import {Subscription} from 'rxjs/Subscription';
-import {UserStore} from '../interfaces/UserStore';
 import {Observer} from '../interfaces/Observer';
 
 @Injectable()
-export class FirestoreDataService {
+export abstract class FirestoreDataService {
 
-    dbCollection: AngularFirestoreCollection<object>;
-    db: AngularFirestoreDocument<object>;
+    private _dbCollection: AngularFirestoreCollection<object>;
     collectionName: string;
+    private _db: AngularFirestoreDocument<object>;
     documentName: string;
+    subscription: Subscription;
 
 
-    constructor(private firestore: AngularFirestore) {
+    constructor(private _firestore: AngularFirestore) {
     }
 
 
@@ -26,12 +25,12 @@ export class FirestoreDataService {
 
 
     update(newData: object) {
-        this.db.update(newData);
+        this._db.update(newData);
     }
 
 
     getProperty(propertyName, observer: Observer): Subscription {
-        return this.db.valueChanges().subscribe((document) => {
+        return this._db.valueChanges().subscribe((document) => {
             if (document[propertyName]){
                 observer(document[propertyName]);
             }
@@ -40,7 +39,7 @@ export class FirestoreDataService {
 
 
     getEntire(observer: Observer): Subscription{
-        return this.db.valueChanges().subscribe((document) => {
+        return this._db.valueChanges().subscribe((document) => {
             if (document){
                 observer(document);
             }
@@ -49,13 +48,13 @@ export class FirestoreDataService {
 
 
     private _set_db(defaultContent: object) {
-        this.dbCollection = this.firestore.collection(this.collectionName);
+        this._dbCollection = this._firestore.collection(this.collectionName);
 
-        if (this.dbCollection) {
-            this.db = this.dbCollection.doc(this.documentName);
+        if (this._dbCollection) {
+            this._db = this._dbCollection.doc(this.documentName);
 
-            this.db.valueChanges().subscribe((response) => {
-                if ( ! response) { // Then db doesn't exist...
+            this.subscription = this._db.valueChanges().subscribe((response) => {
+                if ( ! response) { // Then _db doesn't exist...
                     this._createDefaultDB(defaultContent);
                 }
             });
@@ -64,7 +63,7 @@ export class FirestoreDataService {
 
 
     private _createDefaultDB(content) {
-        this.dbCollection.doc(this.documentName).set(content);
+        this._dbCollection.doc(this.documentName).set(content);
     }
 
 

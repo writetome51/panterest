@@ -1,44 +1,31 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
+import {AngularFirestore} from 'angularfire2/firestore';
 import {Subscription} from 'rxjs/Subscription';
-import {environment} from '../../environments/environment';
-import {UserStore} from '../interfaces/UserStore';
-import {Observer} from '../interfaces/Observer';
-import {SpecificRecipe} from '../interfaces/SpecificRecipe';
-import {ApiService} from './api.service';
+import {FirestoreDataService} from './firestore-data.service';
 
 @Injectable()
-export class RecipeDataService {
+export class RecipeDataService extends FirestoreDataService {
 
-    subscription: Subscription;
-    db: AngularFirestoreCollection<object>;
     id: string;
-    store: AngularFirestoreDocument<object>;
     commentText = '';
     comments: object[];
 
 
-    constructor(private firestore: AngularFirestore,
-                private _api: ApiService) {
+    constructor(firestore: AngularFirestore) {
+        super(firestore);
     }
 
 
     setup(recipeID){
         this.id = recipeID;
-        this._set_db();
-        this._set_store();
+        super.setup('recipes', this.id, this._createDefaultRecipe());
         this._set_comments();
-    }
-
-
-    update(newData: object) {
-        this.store.update(newData);
     }
 
 
     addComment(userDisplayName){
         let comment = this._createComment(userDisplayName);
-        this.subscription = this.store.valueChanges().subscribe((recipe: any) => {
+        this.subscription = this.getEntire((recipe) => {
             recipe.comments.push(comment);
             this.update(recipe);
             // This line is added to keep this block of code from repeating endlessly:
@@ -47,48 +34,25 @@ export class RecipeDataService {
     }
 
 
-    private _set_db() {
-        this.db = this.firestore.collection('recipes');
-    }
-
-
-    private _set_store() {
-        if (this.id) {
-            // The document object is named after recipe's id:
-            this.store = this.db.doc(this.id);
-
-            this.subscription = this.store.valueChanges().subscribe((store) => {
-                if (!store) { // Then store doesn't exist...
-                    this._createDefaultRecipeStore();
-                }
-            });
-        }
-    }
-
-
     private _set_comments(){
-        this.subscription = this.store.valueChanges().subscribe((recipe: any) => {
-            if (recipe){
-                this.comments = recipe.comments;
-            }
+        this.subscription = this.getProperty('comments', (comments) => {
+            this.comments = comments;
         });
-
     }
 
 
-    private _createDefaultRecipeStore() {
+    private _createDefaultRecipe() {
         let content = {};
         content['averageRating'] = 0;
         content['favoriteCount'] = 0;
         content['comments'] = [];
-        this.db.doc(this.id).set(content);
+        return content;
     }
 
 
     private _createComment(userDisplayName) {
         return {body: this.commentText,  user: userDisplayName};
     }
-
 
 
 }
