@@ -35,18 +35,13 @@ export class RecipesComponent implements OnInit, OnDestroy {
                 public userService: UserService,
                 public recipeData: RecipeDataService,
                 public gAuth: GoogleAuthService) {
+
+        this.initializeDisplayData();
     }
 
 
     ngOnInit() {
-        let recipeId = this.activatedRoute.snapshot.params['recipe_id'];
-        this.recipeData.setup(recipeId);
-
-        this.search.getSpecificRecipe(this.recipeData.id, (response) => {
-            this.result = response;
-            this.set_favorite();
-        });
-
+        this.initializeDisplayData();
     }
 
     ngOnDestroy() {
@@ -57,6 +52,16 @@ export class RecipesComponent implements OnInit, OnDestroy {
             this.recipeData.subscription.unsubscribe();
         }
         catch (error){}
+    }
+
+
+    initializeDisplayData(){
+        let recipeId = this.activatedRoute.snapshot.params['recipe_id'];
+        this.search.getSpecificRecipe(recipeId, (response) => {
+            this.result = response;
+            this.set_favorite();
+            this.recipeData.setup(recipeId);
+        });
     }
 
 
