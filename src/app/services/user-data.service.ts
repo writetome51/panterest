@@ -10,22 +10,25 @@ import {UserStore} from '../interfaces/UserStore';
 import {Observer} from '../interfaces/Observer';
 import {SpecificRecipe} from '../interfaces/SpecificRecipe';
 import {ApiService} from './api.service';
+import {FirestoreDataService} from './firestore-data.service';
 
 @Injectable()
-export class UserDataService {
+export class UserDataService extends FirestoreDataService {
 
-    subscription: Subscription;
     user: GoogleUser;
+    userSubscription: Subscription;
     db: AngularFirestoreCollection<object>;
     store: AngularFirestoreDocument<object>;
     private _localStorageKeyPrefix = 'panterest_' + environment.firebase.apiKey;
     private _localLoggedInKey = this._localStorageKeyPrefix + '_loggedIn';
 
 
-    constructor(private firestore: AngularFirestore,
+    constructor(firestore: AngularFirestore,
                 private _afAuth: AngularFireAuth,
                 private googleAuth: GoogleAuthService,
                 private _api: ApiService) {
+
+        super(firestore);
 
         this.subscription = this._afAuth.authState.subscribe((response) => {
             if (response) { // if true, you're logged in.
@@ -37,14 +40,17 @@ export class UserDataService {
         });
     }
 
+    setup(){
+        super.setup('users', this.user.email, this._createDefaultUser());
+    }
+
 
     private _setupAllLoggedInSettings() {
 
-        // this._setupUserDataProperties() requires a callback passed to it in case
+        // this._set_user() requires a callback passed to it in case
         // you need to run more code inside it that requires access to the properties
         // that have just been assigned values.
-        this._setupUserDataProperties(() => {
-        });
+        this.userSubscription  = this._set_user(() => {});
         this._setLoggedInLocalState();
     }
 
@@ -72,12 +78,14 @@ export class UserDataService {
 
 
     getFavorites(observer: Observer) {
-
-        // this._setupUserDataProperties() needs to be called again because,
+        this.getProperty('favorites', (favorites) => {
+            observer(favorites);
+        });
+        // this._set_user() needs to be called again because,
         // due to its setting of variables asynchronously, when this class'
         // methods are run later, those variables are suddenly undefined.
 
-        return this._setupUserDataProperties(() => {
+        return this._set_user(() => {
             if (this.store) {
                 this.store.valueChanges().subscribe((userStore: UserStore) => {
                     observer(userStore.favorites);
@@ -110,40 +118,19 @@ export class UserDataService {
     }
 
 
-    private _setupUserDataProperties(observer) {
-        this._set_db();
+    private _set_user(observer) {
         return this.googleAuth.user.subscribe((response) => {
             this.user = response;
-            this._set_store();
             observer();
         });
     }
 
 
-    private _set_db() {
-        this.db = this.firestore.collection('users');
-    }
-
-
-    private _set_store() {
-        if (this.user) {
-            // The document object is named after user's email:
-            this.store = this.db.doc(this.user.email);
-
-            this.store.valueChanges().subscribe((response) => {
-                if (!response) { // Then store doesn't exist...
-                    this._createDefaultUserStore();
-                }
-            });
-        }
-    }
-
-
-    private _createDefaultUserStore() {
+    private _createDefaultUser() {
         let content = {};
         content['displayName'] = this.user.displayName;
         content['favorites'] = {};
-        this.db.doc(this.user.email).set(content);
+        return content;
     }
 
 
