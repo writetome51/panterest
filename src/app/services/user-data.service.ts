@@ -49,6 +49,11 @@ export class UserDataService {
     }
 
 
+    getDisplayName(){
+        return this.user.displayName;
+    }
+
+
     update(newData: object) {
         this.store.update(newData);
     }

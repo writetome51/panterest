@@ -6,6 +6,7 @@ import {UserService} from '../services/user.service';
 import {GoogleAuthService} from '../services/google-auth.service';
 import {environment} from '../../environments/environment';
 import {Subscription} from 'rxjs/Subscription';
+import {RecipeDataService} from '../services/recipe-data.service';
 
 @Component({
     selector: 'app-recipes',
@@ -31,6 +32,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
                 private activatedRoute: ActivatedRoute,
                 private _location: Location,
                 public userService: UserService,
+                public recipeData: RecipeDataService,
                 public gAuth: GoogleAuthService) {
 
         this.recipeId = this.activatedRoute.snapshot.params['recipe_id'];
@@ -41,6 +43,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
         this.search.getSpecificRecipe(this.recipeId, (response) => {
             this.result = response;
             this.set_favorite();
+            this.recipeData.setup(this.recipeId);
         });
 
     }

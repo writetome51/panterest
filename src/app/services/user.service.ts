@@ -9,6 +9,7 @@ import {Subscription} from 'rxjs/Subscription';
 export class UserService {
 
     // magic variable:  loggedIn: boolean;
+    // magic variable: displayName: string;
     subscription: Subscription;
 
     constructor(public data: UserDataService) {
@@ -39,6 +40,11 @@ export class UserService {
             delete userStore.favorites[recipeId];
             this.data.update(userStore);
         });
+    }
+
+
+    get displayName(){
+        return this.data.getDisplayName();
     }
 
 

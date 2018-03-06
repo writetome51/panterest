@@ -24,6 +24,7 @@ import {UserDataService} from './services/user-data.service';
 import {AuthGuard} from './guards/auth.guard';
 import {ProfileDetailComponent} from './profile-detail/profile-detail.component';
 import {UserService} from './services/user.service';
+import {RecipeDataService} from './services/recipe-data.service';
 
 @NgModule({
     declarations: [
@@ -53,7 +54,7 @@ import {UserService} from './services/user.service';
         ]),
     ],
     providers: [ApiService, GoogleAuthService, SearchService,
-        UserDataService, UserService, AuthGuard],
+        UserDataService, UserService, RecipeDataService, AuthGuard],
 
     bootstrap: [AppComponent]
 })

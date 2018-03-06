@@ -12,28 +12,19 @@ export class RecipeDataService {
 
     subscription: Subscription;
     db: AngularFirestoreCollection<object>;
-    recipe: SpecificRecipe;
+    recipeID: string;
     store: AngularFirestoreDocument<object>;
 
 
     constructor(private firestore: AngularFirestore,
                 private _api: ApiService) {
-
-        this.subscription = this._afAuth.subscribe((response) => {
-            if (response) {
-                this._setupAllLoggedInSettings();
-            }
-        });
     }
 
 
-    private _setupAllLoggedInSettings() {
-
-        // this._setupUserDataProperties() requires a callback passed to it in case
-        // you need to run more code inside it that requires access to the properties
-        // that have just been assigned values.
-        this._setupUserDataProperties(() => {
-        });
+    setup(recipeID){
+        this.recipeID = recipeID;
+        this._set_db();
+        this._set_store();
     }
 
 
@@ -42,35 +33,9 @@ export class RecipeDataService {
     }
 
 
-    getFavorites(observer: Observer) {
-
-        // this._setupUserDataProperties() needs to be called again because,
-        // due to its setting of variables asynchronously, when this class'
-        // methods are run later, those variables are suddenly undefined.
-
-        return this._setupUserDataProperties(() => {
-            if (this.store) {
-                this.store.valueChanges().subscribe((userStore: UserStore) => {
-                    observer(userStore.favorites);
-                });
-            }
-        });
-    }
-
-
-    createComment(user) {
-        let comment = {user: user.displayName, body: ''};
-        return comment;
-    }
-
-
-    private _setupUserDataProperties(observer) {
-        this._set_db();
-        return this.googleAuth.user.subscribe((response) => {
-            this.user = response;
-            this._set_store();
-            observer();
-        });
+    addComment(text, userDisplayName){
+        let comment = this._createComment(text, userDisplayName);
+        this.update(comment);
     }
 
 
@@ -80,13 +45,13 @@ export class RecipeDataService {
 
 
     private _set_store() {
-        if (this.user) {
-            // The document object is named after user's email:
-            this.store = this.db.doc(this.user.email);
+        if (this.recipeID) {
+            // The document object is named after recipe's id:
+            this.store = this.db.doc(this.recipeID);
 
-            this.store.valueChanges().subscribe((response) => {
-                if (!response) { // Then store doesn't exist...
-                    this._createDefaultUserStore();
+            this.store.valueChanges().subscribe((store) => {
+                if (!store) { // Then store doesn't exist...
+                    this._createDefaultRecipeStore();
                 }
             });
         }
@@ -95,10 +60,17 @@ export class RecipeDataService {
 
     private _createDefaultRecipeStore() {
         let content = {};
-        content['displayName'] = this.user.displayName;
-        content['favorites'] = {};
-        this.db.doc(this.user.email).set(content);
+        content['averageRating'] = 0;
+        content['favoriteCount'] = 0;
+        content['comments'] = [];
+        this.db.doc(this.recipeID).set(content);
     }
+
+
+    private _createComment(text, userDisplayName) {
+        return {body: text,  user: userDisplayName};
+    }
+
 
 
 }
