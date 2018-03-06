@@ -100,7 +100,7 @@
 
                 <div id="comments-container" *ngIf="commentsExist()">
                     <hr>
-                    <a (click)="toggleShowComments()">{{showCommentsCommand}}</a>
+                    <a (click)="toggleShowComments()">{{showOrHideCommand}}</a>
                     <div *ngIf="showComments">
                         <h4>User Comments</h4>
                         <div *ngFor="let comment of recipeData.comments">
