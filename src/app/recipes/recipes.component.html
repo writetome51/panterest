@@ -107,7 +107,9 @@
                         <h4>User Comments</h4>
                         <div class="well">
                             <div *ngFor="let comment of recipeData.comments" >
-                                <p >{{comment.user}}: {{comment.body}}</p>
+                                <h4>{{comment.user}}:</h4>
+                                <p>{{comment.body}}</p>
+                                <br>
                             </div>
                         </div>
                     </div>
