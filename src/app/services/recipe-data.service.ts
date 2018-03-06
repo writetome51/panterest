@@ -12,8 +12,9 @@ export class RecipeDataService {
 
     subscription: Subscription;
     db: AngularFirestoreCollection<object>;
-    recipeID: string;
+    id: string;
     store: AngularFirestoreDocument<object>;
+    commentText = '';
 
 
     constructor(private firestore: AngularFirestore,
@@ -22,7 +23,7 @@ export class RecipeDataService {
 
 
     setup(recipeID){
-        this.recipeID = recipeID;
+        this.id = recipeID;
         this._set_db();
         this._set_store();
     }
@@ -33,8 +34,8 @@ export class RecipeDataService {
     }
 
 
-    addComment(text, userDisplayName){
-        let comment = this._createComment(text, userDisplayName);
+    addComment(userDisplayName){
+        let comment = this._createComment(userDisplayName);
         this.update(comment);
     }
 
@@ -45,9 +46,9 @@ export class RecipeDataService {
 
 
     private _set_store() {
-        if (this.recipeID) {
+        if (this.id) {
             // The document object is named after recipe's id:
-            this.store = this.db.doc(this.recipeID);
+            this.store = this.db.doc(this.id);
 
             this.store.valueChanges().subscribe((store) => {
                 if (!store) { // Then store doesn't exist...
@@ -63,12 +64,12 @@ export class RecipeDataService {
         content['averageRating'] = 0;
         content['favoriteCount'] = 0;
         content['comments'] = [];
-        this.db.doc(this.recipeID).set(content);
+        this.db.doc(this.id).set(content);
     }
 
 
-    private _createComment(text, userDisplayName) {
-        return {body: text,  user: userDisplayName};
+    private _createComment(userDisplayName) {
+        return {body: this.commentText,  user: userDisplayName};
     }
 
 
