@@ -68,7 +68,9 @@ export class RecipeDataService {
 
     private _set_comments(){
         this.subscription = this.store.valueChanges().subscribe((recipe: any) => {
-            this.comments = recipe.comments;
+            if (recipe){
+                this.comments = recipe.comments;
+            }
         });
 
     }
