@@ -17,7 +17,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
     result: any = false;
     ingredients: string[];
-    pattern: RegExp = new RegExp('([a-zA-Z 0-9])');
+    pattern: RegExp = new RegExp('([a-z])');
     favorite: boolean;
     favorites: object;
     favoritesSubscription: Subscription;
