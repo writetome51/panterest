@@ -1,67 +1,70 @@
 .recipe {
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 3px 6px #4c728c;
-  border-radius: 15px;
-  overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 3px 6px #4c728c;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 .recipe-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #eeeeee;
-  padding: 0 5px;
-  border-bottom: solid 1px darkgray;
-  font-family: Futura, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eeeeee;
+    padding: 0 5px;
+    border-bottom: solid 1px darkgray;
+    font-family: Futura, sans-serif;
 }
 
 .recipe-body {
-  background-color: whitesmoke;
-  padding: 0 0 10px 0;
+    background-color: whitesmoke;
+    padding: 0 0 10px 0;
 }
 
 .content-container {
-  padding: 10px 0 10px 10px;
+    padding: 10px 0 10px 30px;
 }
 
 .image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  height: 600px;
-  border-bottom: solid 1px darkgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 600px;
+    border-bottom: solid 1px darkgray;
 
 }
 
 .recipe-body img {
-  width: 1000px;
+    width: 1000px;
 }
 
 .back-button {
-  width: 100px;
+    width: 100px;
 }
 
 .button-container {
-  display: flex;
+    display: flex;
     justify-content: center;
-    margin: 0 0 0 10px;
+    margin: 0 0 0 30px;
 
 }
 
 .publisher-link {
     text-decoration: none;
 }
-.recipe-container{
+
+.recipe-container {
     padding: 0 0 20px 0;
 }
+
 .glyphicon-heart {
     color: #f06db6;
     padding: 8px 0 0 20px;
     font-size: 18px;
     cursor: pointer;
 }
+
 .glyphicon-heart-empty {
     color: #f06db6;
     padding: 8px 0 0 20px;
@@ -91,6 +94,7 @@
     flex-direction: column;
     background-color: white;
 }
+
 .contains-title {
     display: flex;
     justify-content: center;
@@ -104,12 +108,26 @@
     width: 200px;
     height: 175px;
 }
-.padding{
-    padding: 10px 30px 0 0 ;
+
+.padding {
+    padding: 10px 30px 0 0;
 }
 
 .ingredients {
     font-family: Futura, sans-serif;
     font-size: 14px;
     padding: 0 0 0 3px;
+}
+
+.commentContainer {
+    padding: 0 0 0 30px;
+}
+
+.commentCommand {
+    font-size: 25px;
+}
+
+.well {
+    margin: 0 30px 10px 0;
+    padding: 10px 0 0 10px;
 }

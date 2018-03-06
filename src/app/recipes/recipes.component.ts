@@ -22,8 +22,10 @@ export class RecipesComponent implements OnInit, OnDestroy {
     favorites: object;
     favoritesSubscription: Subscription;
     loadingSpinner = environment.loadingSpinner;
-    showComments = false;
+    showComments = true;
+    hideCommentsCommand = 'Hide Comments';
     showCommentsCommand = 'Show Comments';
+    showOrHideCommand = this.hideCommentsCommand;
 
 
     constructor(private search: SearchService,
@@ -104,10 +106,10 @@ export class RecipesComponent implements OnInit, OnDestroy {
     toggleShowComments(){
         this.showComments = !(this.showComments);
         if ( ! this.showComments){
-            this.showCommentsCommand = 'Show Comments';
+            this.showOrHideCommand = this.showCommentsCommand;
         }
         else{
-            this.showCommentsCommand = 'Hide Comments';
+            this.showOrHideCommand = this.hideCommentsCommand;
         }
     }
 
