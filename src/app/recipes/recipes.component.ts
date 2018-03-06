@@ -22,6 +22,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
     favorites: object;
     favoritesSubscription: Subscription;
     loadingSpinner = environment.loadingSpinner;
+    showComments = false;
+    showCommentsCommand = 'Show Comments';
 
 
     constructor(private search: SearchService,
@@ -50,8 +52,14 @@ export class RecipesComponent implements OnInit, OnDestroy {
             this.search.subscription.unsubscribe();
             this.userService.subscription.unsubscribe();
             this.favoritesSubscription.unsubscribe();
+            this.recipeData.subscription.unsubscribe();
         }
         catch (error){}
+    }
+
+
+    commentsExist(){
+        return (this.recipeData.comments.length > 0);
     }
 
 
@@ -87,6 +95,18 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
     addComment(){
         this.recipeData.addComment(this.userService.displayName);
+        this.recipeData.commentText = '';
+    }
+
+
+    toggleShowComments(){
+        this.showComments = !(this.showComments);
+        if ( ! this.showComments){
+            this.showCommentsCommand = 'Show Comments';
+        }
+        else{
+            this.showCommentsCommand = 'Hide Comments';
+        }
     }
 
 
