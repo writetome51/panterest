@@ -100,13 +100,15 @@
 
                 <div id="comments-container" *ngIf="commentsExist()">
                     <hr>
-                    <h4>User Comments</h4>
-                    <div *ngFor="let comment of recipeData.comments">
-                        <p>{{comment.body}}</p>
-                        <p>author: {{comment.user}}</p>
-                        <br>
+                    <a (click)="toggleShowComments()">{{showCommentsCommand}}</a>
+                    <div *ngIf="showComments">
+                        <h4>User Comments</h4>
+                        <div *ngFor="let comment of recipeData.comments">
+                            <p>{{comment.body}}</p>
+                            <p>author: {{comment.user}}</p>
+                            <br>
+                        </div>
                     </div>
-
                 </div>
 
             </div>
