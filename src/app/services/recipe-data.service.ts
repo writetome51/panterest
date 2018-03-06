@@ -38,7 +38,7 @@ export class RecipeDataService {
 
     addComment(userDisplayName){
         let comment = this._createComment(userDisplayName);
-        this.subscription = this.store.valueChanges().subscribe((recipe) => {
+        this.subscription = this.store.valueChanges().subscribe((recipe: any) => {
             recipe.comments.push(comment);
             this.update(recipe);
             // This line is added to keep this block of code from repeating endlessly:
@@ -67,7 +67,7 @@ export class RecipeDataService {
 
 
     private _set_comments(){
-        this.subscription = this.store.valueChanges().subscribe((recipe) => {
+        this.subscription = this.store.valueChanges().subscribe((recipe: any) => {
             this.comments = recipe.comments;
         });
 
