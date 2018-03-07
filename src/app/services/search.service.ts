@@ -11,11 +11,11 @@ export class SearchService {
 
     subscription: Subscription;
     searchText = '';
-    results;
+    results: SearchResultRecipe[];
     resultsHeader: string;
     pageNumber = 1;
-    showNext: boolean;
-    showPrevious: boolean;
+    showNext = true;
+    showPrevious = false;
 
 
     constructor(private _api: ApiService) {
@@ -72,20 +72,12 @@ export class SearchService {
 
 
     private _setNextAndPreviousButtons(){
-        if (this.pageNumber < 2) {
-            this.showPrevious = false;
-            this.showNext = true;
-        }
-        else {
+        if (this.pageNumber > 1) {
             this.showPrevious = true;
-            this.showNext = true;
         }
-
         if (this.results.length === 0){
-            this.showPrevious = false;
             this.showNext = false;
         }
-
     }
 
 
