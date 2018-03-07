@@ -18,7 +18,6 @@ export class UserDataService extends FirestoreDataService {
 
     user: GoogleUser;
     userSubscription: Subscription;
-    store: AngularFirestoreDocument<object>;
     private _localStorageKeyPrefix = 'panterest_' + environment.firebase.apiKey;
     private _localLoggedInKey = this._localStorageKeyPrefix + '_loggedIn';
 
@@ -41,37 +40,25 @@ export class UserDataService extends FirestoreDataService {
     }
 
 
-    addNewFavorite(recipe: SpecificRecipe) {
-        let favorite: Favorite = this.data.createFavorite(recipe);
-        return this.data.store.valueChanges().subscribe((userStore: UserStore) => {
-            userStore.favorites[favorite.name] = favorite.content;
-            this.data.update(userStore);
-        });
-    }
-
-
-    removeFavorite(recipeId){
-        return this.data.store.valueChanges().subscribe((userStore: UserStore) => {
-            delete userStore.favorites[recipeId];
-            this.data.update(userStore);
-        });
-    }
-
-
-    private _setupAllLoggedInSettings() {
-
-        // this._set_user() requires a callback passed to it in case
-        // you need to run more code inside it that requires access to the properties
-        // that have just been assigned values.
-        this.userSubscription  = this._set_user(() => {
-            this.setup();
-        });
-        this._setLoggedInLocalState();
-    }
-
-
     setup(){
         super.setup('users', this.user.email, this._createDefaultUser());
+    }
+
+
+    addNewFavorite(recipe: SpecificRecipe): Subscription {
+        let favorite: Favorite = this._createFavorite(recipe);
+        return this.getEntire((user: UserStore) => {
+            user.favorites[favorite.name] = favorite.content;
+            this.update(user);
+        });
+    }
+
+
+    removeFavorite(recipeId): Subscription{
+        return this.getEntire((user: UserStore) => {
+            delete user.favorites[recipeId];
+            this.update(user);
+        });
     }
 
 
@@ -99,6 +86,31 @@ export class UserDataService extends FirestoreDataService {
     }
 
 
+    isLoggedInLocalState() {
+        return Boolean(localStorage.getItem(this._localLoggedInKey));
+    }
+
+
+    private _createFavorite(recipe: SpecificRecipe) {
+        let favorite = {name: '', content: {}};
+        favorite.name = this._api.getRecipeID(recipe);
+        favorite.content = recipe;
+        return favorite;
+    }
+
+
+    private _setupAllLoggedInSettings() {
+
+        // this._set_user() requires a callback passed to it in case
+        // you need to run more code inside it that requires access to the properties
+        // that have just been assigned values.
+        this.userSubscription  = this._set_user(() => {
+            this.setup();
+        });
+        this._setLoggedInLocalState();
+    }
+
+
     private _setLoggedInLocalState() {
         localStorage.setItem(this._localLoggedInKey, 'true');
     }
@@ -106,19 +118,6 @@ export class UserDataService extends FirestoreDataService {
 
     private _unsetLoggedInLocalState() {
         localStorage.removeItem(this._localLoggedInKey);
-    }
-
-
-    isLoggedInLocalState() {
-        return (localStorage.getItem(this._localLoggedInKey));
-    }
-
-
-    createFavorite(recipe: SpecificRecipe) {
-        let favorite = {name: '', content: {}};
-        favorite.name = this._api.getRecipeID(recipe);
-        favorite.content = recipe;
-        return favorite;
     }
 
 

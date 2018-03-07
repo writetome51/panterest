@@ -1,8 +1,5 @@
 import {Injectable} from '@angular/core';
-import {UserStore} from '../interfaces/UserStore';
-import {Favorite} from '../interfaces/Favorite';
 import {UserDataService} from './user-data.service';
-import {SpecificRecipe} from '../interfaces/SpecificRecipe';
 import {Subscription} from 'rxjs/Subscription';
 
 @Injectable()
@@ -33,7 +30,7 @@ export class UserService {
 
     get loggedIn() {
         try {
-            return Boolean(this.data.isLoggedInLocalState());
+            return (this.data.isLoggedInLocalState());
         }
         catch (error){
             return false;

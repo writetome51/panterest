@@ -25,6 +25,7 @@ export class RecipeDataService extends FirestoreDataService {
 
     addComment(userDisplayName){
         let comment = this._createComment(userDisplayName);
+        this.commentText = '';
         this.subscription = this.getEntire((recipe) => {
             recipe.comments.push(comment);
             this.update(recipe);
@@ -35,6 +36,7 @@ export class RecipeDataService extends FirestoreDataService {
 
 
     private _set_comments(){
+        this.comments = [];
         this.subscription = this.getProperty('comments', (comments) => {
             this.comments = comments;
         });
