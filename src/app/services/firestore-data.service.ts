@@ -30,11 +30,13 @@ export abstract class FirestoreDataService {
 
 
     getProperty(propertyName, observer: Observer): Subscription {
-        return this._db.valueChanges().subscribe((document) => {
-            if (document[propertyName]){
-                observer(document[propertyName]);
-            }
-        });
+        if (this._db){
+            return this._db.valueChanges().subscribe((document) => {
+                if (document[propertyName]){
+                    observer(document[propertyName]);
+                }
+            });
+        }
     }
 
 
