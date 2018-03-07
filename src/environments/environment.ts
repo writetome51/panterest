@@ -14,6 +14,5 @@ export const environment = {
       projectId: 'panterest-58d18',
       storageBucket: 'panterest-58d18.appspot.com',
       messagingSenderId: '870271143850'
-    },
-
+    }
 };
