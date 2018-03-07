@@ -142,3 +142,7 @@
 .boldfont{
     font-weight: bold;
 }
+
+.add-comment-button {
+    outline: none;
+}
