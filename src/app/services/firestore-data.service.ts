@@ -30,22 +30,29 @@ export abstract class FirestoreDataService {
 
 
     getProperty(propertyName, observer: Observer): Subscription {
-        if (this._db){
-            return this._db.valueChanges().subscribe((document) => {
-                if (document  && document[propertyName]){
-                    observer(document[propertyName]);
-                }
-            });
-        }
+        return this._valueChanges((document) => {
+            if (document[propertyName]) {
+                observer(document[propertyName]);
+            }
+        });
     }
 
 
-    getEntire(observer: Observer): Subscription{
-        return this._db.valueChanges().subscribe((document) => {
-            if (document){
-                observer(document);
-            }
+    getEntire(observer: Observer): Subscription {
+        return this._valueChanges((document) => {
+            observer(document);
         });
+    }
+
+
+    private _valueChanges(observer): Subscription {
+        if (this._db) {
+            return this._db.valueChanges().subscribe((document) => {
+                if (document) {
+                    observer(document);
+                }
+            });
+        }
     }
 
 
@@ -56,7 +63,7 @@ export abstract class FirestoreDataService {
             this._db = this._dbCollection.doc(this.documentName);
 
             this.subscription = this._db.valueChanges().subscribe((response) => {
-                if ( ! response) { // Then _db doesn't exist...
+                if (!response) { // Then _db doesn't exist...
                     this._createDefaultDB(defaultContent);
                 }
             });

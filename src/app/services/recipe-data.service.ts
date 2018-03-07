@@ -29,7 +29,7 @@ export class RecipeDataService extends FirestoreDataService {
         this.subscription = this.getEntire((recipe) => {
             recipe.comments.push(comment);
             this.update(recipe);
-            // This line is added to keep this block of code from repeating endlessly:
+            // This is needed to keep this block of code from looping endlessly:
             this.subscription.unsubscribe();
         });
     }

@@ -17,7 +17,6 @@ import {Favorite} from '../interfaces/Favorite';
 export class UserDataService extends FirestoreDataService {
 
     user: GoogleUser;
-    userSubscription: Subscription;
     private _localStorageKeyPrefix = 'panterest_' + environment.firebase.apiKey;
     private _localLoggedInKey = this._localStorageKeyPrefix + '_loggedIn';
 
@@ -63,18 +62,25 @@ export class UserDataService extends FirestoreDataService {
 
 
     getDisplayName(){
+        if ( ! this.user){
+            this._set_user(() => {});
+        }
         return this.user.displayName;
     }
 
 
     login() {
+        // This line is because you'll already be subscribed when not logged in,
+        // and get an error if you don't unsubscribe here:
+        this.subscription.unsubscribe();
+
         this.googleAuth.googleLogin();
         this._setupAllLoggedInSettings();
     }
 
     logout() {
-        this.googleAuth.signOut();
         this.subscription.unsubscribe();
+        this.googleAuth.signOut();
         this._unsetLoggedInLocalState();
     }
 
@@ -100,14 +106,12 @@ export class UserDataService extends FirestoreDataService {
 
 
     private _setupAllLoggedInSettings() {
-
-        // this._set_user() requires a callback passed to it in case
-        // you need to run more code inside it that requires access to the properties
-        // that have just been assigned values.
-        this.userSubscription  = this._set_user(() => {
-            this.setup();
+        this.subscription  = this._set_user(() => {
+            if (this.user){
+                this.setup();
+                this._setLoggedInLocalState();
+            }
         });
-        this._setLoggedInLocalState();
     }
 
 
@@ -121,6 +125,9 @@ export class UserDataService extends FirestoreDataService {
     }
 
 
+    // _set_user() requires a callback passed to it in case
+    // you need to run more code inside it that requires access to the properties
+    // that have just been assigned values.
     private _set_user(observer) {
         return this.googleAuth.user.subscribe((response) => {
             this.user = response;
