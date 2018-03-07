@@ -15,7 +15,7 @@
 
 <ng-template #authenticated>
   <li>
-  <div *ngIf="gAuth.user | async as user"  [routerLink]="['/profile-detail', user]">
+  <div *ngIf="gAuth.user | async as user">
     <div class="fontSize">Hi, {{ user.displayName }} <p class="glyphicon glyphicon-user"></p>
         <a  class="noUnderline" (click)="userService.logout()">&nbsp;&nbsp;&nbsp;Logout
         </a>

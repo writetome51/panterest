@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SearchService} from '../services/search.service';
 import {UserService} from '../services/user.service';
 import {SpecificRecipe} from '../interfaces/SpecificRecipe';
 import {Subscription} from 'rxjs/Subscription';

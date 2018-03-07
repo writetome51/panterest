@@ -22,7 +22,6 @@ import {SearchBarComponent} from './search-bar/search-bar.component';
 import {SearchService} from './services/search.service';
 import {UserDataService} from './services/user-data.service';
 import {AuthGuard} from './guards/auth.guard';
-import {ProfileDetailComponent} from './profile-detail/profile-detail.component';
 import {UserService} from './services/user.service';
 import {RecipeDataService} from './services/recipe-data.service';
 
@@ -36,7 +35,6 @@ import {RecipeDataService} from './services/recipe-data.service';
         HomeComponent,
         FavoritesComponent,
         SearchBarComponent,
-        ProfileDetailComponent
     ],
 
     imports: [
