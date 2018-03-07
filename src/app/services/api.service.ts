@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Observer} from '../interfaces/Observer';
 import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
 import {Subscription} from 'rxjs/Subscription';
+import {SpecificRecipe} from '../interfaces/SpecificRecipe';
 
 @Injectable()
 export class ApiService {
@@ -52,7 +53,7 @@ export class ApiService {
     }
 
 
-    getRecipeID(recipe: SearchResultRecipe) {
+    getRecipeID(recipe: SearchResultRecipe | SpecificRecipe) {
         return recipe.recipe_id;
     }
 
