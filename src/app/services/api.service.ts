@@ -61,9 +61,7 @@ export class ApiService {
     private _getTopRatedAndGetObservable(resultPage) {
         let keyValueList = [this._pageParam, String(resultPage)]; // alternating key and value;
         let getParameters = this._createGetParameters(keyValueList);
-        return this._getRequest(
-            this._createRequestUrl('search', getParameters)
-        );
+        return this._searchRequest(getParameters);
     }
 
 
@@ -73,33 +71,32 @@ export class ApiService {
             this._queryParam, recipeSearch,
             this._pageParam, String(resultPage)
         ]);
-        return this._getRequest(
-            this._createRequestUrl('search', getParameters)
-        );
+        return this._searchRequest(getParameters);
     }
 
 
     private _getSpecificRecipeAsObservable(recipeId): Observable<any> {
         let keyValueList = [this._recipeIDParam, recipeId];
         let getParameters = this._createGetParameters(keyValueList);
+        return this._specificRequest(getParameters);
+    }
+
+
+    private _specificRequest(getParameters): Observable<any> {
         return this._getRequest(
             this._createRequestUrl('specific', getParameters)
         );
     }
 
 
-    // parameter keyValueArray must alternate in this order:
-    // [key1, key1's value,  key2, key2's value, and so on...]
-    private _createGetParameters(keyValueArray) {
-        let getParameters = '?' + this._keyParamValuePair;
-        for (let i = 0; i < keyValueArray.length; i += 2) {
-            getParameters += ('&' + keyValueArray[i] + '=' + keyValueArray[i + 1]);
-        }
-        return getParameters;
+    private _searchRequest(getParameters): Observable<any> {
+        return this._getRequest(
+            this._createRequestUrl('search', getParameters)
+        );
     }
 
 
-    private _getRequest(url) {
+    private _getRequest(url): Observable<any> {
         return this._http.get(url, this._httpOptions);
     }
 
@@ -116,5 +113,15 @@ export class ApiService {
         return fullUrl;
     }
 
+
+    // parameter keyValueArray must alternate in this order:
+    // [key1, key1's value,  key2, key2's value, and so on...]
+    private _createGetParameters(keyValueArray) {
+        let getParameters = '?' + this._keyParamValuePair;
+        for (let i = 0; i < keyValueArray.length; i += 2) {
+            getParameters += ('&' + keyValueArray[i] + '=' + keyValueArray[i + 1]);
+        }
+        return getParameters;
+    }
 
 }
