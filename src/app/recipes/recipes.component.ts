@@ -69,6 +69,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
         if (this.recipeData.comments){
             return (this.recipeData.comments.length > 0);
         }
+        else return false;
     }
 
 
@@ -93,10 +94,10 @@ export class RecipesComponent implements OnInit, OnDestroy {
         this.favorite = !(this.favorite);
         if ( ! this.favorite){
             delete this.favorites[this.recipeData.id];
-            this.favoritesSubscription =  this.userService.removeFavorite(this.recipeData.id);
+            this.favoritesSubscription =  this.userService.data.removeFavorite(this.recipeData.id);
         }
         else{
-            this.favoritesSubscription = this.userService.addNewFavorite(recipe);
+            this.favoritesSubscription = this.userService.data.addNewFavorite(recipe);
             this.favorites[this.recipeData.id] = recipe;
         }
     }
@@ -104,7 +105,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
     addComment(){
         this.recipeData.addComment(this.userService.displayName);
-        this.recipeData.commentText = '';
     }
 
 

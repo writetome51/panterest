@@ -10,22 +10,23 @@ import {UserStore} from '../interfaces/UserStore';
 import {Observer} from '../interfaces/Observer';
 import {SpecificRecipe} from '../interfaces/SpecificRecipe';
 import {ApiService} from './api.service';
+import {FirestoreDataService} from './firestore-data.service';
+import {Favorite} from '../interfaces/Favorite';
 
 @Injectable()
-export class UserDataService {
+export class UserDataService extends FirestoreDataService {
 
-    subscription: Subscription;
     user: GoogleUser;
-    db: AngularFirestoreCollection<object>;
-    store: AngularFirestoreDocument<object>;
     private _localStorageKeyPrefix = 'panterest_' + environment.firebase.apiKey;
     private _localLoggedInKey = this._localStorageKeyPrefix + '_loggedIn';
 
 
-    constructor(private firestore: AngularFirestore,
+    constructor(firestore: AngularFirestore,
                 private _afAuth: AngularFireAuth,
                 private googleAuth: GoogleAuthService,
                 private _api: ApiService) {
+
+        super(firestore);
 
         this.subscription = this._afAuth.authState.subscribe((response) => {
             if (response) { // if true, you're logged in.
@@ -38,50 +39,77 @@ export class UserDataService {
     }
 
 
-    private _setupAllLoggedInSettings() {
+    setup(){
+        super.setup('users', this.user.email, this._createDefaultUser());
+    }
 
-        // this._setupUserDataProperties() requires a callback passed to it in case
-        // you need to run more code inside it that requires access to the properties
-        // that have just been assigned values.
-        this._setupUserDataProperties(() => {
+
+    addNewFavorite(recipe: SpecificRecipe): Subscription {
+        let favorite: Favorite = this._createFavorite(recipe);
+        return this.getEntire((user: UserStore) => {
+            user.favorites[favorite.name] = favorite.content;
+            this.update(user);
         });
-        this._setLoggedInLocalState();
+    }
+
+
+    removeFavorite(recipeId): Subscription{
+        return this.getEntire((user: UserStore) => {
+            delete user.favorites[recipeId];
+            this.update(user);
+        });
     }
 
 
     getDisplayName(){
+        if ( ! this.user){
+            this._set_user(() => {});
+        }
         return this.user.displayName;
     }
 
 
-    update(newData: object) {
-        this.store.update(newData);
-    }
-
-
     login() {
+        // This line is because you'll already be subscribed when not logged in,
+        // and get an error if you don't unsubscribe here:
+        this.subscription.unsubscribe();
+
         this.googleAuth.googleLogin();
         this._setupAllLoggedInSettings();
     }
 
     logout() {
-        this.googleAuth.signOut();
         this.subscription.unsubscribe();
+        this.googleAuth.signOut();
         this._unsetLoggedInLocalState();
     }
 
 
     getFavorites(observer: Observer) {
+        return this.getProperty('favorites', (favorites) => {
+            observer(favorites);
+        });
+    }
 
-        // this._setupUserDataProperties() needs to be called again because,
-        // due to its setting of variables asynchronously, when this class'
-        // methods are run later, those variables are suddenly undefined.
 
-        return this._setupUserDataProperties(() => {
-            if (this.store) {
-                this.store.valueChanges().subscribe((userStore: UserStore) => {
-                    observer(userStore.favorites);
-                });
+    isLoggedInLocalState() {
+        return Boolean(localStorage.getItem(this._localLoggedInKey));
+    }
+
+
+    private _createFavorite(recipe: SpecificRecipe) {
+        let favorite = {name: '', content: {}};
+        favorite.name = this._api.getRecipeID(recipe);
+        favorite.content = recipe;
+        return favorite;
+    }
+
+
+    private _setupAllLoggedInSettings() {
+        this.subscription  = this._set_user(() => {
+            if (this.user){
+                this.setup();
+                this._setLoggedInLocalState();
             }
         });
     }
@@ -97,53 +125,22 @@ export class UserDataService {
     }
 
 
-    isLoggedInLocalState() {
-        return (localStorage.getItem(this._localLoggedInKey));
-    }
-
-
-    createFavorite(recipe: SpecificRecipe) {
-        let favorite = {name: '', content: {}};
-        favorite.name = this._api.getRecipeID(recipe);
-        favorite.content = recipe;
-        return favorite;
-    }
-
-
-    private _setupUserDataProperties(observer) {
-        this._set_db();
+    // _set_user() requires a callback passed to it in case
+    // you need to run more code inside it that requires access to the properties
+    // that have just been assigned values.
+    private _set_user(observer) {
         return this.googleAuth.user.subscribe((response) => {
             this.user = response;
-            this._set_store();
             observer();
         });
     }
 
 
-    private _set_db() {
-        this.db = this.firestore.collection('users');
-    }
-
-
-    private _set_store() {
-        if (this.user) {
-            // The document object is named after user's email:
-            this.store = this.db.doc(this.user.email);
-
-            this.store.valueChanges().subscribe((response) => {
-                if (!response) { // Then store doesn't exist...
-                    this._createDefaultUserStore();
-                }
-            });
-        }
-    }
-
-
-    private _createDefaultUserStore() {
+    private _createDefaultUser() {
         let content = {};
         content['displayName'] = this.user.displayName;
         content['favorites'] = {};
-        this.db.doc(this.user.email).set(content);
+        return content;
     }
 
 
