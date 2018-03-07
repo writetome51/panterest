@@ -11,6 +11,7 @@ import {Observer} from '../interfaces/Observer';
 import {SpecificRecipe} from '../interfaces/SpecificRecipe';
 import {ApiService} from './api.service';
 import {FirestoreDataService} from './firestore-data.service';
+import {Favorite} from '../interfaces/Favorite';
 
 @Injectable()
 export class UserDataService extends FirestoreDataService {
@@ -36,6 +37,23 @@ export class UserDataService extends FirestoreDataService {
             else {
                 this._unsetLoggedInLocalState();
             }
+        });
+    }
+
+
+    addNewFavorite(recipe: SpecificRecipe) {
+        let favorite: Favorite = this.data.createFavorite(recipe);
+        return this.data.store.valueChanges().subscribe((userStore: UserStore) => {
+            userStore.favorites[favorite.name] = favorite.content;
+            this.data.update(userStore);
+        });
+    }
+
+
+    removeFavorite(recipeId){
+        return this.data.store.valueChanges().subscribe((userStore: UserStore) => {
+            delete userStore.favorites[recipeId];
+            this.data.update(userStore);
         });
     }
 
