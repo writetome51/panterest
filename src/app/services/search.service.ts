@@ -74,7 +74,6 @@ export class SearchService {
     private _setNextAndPreviousButtons(){
         this.showNext = true;
         if (this.pageNumber > 1) {
-            console.log('page number greater than 1');
             this.showPrevious = true;
         }
         else { this.showPrevious = false;  }

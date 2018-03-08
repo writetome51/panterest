@@ -21,7 +21,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
     favorite: boolean;
     favorites: object;
     favoritesSubscription: Subscription;
-    loadingSpinner = environment.loadingSpinner;
+    loadingSpinner = environment.loadingSpinner2;
     showComments = true;
     hideCommentsCommand = 'Hide Comments';
     showCommentsCommand = 'Show Comments';
