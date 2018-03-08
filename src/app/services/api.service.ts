@@ -13,7 +13,7 @@ export class ApiService {
 
 
     getTopRated(resultPage, observer): Subscription {
-        return this._helper.getTopRatedAndGetObservable(resultPage)
+        return this._helper.getTopRatedAsObservable(resultPage)
             .subscribe(observer);
     }
 
@@ -21,7 +21,7 @@ export class ApiService {
     search(recipeSearch: string,
            resultPage: number,
            observer: Observer): Subscription {
-        return this._helper.searchAndGetObservable(recipeSearch, resultPage)
+        return this._helper.searchAsObservable(recipeSearch, resultPage)
             .subscribe(observer);
     }
 

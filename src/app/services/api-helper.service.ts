@@ -22,75 +22,65 @@ export class ApiHelperService {
             'apikey': this._apiKey,
         })
     };
+    private _getParameters: string;
+    private _requestUrl: string;
+
 
     constructor(private _http: HttpClient) {
     }
 
 
-    getTopRatedAndGetObservable(resultPage) {
+    getTopRatedAsObservable(resultPage) {
         let keyValueArray = [this._pageParam, String(resultPage)]; // alternating key and value;
-        let getParameters = this._createGetParameters(keyValueArray);
-        return this._searchRequest(getParameters);
+        this._set_getParameters(keyValueArray);
+        return this._requestAsObservable('search');
     }
 
 
-    searchAndGetObservable(recipeSearch, resultPage): Observable<any> {
-
-        let getParameters = this._createGetParameters([
+    searchAsObservable(recipeSearch, resultPage): Observable<any> {
+        this._set_getParameters([
             this._queryParam, recipeSearch,
             this._pageParam, String(resultPage)
         ]);
-        return this._searchRequest(getParameters);
+        return this._requestAsObservable('search');
     }
 
 
     getSpecificRecipeAsObservable(recipeId): Observable<any> {
         let keyValueArray = [this._recipeIDParam, recipeId];
-        let getParameters = this._createGetParameters(keyValueArray);
-        return this._specificRequest(getParameters);
+        this._set_getParameters(keyValueArray);
+        return this._requestAsObservable('specific');
     }
 
 
-    private _specificRequest(getParameters): Observable<any> {
-        return this._getRequest(
-            this._createRequestUrl('specific', getParameters)
-        );
+    private _requestAsObservable(searchType){
+        this._set_requestUrl(searchType);
+        return this._getRequest();
     }
 
 
-    private _searchRequest(getParameters): Observable<any> {
-        return this._getRequest(
-            this._createRequestUrl('search', getParameters)
-        );
+    private _getRequest(): Observable<any> {
+        return this._http.get(this._requestUrl, this._httpOptions);
     }
 
 
-    private _getRequest(url): Observable<any> {
-        return this._http.get(url, this._httpOptions);
-    }
-
-
-    private _createRequestUrl(searchType, getParameters) {
-        let fullUrl = '';
-
+    private _set_requestUrl(searchType) {
         if (searchType === 'search') {
-            fullUrl = this._baseSearchUrl + getParameters;
+            this._requestUrl = this._baseSearchUrl + this._getParameters;
         }
         else if (searchType === 'specific') {
-            fullUrl = this._baseRecipeRequestUrl + getParameters;
+            this._requestUrl = this._baseRecipeRequestUrl + this._getParameters;
         }
-        return fullUrl;
     }
 
 
     // parameter keyValueArray must alternate in this order:
     // [key1, key1's value,  key2, key2's value, and so on...]
-    private _createGetParameters(keyValueArray) {
-        let getParameters = '?' + this._keyParamValuePair;
+    private _set_getParameters(keyValueArray) {
+        this._getParameters = '?' + this._keyParamValuePair;
         for (let i = 0; i < keyValueArray.length; i += 2) {
-            getParameters += ('&' + keyValueArray[i] + '=' + keyValueArray[i + 1]);
+            this._getParameters += ('&' + keyValueArray[i] + '=' + keyValueArray[i + 1]);
         }
-        return getParameters;
     }
 
 
