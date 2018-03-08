@@ -24,6 +24,7 @@ import {UserDataService} from './services/user-data.service';
 import {AuthGuard} from './guards/auth.guard';
 import {UserService} from './services/user.service';
 import {RecipeDataService} from './services/recipe-data.service';
+import {ApiHelperService} from './services/api-helper.service';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,7 @@ import {RecipeDataService} from './services/recipe-data.service';
             {path: '**', redirectTo: 'home/1'}
         ]),
     ],
-    providers: [ApiService, GoogleAuthService, SearchService,
+    providers: [ApiService, ApiHelperService, GoogleAuthService, SearchService,
         UserDataService, UserService, RecipeDataService, AuthGuard],
 
     bootstrap: [AppComponent]
