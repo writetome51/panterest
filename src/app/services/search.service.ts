@@ -14,8 +14,8 @@ export class SearchService {
     results: SearchResultRecipe[];
     resultsHeader: string;
     pageNumber = 1;
-    showNext = true;
-    showPrevious = false;
+    showNext: boolean;
+    showPrevious: boolean;
 
 
     constructor(private _api: ApiService) {
@@ -72,9 +72,13 @@ export class SearchService {
 
 
     private _setNextAndPreviousButtons(){
+        this.showNext = true;
         if (this.pageNumber > 1) {
+            console.log('page number greater than 1');
             this.showPrevious = true;
         }
+        else { this.showPrevious = false;  }
+
         if (this.results.length === 0){
             this.showNext = false;
         }

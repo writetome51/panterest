@@ -30,7 +30,7 @@ export class ApiHelperService {
     }
 
 
-    getTopRatedAsObservable(resultPage) {
+    getTopRatedAsObservable(resultPage): Observable<any> {
         let keyValueArray = [this._pageParam, String(resultPage)]; // alternating key and value;
         this._set_getParameters(keyValueArray);
         return this._requestAsObservable('search');
@@ -47,8 +47,7 @@ export class ApiHelperService {
 
 
     getSpecificRecipeAsObservable(recipeId): Observable<any> {
-        let keyValueArray = [this._recipeIDParam, recipeId];
-        this._set_getParameters(keyValueArray);
+        this._set_getParameters([this._recipeIDParam, recipeId]);
         return this._requestAsObservable('specific');
     }
 

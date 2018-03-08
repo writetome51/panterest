@@ -18,11 +18,12 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     constructor(public searcher: SearchService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
+
+        this.searcher.pageNumber = this.activatedRoute.snapshot.params['page_number'];
     }
 
 
     ngOnInit(){
-        this.searcher.pageNumber = this.activatedRoute.snapshot.params['page_number'];
         this.decideWhatSearchToPerform();
     }
 
