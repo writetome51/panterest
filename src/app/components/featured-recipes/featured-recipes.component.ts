@@ -11,6 +11,9 @@ import {environment} from '../../../environments/environment';
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     loadingSpinner = environment.loadingSpinner;
+    pageChangeAmount = 1;
+    previousButtonText = 'Previous';
+    nextButtonText = 'Next';
 
 
     constructor(public searcher: SearchService,
@@ -29,10 +32,16 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
 
-    changeResultPage(plusOrMinus: number){
+    changeResultPage(previousOrNext){
+        if (previousOrNext === this.previousButtonText){
+            this.pageChangeAmount *= -1;
+        }
         // searcher.pageNumber must be coerced back into a number:
-        this.searcher.pageNumber = ((this.searcher.pageNumber * 1) + Number(plusOrMinus) );
+        this.searcher.pageNumber = ((this.searcher.pageNumber * 1) + Number(this.pageChangeAmount) );
         this.searcher.decideWhatSearchToPerform();
+        if (this.pageChangeAmount < 0){
+            this.pageChangeAmount *= -1;
+        }
     }
 
 

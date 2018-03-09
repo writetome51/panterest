@@ -28,18 +28,22 @@
         <div class="nav-container-left">
             <button class="btn btn-primary nav-button"
                     [style.display]="searcher.showPrevious ?  'inherit' : 'none'"
-                    [routerLink]="['/home', (searcher.pageNumber * 1) - 1]"
-                    (click)="changeResultPage(-1)">
+                    [routerLink]="['/home', (searcher.pageNumber * 1) - pageChangeAmount]"
+                    (click)="changeResultPage(previousButtonText)">
                 <p class="glyphicon glyphicon-triangle-left glyphicon-font-size"></p>
-                Previous
+                {{previousButtonText}}
             </button>
+            <input type="number" min="1" name="backwardAmount"  [(ngModel)]="pageChangeAmount">
         </div>
-        <div class="page-number">{{searcher.pageNumber}}</div>
-        <div class="nav-container-right">
 
+        <div class="page-number">{{searcher.pageNumber}}</div>
+
+        <div class="nav-container-right">
+            <input type="number" min="1" name="forwardAmount"  [(ngModel)]="pageChangeAmount">
             <button class="btn btn-primary nav-button" [style.display]="searcher.showNext ? 'inherit' :'none'"
-                    [routerLink]="['/home', (searcher.pageNumber * 1 + 1)]" (click)="changeResultPage(1)">
-                Next
+                    [routerLink]="['/home', (searcher.pageNumber * 1) + pageChangeAmount]"
+                    (click)="changeResultPage(nextButtonText)">
+                {{nextButtonText}}
                 <p class="glyphicon glyphicon-triangle-right glyphicon-font-size"></p>
             </button>
         </div>
