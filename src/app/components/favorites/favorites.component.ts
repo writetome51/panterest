@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UserService} from '../services/user.service';
-import {SpecificRecipe} from '../interfaces/SpecificRecipe';
+import {UserService} from '../../services/user.service';
+import {SpecificRecipe} from '../../interfaces/SpecificRecipe';
 import {Subscription} from 'rxjs/Subscription';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-favorites',

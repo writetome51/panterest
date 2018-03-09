@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SearchResultRecipe} from '../interfaces/SearchResultRecipe';
-import {SearchService} from '../services/search.service';
+import {SearchResultRecipe} from '../../interfaces/SearchResultRecipe';
+import {SearchService} from '../../services/search.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {current} from 'codelyzer/util/syntaxKind';
 
 @Component({

@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SearchService} from '../services/search.service';
+import {SearchService} from '../../services/search.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {UserService} from '../services/user.service';
-import {GoogleAuthService} from '../services/google-auth.service';
-import {environment} from '../../environments/environment';
+import {UserService} from '../../services/user.service';
+import {GoogleAuthService} from '../../services/google-auth.service';
+import {environment} from '../../../environments/environment';
 import {Subscription} from 'rxjs/Subscription';
-import {RecipeDataService} from '../services/recipe-data.service';
+import {RecipeDataService} from '../../services/recipe-data.service';
 
 @Component({
     selector: 'app-recipes',
