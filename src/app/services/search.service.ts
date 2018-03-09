@@ -45,6 +45,14 @@ export class SearchService {
     }
 
 
+    decideWhatSearchToPerform(){
+        if (this.searchText === ''){
+            this.getTopRated();
+        }
+        else{ this.search(); }
+    }
+
+
     getSpecificRecipe(recipeID: string,
                       observer: Observer) {
         this.subscription = this._api.getSpecificRecipe(recipeID, observer);

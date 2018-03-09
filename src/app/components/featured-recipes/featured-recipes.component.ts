@@ -1,9 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SearchResultRecipe} from '../../interfaces/SearchResultRecipe';
 import {SearchService} from '../../services/search.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../../environments/environment';
-import {current} from 'codelyzer/util/syntaxKind';
 
 @Component({
     selector: 'app-featured-recipes',
@@ -16,7 +14,6 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
 
     constructor(public searcher: SearchService,
-                private router: Router,
                 private activatedRoute: ActivatedRoute) {
 
         this.searcher.pageNumber = this.activatedRoute.snapshot.params['page_number'];
@@ -24,7 +21,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(){
-        this.decideWhatSearchToPerform();
+        this.searcher.decideWhatSearchToPerform();
     }
 
     ngOnDestroy(){
@@ -32,34 +29,10 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
 
-    forwardOne(){
-       ++this.searcher.pageNumber;
-        this.decideWhatSearchToPerform();
-    }
-
-    backOne(){
-        --this.searcher.pageNumber;
-        this.decideWhatSearchToPerform();
-    }
-
-
-    decideWhatSearchToPerform(){
-        if (this.searcher.searchText === ''){
-            this.getFeatured();
-        }
-        else{
-            this.getSearchResults();
-        }
-    }
-
-
-    getSearchResults(){
-        this.searcher.search();
-    }
-
-
-    getFeatured(){
-        this.searcher.getTopRated();
+    changeResultPage(plusOrMinus: number){
+        // searcher.pageNumber must be coerced back into a number:
+        this.searcher.pageNumber = ((this.searcher.pageNumber * 1) + Number(plusOrMinus) );
+        this.searcher.decideWhatSearchToPerform();
     }
 
 
