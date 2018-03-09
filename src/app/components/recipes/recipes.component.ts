@@ -90,7 +90,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
 
     toggleFavorite(recipe){
-        this.favoritesSubscription.unsubscribe();
+        this.favoritesSubscription.unsubscribe(); // prevents infinite loop.
         this.favorite = !(this.favorite);
         if ( ! this.favorite){
             delete this.favorites[this.recipeData.id];
