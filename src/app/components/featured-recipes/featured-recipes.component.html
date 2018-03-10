@@ -23,29 +23,37 @@
         </div>
     </div>
 
+
     <div class="nav-container" *ngIf="searcher.results">
 
-        <div class="nav-container-left">
+        <div *ngIf="searcher.showPrevious"   class="nav-container-left">
+
             <button class="btn btn-primary nav-button"
-                    [style.display]="searcher.showPrevious ?  'inherit' : 'none'"
                     [routerLink]="['/home', (searcher.pageNumber * 1) - previousChangeAmount]"
                     (click)="changeResultPage(previousButtonText)">
                 <p class="glyphicon glyphicon-triangle-left glyphicon-font-size"></p>
                 {{previousButtonText}}
             </button>
-            <input type="number" min="1" name="backwardAmount"  [(ngModel)]="previousChangeAmount">
+
+            <input type="number" class="number-input"   min="1" [max]="searcher.pageNumber - 1"
+                     name="backwardAmount"  [(ngModel)]="previousChangeAmount">
+            <span class="glyphicon glyphicon-minus  page-change-input"></span>
         </div>
 
         <div class="page-number">{{searcher.pageNumber}}</div>
 
-        <div class="nav-container-right">
-            <input type="number" min="1" name="forwardAmount"  [(ngModel)]="nextChangeAmount">
-            <button class="btn btn-primary nav-button" [style.display]="searcher.showNext ? 'inherit' :'none'"
+        <div  *ngIf="searcher.showNext"    class="nav-container-right">
+            <span class="glyphicon glyphicon-plus  page-change-input"></span>
+            <input type="number" class="number-input"  min="1"
+                   name="forwardAmount"  [(ngModel)]="nextChangeAmount">
+
+            <button class="btn btn-primary nav-button"
                     [routerLink]="['/home', (searcher.pageNumber * 1) + nextChangeAmount]"
                     (click)="changeResultPage(nextButtonText)">
                 {{nextButtonText}}
                 <p class="glyphicon glyphicon-triangle-right glyphicon-font-size"></p>
             </button>
+
         </div>
 
     </div>

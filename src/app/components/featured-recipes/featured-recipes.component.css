@@ -114,3 +114,9 @@
     top:2px;
     margin: 0px 8px;
 }
+
+.page-change-input{
+    font-size: 18px;
+    position:relative;
+    top:6px;
+}
