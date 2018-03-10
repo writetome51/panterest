@@ -11,7 +11,6 @@ import {environment} from '../../../environments/environment';
 export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     loadingSpinner = environment.loadingSpinner;
-    pageChangeAmount = 1;
     previousChangeAmount = 1;
     nextChangeAmount = 1;
     previousButtonText = 'Previous';
@@ -34,15 +33,24 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
 
-    changeResultPage(previousOrNext){
-        if (previousOrNext === this.previousButtonText){
-            this.pageChangeAmount *= -1;
-        }
+    changeResultPage(buttonText){
+        let changeAmount = this.getChangeAmount(buttonText);
         // searcher.pageNumber must be coerced back into a number:
-        this.searcher.pageNumber = ((this.searcher.pageNumber * 1) + Number(this.pageChangeAmount) );
+        this.searcher.pageNumber = ((this.searcher.pageNumber * 1) + Number(changeAmount) );
         this.searcher.decideWhatSearchToPerform();
-        if (this.pageChangeAmount < 0){
-            this.pageChangeAmount *= -1;
+        if (this.previousChangeAmount < 0){
+            this.previousChangeAmount *= -1;
+        }
+    }
+
+
+    getChangeAmount(buttonText){
+        if (buttonText === this.previousButtonText){
+            this.previousChangeAmount *= -1;
+            return this.previousChangeAmount;
+        }
+        else if (buttonText === this.nextButtonText){
+            return this.nextChangeAmount;
         }
     }
 
