@@ -12,6 +12,8 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
     loadingSpinner = environment.loadingSpinner;
     pageChangeAmount = 1;
+    previousChangeAmount = 1;
+    nextChangeAmount = 1;
     previousButtonText = 'Previous';
     nextButtonText = 'Next';
 
