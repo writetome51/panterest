@@ -1,7 +1,7 @@
 export const environment = {
     production: true,
-    loadingSpinner: '../../../assets/giphy.gif',
-    loadingSpinner2: '../../../assets/MoreDance.gif',
+    loadingSpinner: 'assets/giphy.gif',
+    loadingSpinner2: 'assets/MoreDance.gif',
     firebase: {
         apiKey: 'AIzaSyCUHTMpkoL951NN6wTgBD5Gs-CflBwQzxg',
         authDomain: 'panterest-58d18.firebaseapp.com',

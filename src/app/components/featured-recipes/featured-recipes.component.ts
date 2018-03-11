@@ -34,7 +34,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
 
 
     changeResultPage(buttonText){
-        let changeAmount = this.getChangeAmount(buttonText);
+        let changeAmount = this._getChangeAmount(buttonText);
         // searcher.pageNumber must be coerced back into a number:
         this.searcher.pageNumber = ((this.searcher.pageNumber * 1) + Number(changeAmount) );
         this.searcher.decideWhatSearchToPerform();
@@ -44,7 +44,7 @@ export class FeaturedRecipesComponent implements OnInit, OnDestroy {
     }
 
 
-    getChangeAmount(buttonText){
+    private _getChangeAmount(buttonText){
         if (buttonText === this.previousButtonText){
             this.previousChangeAmount *= -1;
             return this.previousChangeAmount;
